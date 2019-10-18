@@ -1,6 +1,7 @@
 # Local File
 .idea/
 HungryFish.iml
+out/
 
 # Compiled class file
 *.class
