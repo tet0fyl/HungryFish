@@ -27,12 +27,10 @@ public class ViewHandler extends Application {
         scene = new Scene(root);
 
         mm = new Menu();
-        mig = new InGame();
 
         mp = new ViewMenuPrincipal(mm,root);
 
         cm = new ControllerMenu(this, mm);
-        cig = new ControllerInGame(this, mig);
 
         primaryStage.setTitle("HungryFish");
         //primaryStage.setFullScreenExitHint("");
@@ -58,6 +56,10 @@ public class ViewHandler extends Application {
 
     public void setIg(ViewInGame ig){this.ig=ig;}
 
-    public void launchViewInGame(){this.ig= new ViewInGame(mig,this.root);}
+    public void launchViewInGame(){
+        mig = new InGame();
+        ig= new ViewInGame(mig,this.root);
+        cig = new ControllerInGame(this, mig);
+    }
 
 }

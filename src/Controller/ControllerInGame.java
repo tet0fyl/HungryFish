@@ -13,7 +13,7 @@ public class ControllerInGame implements EventHandler {
     public ControllerInGame(ViewHandler launcher, InGame model){
         this.model = model;
         this.launcher = launcher;
-        //this.launcher.setEventHandlerInGame(this);
+        this.launcher.setEventHandlerInGame(this);
     }
 
     @Override
