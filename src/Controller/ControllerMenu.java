@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Menu;
 import View.ViewHandler;
+import View.ViewInGame;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -19,7 +20,9 @@ public class ControllerMenu implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent mouseEvent) {
-
+        if(mouseEvent.getSource().equals(launcher.getMp().getBtnStart())){
+            launcher.launchViewInGame();
+        }
     }
 
 }
