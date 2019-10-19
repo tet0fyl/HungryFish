@@ -1,19 +1,17 @@
 package View;
 
 import Controller.ControllerInGame;
-import Model.InGame;
+import Model.ModelInGame;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 public class ViewInGame {
 
-    private InGame model;
     private Group root;
     private Text testText;
 
-    ViewInGame(InGame model,Group root){
+    ViewInGame(Group root){
         this.root = root;
-        this.model = model;
 
         testText = new Text(100,100,"On est dans la vue du Jeu");
 

@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.InGame;
+import Model.ModelInGame;
 import View.ViewHandler;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -8,9 +8,9 @@ import javafx.event.EventHandler;
 public class ControllerInGame implements EventHandler {
 
     private ViewHandler launcher;
-    private InGame model;
+    private ModelInGame model;
 
-    public ControllerInGame(ViewHandler launcher, InGame model){
+    public ControllerInGame(ViewHandler launcher, ModelInGame model){
         this.model = model;
         this.launcher = launcher;
         this.launcher.setEventHandlerInGame(this);

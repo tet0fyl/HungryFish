@@ -1,32 +1,25 @@
 package View;
 
-import Controller.ControllerMenu;
-import Model.InGame;
-import Model.Menu;
+import Controller.ControllerMenuPrincipal;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class ViewMenuPrincipal {
-    // mettre les variable de classe //
+
+    // TODO Rajouter des variable si besoin //
     private Group root;
-    private Menu model;
-    private InGame mig;
-    private ViewInGame ig;
     private Text txtTitle;
     private Button btnStart, btnOption, btnExit;
 
 
-    ///////////////////////////////
-
-    ViewMenuPrincipal(Menu model, Group root){
+    ViewMenuPrincipal(Group root){
         this.root = root;
-        this.model = model;
 
 
         //Tu géres l'affichage ici //
-        //TODO ajouter les boutons restant (btnOption et btnExit) et faire la mise en forme du Menu //
+        //TODO ajouter les boutons restant (btnOption et btnExit), des images et faire la mise en forme du Menu ICI //
 
         txtTitle = new Text();
         txtTitle.setText("ExempleDeText");
@@ -39,17 +32,24 @@ public class ViewMenuPrincipal {
         btnStart.setLayoutX(100);
         btnStart.setLayoutY(200);
 
+        btnOption = new Button();
+        btnOption.setText("OPTION");
+        btnOption.setLayoutX(100);
+        btnOption.setLayoutY(300);
+
         root.getChildren().clear();
         root.getChildren().add(txtTitle);
         root.getChildren().add(btnStart);
+        root.getChildren().add(btnOption);
 
 
-        ///////////////////////////////
+        ////////////////////////////////////////////////////////////
     }
 
 
-    void setEvents(ControllerMenu mc){
+    void setEvents(ControllerMenuPrincipal mc){
         btnStart.setOnMouseClicked(mc);
+        btnOption.setOnMouseClicked(mc);
     }
 
     public Text getTxtTitle(){
@@ -57,5 +57,7 @@ public class ViewMenuPrincipal {
     }
 
     public Button getBtnStart(){return btnStart;}
+
+    public Button getBtnOption(){return btnOption;}
 
 }
