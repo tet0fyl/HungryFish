@@ -16,10 +16,10 @@ public class ViewHandler extends Application {
     private ViewMenuPrincipal vmp;
     private ViewInGame vig;
     private ViewMenuOption vmo;
-    private ModelMenuPrincipal mm;
+    private ModelMenuPrincipal mmp;
     private ModelInGame mig;
     private ModelMenuOption mmo;
-    private ControllerMenuPrincipal cm;
+    private ControllerMenuPrincipal cmp;
     private ControllerInGame cig;
     private ControllerMenuOption cmo;
     private Group root;
@@ -32,11 +32,11 @@ public class ViewHandler extends Application {
 
         this.primaryStage = primaryStage;
 
-        mm = new ModelMenuPrincipal();
+        mmp = new ModelMenuPrincipal();
 
-        vmp = new ViewMenuPrincipal(root);
+        vmp = new ViewMenuPrincipal(root, mmp);
 
-        cm = new ControllerMenuPrincipal(this, mm);
+        cmp = new ControllerMenuPrincipal(this, mmp);
 
         primaryStage.setTitle("HungryFish");
         //primaryStage.setFullScreenExitHint("");
@@ -63,7 +63,7 @@ public class ViewHandler extends Application {
 
     public ViewInGame getVig(){return vig;}
 
-    public void setVig(ViewInGame ig){this.vig =ig;}
+    public void setVig(ViewInGame vig){this.vig =vig;}
 
     public void launchViewInGame(){
         mig = new ModelInGame();
@@ -75,7 +75,6 @@ public class ViewHandler extends Application {
         mmo = new ModelMenuOption();
         vmo = new ViewMenuOption(root);
         cmo = new ControllerMenuOption(this,mmo);
-
     }
 
 }

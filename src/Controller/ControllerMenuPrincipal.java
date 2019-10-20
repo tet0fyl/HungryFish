@@ -23,9 +23,12 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
             launcher.launchViewInGame();
         }
         if(mouseEvent.getSource().equals(launcher.getVmp().getBtnOption())){
-            System.out.println("Click click");
-            launcher.launcViewMenuOption();
+            //launcher.launcViewMenuOption();
+            System.out.println("L'animation se lance normalement");
         }
+
+        launcher.getVmp().getRoot().getChildren().add(model.createBubble(mouseEvent.getSceneX(),mouseEvent.getScreenY()).getMainImg());
+
     }
 
 }
