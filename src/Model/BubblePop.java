@@ -9,21 +9,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 
+import java.util.Random;
+
 
 public class BubblePop {
 
     private ImageView mainImg;
-    private int minSize;
-    private double scaleSize,translateY;
+    private int minSize = 15;
+    private int maxSize = 30;
+    private double scaleSize = 1.6;
+    private double translateY = -30;
+    private int size;
     private Timeline timeline;
-    private Scale scale;
-    private Image frame1;
-    private Image frame2;
-    private Image frame3;
-    private Image frame4;
-    private Image frame5;
-    private Image frame6;
-    private Image frame7;
+    private Image frame1, frame2,frame3,frame4,frame5,frame6,frame7;
 
     BubblePop(double x, double y){
 
@@ -35,20 +33,17 @@ public class BubblePop {
         frame6 = new Image(Path.urlBubblePopDirectory + "06" + Path.imgTypePng);
         frame7 = new Image(Path.urlBubblePopDirectory + "07" + Path.imgTypePng);
 
-        minSize = 30;
-        scaleSize = 1.6;
-        translateY = -30;
+
+        int rand = (int) (Math.random()* maxSize) + minSize;
+
+        size = rand;
 
         timeline = new Timeline();
         mainImg = new ImageView(frame1);
         mainImg.setX(x);
         mainImg.setY(y);
-        mainImg.setFitHeight(minSize);
-        mainImg.setFitWidth(minSize);
-        /*scale = new Scale();
-        scale.setX(maxSize);
-        scale.setY(maxSize);
-        mainImg.getTransforms().add(scale);*/
+        mainImg.setFitHeight(size);
+        mainImg.setFitWidth(size);
     }
 
     public void startAnimation(){
