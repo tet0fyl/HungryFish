@@ -15,7 +15,7 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
         this.launcher = launcher;
         this.launcher.setEventHandlerMenu(this);
 
-        model.prepareBubble(40,launcher.getVmp().getRoot());
+        model.bubbles.generateBubbleList(40,launcher.getVmp().getRoot());
     }
 
 
@@ -28,7 +28,7 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
             launcher.launcViewMenuOption();
         }
 
-        model.launchBubble(mouseEvent.getScreenX(),mouseEvent.getScreenY());
+        model.bubbles.launchBubble(mouseEvent.getScreenX(),mouseEvent.getScreenY());
     }
 
 }
