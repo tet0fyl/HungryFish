@@ -27,7 +27,7 @@ public class ViewMenuPrincipal {
         this.model = model;
 
         //Tu géres l'affichage ici //
-        //TODO ajouter les boutons restant (btnOption et btnExit), des images et faire la mise en forme du Menu ICI //
+        //TODO ajouter les boutons restant (btnExit) et faire la mise en forme du Menu ICI //
 
         txtTitle = initText(50,"HUNGRY FISH");
         txtTitle.setLayoutX(100);
