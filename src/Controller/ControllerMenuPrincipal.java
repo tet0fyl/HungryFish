@@ -15,7 +15,7 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
         this.launcher = launcher;
         this.launcher.setEventHandlerMenu(this);
 
-        model.prepareBubble(100,launcher.getVmp().getRoot());
+        model.prepareBubble(40,launcher.getVmp().getRoot());
     }
 
 

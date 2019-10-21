@@ -29,19 +29,15 @@ public class ViewMenuPrincipal {
         //Tu géres l'affichage ici //
         //TODO ajouter les boutons restant (btnOption et btnExit), des images et faire la mise en forme du Menu ICI //
 
-        txtTitle = new Text();
-        txtTitle.setText("ExempleDeText");
+        txtTitle = initText(50,"HUNGRY FISH");
         txtTitle.setLayoutX(100);
         txtTitle.setLayoutY(100);
-        txtTitle.setFont(Font.font(30));
 
-        btnStart = new Button();
-        btnStart.setText("JOUER");
+        btnStart = initButton("JOUER");
         btnStart.setLayoutX(100);
         btnStart.setLayoutY(200);
 
-        btnOption = new Button();
-        btnOption.setText("OPTION");
+        btnOption = initButton("OPTION");
         btnOption.setLayoutX(100);
         btnOption.setLayoutY(300);
 
@@ -63,6 +59,20 @@ public class ViewMenuPrincipal {
         imgBg.setFitWidth((int) primaryScreenBounds.getWidth());
     }
 
+    public static Button initButton( String texteDuBouton) {
+        Button b = new Button();
+        b.setText(texteDuBouton);
+        b.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.marioFont),25));
+        b.getStyleClass().add("my_btn");
+        return b;
+    }
+
+    public Text initText(int fontSize, String textContent){
+        Text t = new Text();
+        t.setText(textContent);
+        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.marioFont), fontSize));
+        return t;
+    }
 
     void setEvents(ControllerMenuPrincipal mc){
         btnStart.setOnMouseClicked(mc);

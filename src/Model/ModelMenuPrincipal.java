@@ -13,17 +13,18 @@ public class ModelMenuPrincipal {
     private BubblePop bubble;
     private Double mouseMemoryX = null;
     private Double mouseMemoryY = null;
-    private double deltaMousePosition = 80;
+    private double deltaMin = 20;
+    private double deltaMax = 150;
+    private double randomDeltaMousePosition;
     private int currentBubbleKey;
-    private int nbDeBubbleEnCacheBeforeRunning = 100;
-    private int nbBubbleCacheInRun = 50;
-    private Group root;
+    private int nbBubbleLoadBeforeRunning;
 
     public ModelMenuPrincipal(){
-
+        randomDeltaMousePosition = (Math.random()* deltaMax) + deltaMin;
     }
 
     public void prepareBubble(int nbBubbleToGenerate, Group root){
+        nbBubbleLoadBeforeRunning = nbBubbleToGenerate;
         for (int i = 0; i < nbBubbleToGenerate ; i++) {
             listBubblePop.add(new BubblePop());
             root.getChildren().add(listBubblePop.get(i).getMainImg());
@@ -31,7 +32,7 @@ public class ModelMenuPrincipal {
     }
 
     public void reloadBubble(){
-        int i = currentBubbleKey + (nbDeBubbleEnCacheBeforeRunning/2);
+        int i = currentBubbleKey + (nbBubbleLoadBeforeRunning /2);
         for (; i < currentBubbleKey ; i++) {
             listBubblePop.get(i).loadDefautConfig();
         }
@@ -39,15 +40,16 @@ public class ModelMenuPrincipal {
 
 
     public void launchBubble(double x, double y){
-        if(mouseMemoryY == null || x>mouseMemoryX+deltaMousePosition || x<mouseMemoryX-deltaMousePosition || y>mouseMemoryY + deltaMousePosition || y<mouseMemoryY - deltaMousePosition){
+        if(mouseMemoryY == null || x>mouseMemoryX+randomDeltaMousePosition || x<mouseMemoryX-randomDeltaMousePosition || y>mouseMemoryY + randomDeltaMousePosition || y<mouseMemoryY - randomDeltaMousePosition){
+            randomDeltaMousePosition = (Math.random()* deltaMax) + deltaMin;
             bubble = listBubblePop.get(currentBubbleKey);
             bubble.startAnimation(x,y);
             currentBubbleKey++;
             System.out.println(currentBubbleKey);
-            if(currentBubbleKey == 100){
+            if(currentBubbleKey == nbBubbleLoadBeforeRunning){
                 currentBubbleKey=0;
             }
-            if(currentBubbleKey % nbBubbleCacheInRun == 0){
+            if(currentBubbleKey % (nbBubbleLoadBeforeRunning/2) == 0){
                 final Service<Void> calculateService = new Service<Void>() {
 
                     @Override
