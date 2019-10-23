@@ -41,7 +41,7 @@ public class ViewMenuPrincipal {
 
         btnExit = initButton("QUITTER");
         btnExit.setLayoutX(100);
-        btnExit.setLayoutX(400);
+        btnExit.setLayoutY(400);
 
         root.getChildren().clear();
         root.getChildren().add(model.parallax.getRoot());
@@ -64,8 +64,9 @@ public class ViewMenuPrincipal {
         Button b = new Button();
         b.setText(texteDuBouton);
         b.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.marioFont),25));
-        b.getStyleClass().add("my_btn");
+        b.getStyleClass().add("btn");
         return b;
+
     }
 
     public Text initText(int fontSize, String textContent){

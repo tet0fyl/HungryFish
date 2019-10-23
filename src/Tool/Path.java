@@ -7,5 +7,6 @@ public class Path {
     public static final String urlParallaxMenuPrincipalBackgroundImg = "Asset/img/parallax/menuPrincipalBackground/parallax";
     public static final String urlBubblePopDirectory = "Asset/img/bubblePop/bubble_pop_frame_";
     public static final String imgTypePng = ".png";
+    public static final String urlStyleshet = "Asset/css/styles.css";
 
 }

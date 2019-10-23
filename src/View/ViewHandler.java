@@ -6,6 +6,7 @@ import Controller.ControllerMenuOption;
 import Model.ModelInGame;
 import Model.ModelMenuOption;
 import Model.ModelMenuPrincipal;
+import Tool.Path;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -32,13 +33,10 @@ public class ViewHandler extends Application {
 
         this.primaryStage = primaryStage;
 
-        mmp = new ModelMenuPrincipal();
 
-        vmp = new ViewMenuPrincipal(root, mmp);
-
-        cmp = new ControllerMenuPrincipal(this, mmp);
-
+        launchViewMenuPrincipal();
         primaryStage.setTitle("HungryFish");
+        root.getStylesheets().add(Path.urlStyleshet);
         //primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(scene);
         //primaryStage.setResizable(false);
@@ -61,6 +59,10 @@ public class ViewHandler extends Application {
         return vmp;
     }
 
+    public ViewMenuOption getVmo() {
+        return vmo;
+    }
+
     public ViewInGame getVig(){return vig;}
 
     public void setVig(ViewInGame vig){this.vig =vig;}
@@ -77,4 +79,9 @@ public class ViewHandler extends Application {
         cmo = new ControllerMenuOption(this,mmo);
     }
 
+    public void launchViewMenuPrincipal(){
+        mmp = new ModelMenuPrincipal();
+        vmp = new ViewMenuPrincipal(root, mmp);
+        cmp = new ControllerMenuPrincipal(this, mmp);
+    }
 }

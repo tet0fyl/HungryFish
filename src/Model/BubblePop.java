@@ -37,8 +37,8 @@ public class BubblePop {
     private Image frame1, frame2,frame3,frame4,frame5,frame6,frame7;
 
     // MACRO CONTROLE //
-    private double deltaMin = 20;
-    private double deltaMax = 150;
+    private double deltaMin = 100;
+    private double deltaMax = 200;
     private int minSize = 10;
     private int maxSize = 30;
     private double scaleSize = 1.6;
