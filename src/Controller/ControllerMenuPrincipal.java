@@ -29,6 +29,7 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
         }
 
         model.bubbles.launchBubble(mouseEvent.getScreenX(),mouseEvent.getScreenY());
+        model.parallax.move(mouseEvent.getScreenX(),mouseEvent.getScreenY());
     }
 
 }
