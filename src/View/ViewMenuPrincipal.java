@@ -1,9 +1,7 @@
 package View;
 
 import Controller.ControllerMenuPrincipal;
-import Model.BubblePop;
 import Model.ModelMenuPrincipal;
-import Model.Parallax;
 import Tool.Path;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
@@ -41,11 +39,16 @@ public class ViewMenuPrincipal {
         btnOption.setLayoutX(100);
         btnOption.setLayoutY(300);
 
+        btnExit = initButton("QUITTER");
+        btnExit.setLayoutX(100);
+        btnExit.setLayoutX(400);
+
         root.getChildren().clear();
         root.getChildren().add(model.parallax.getRoot());
         root.getChildren().add(txtTitle);
         root.getChildren().add(btnStart);
         root.getChildren().add(btnOption);
+        root.getChildren().add(btnExit);
 
         ////////////////////////////////////////////////////////////
     }
@@ -76,6 +79,7 @@ public class ViewMenuPrincipal {
         btnStart.setOnMouseClicked(mc);
         btnOption.setOnMouseClicked(mc);
         model.parallax.getRoot().setOnMouseMoved(mc);
+        btnExit.setOnMouseClicked(mc);
     }
 
     public Text getTxtTitle(){
@@ -85,6 +89,8 @@ public class ViewMenuPrincipal {
     public Button getBtnStart(){return btnStart;}
 
     public Button getBtnOption(){return btnOption;}
+
+    public Button getBtnExit(){return btnExit;}
 
     public Group getRoot(){return root;}
 
