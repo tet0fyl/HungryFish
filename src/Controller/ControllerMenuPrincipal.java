@@ -26,6 +26,9 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
         if(mouseEvent.getSource().equals(launcher.getVmp().getBtnOption())){
             launcher.launcViewMenuOption();
         }
+        if(mouseEvent.getSource().equals(launcher.getVmp().getBtnExit())){
+            launcher.getPrimaryStage().close();
+        }
 
         model.bubbles.launchBubble(mouseEvent.getScreenX(),mouseEvent.getScreenY());
         model.parallax.move(mouseEvent.getScreenX(),mouseEvent.getScreenY());

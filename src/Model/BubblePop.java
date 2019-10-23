@@ -12,8 +12,8 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 /**
-                                        ! HOW TO USE IT !
-                                        -----------------
+                                        ! HOW TO USE IT (IN MVC)!
+                                        -------------------------
       1. Create an object Bubble in the concerned Model.
       2. Call the model in the proper controller constructor with the method model.bubble.generateBubble(int,Group)
       with the number of bubble to generate and the group who must belong to in parameter.

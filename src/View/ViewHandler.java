@@ -67,6 +67,10 @@ public class ViewHandler extends Application {
 
     public void setVig(ViewInGame vig){this.vig =vig;}
 
+    public Stage getPrimaryStage(){
+        return primaryStage;
+    }
+
     public void launchViewInGame(){
         mig = new ModelInGame();
         vig = new ViewInGame(root);

@@ -18,6 +18,8 @@ public class ControllerInGame implements EventHandler {
 
     @Override
     public void handle(Event event) {
-
+        if(event.getSource().equals(launcher.getVig().getBtnReturn())){
+            launcher.launchViewMenuPrincipal();
+        }
     }
 }
