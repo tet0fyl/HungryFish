@@ -4,7 +4,6 @@ import Model.ModelMenuOption;
 import View.ViewHandler;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import sun.misc.Launcher;
 
 public class ControllerMenuOption implements EventHandler<MouseEvent> {
 
@@ -20,7 +19,7 @@ public class ControllerMenuOption implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getSource().equals(launcher.getVmo().getBtnReturn())) {
-            launcher.launchViewMenuPrincipal();
+            launcher.launcViewMenuOption();
         }
 
     }

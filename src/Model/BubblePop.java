@@ -15,12 +15,12 @@ import java.util.ArrayList;
                                         ! HOW TO USE IT !
                                         -----------------
       1. Create an object Bubble in the concerned Model.
-      2. Call the model in the proper controller with the method model.bubble.generateBubble(int,Group)
+      2. Call the model in the proper controller constructor with the method model.bubble.generateBubble(int,Group)
       with the number of bubble to generate and the group who must belong to in parameter.
-      3. Call the model in your Controller eventListener with de method model.launchBubble(target x : double,target y : double)
+      3. Call the model in your Controller eventListener with the method model.launchBubble(target x : double,target y : double)
       with the X Y position of target in parameter.
       4. ENJOY !!
-        © copyright all right reserved to Theophile&co.
+                                                        © copyright all right reserved to Theophile&Co.
  */
 
 public class BubblePop {
@@ -37,8 +37,8 @@ public class BubblePop {
     private Image frame1, frame2,frame3,frame4,frame5,frame6,frame7;
 
     // MACRO CONTROLE //
-    private double deltaMin = 100;
-    private double deltaMax = 200;
+    private double deltaMin = 20;
+    private double deltaMax = 300;
     private int minSize = 10;
     private int maxSize = 30;
     private double scaleSize = 1.6;
@@ -47,7 +47,7 @@ public class BubblePop {
     ////////////////////
 
     /**
-     *
+     *The constructor prepare the images and init The Animation timelime by the method prepareAnimation
      */
     BubblePop(){
         frame1 = new Image(Path.urlBubblePopDirectory + "01" + Path.imgTypePng);

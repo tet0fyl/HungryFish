@@ -17,7 +17,7 @@ public class Parallax {
 
     // MACRO CONTROL //
     private int ratio = 110;
-    private float coef1 = 0.08f;
+    private float coef1 = 0.065f;
     private float coef2 = 0.04f;
     private float coef3 = 0.02f;
     private float coef4 = 0.01f;

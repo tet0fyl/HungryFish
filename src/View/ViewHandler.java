@@ -33,8 +33,8 @@ public class ViewHandler extends Application {
 
         this.primaryStage = primaryStage;
 
-
         launchViewMenuPrincipal();
+
         primaryStage.setTitle("HungryFish");
         root.getStylesheets().add(Path.urlStyleshet);
         //primaryStage.setFullScreenExitHint("");

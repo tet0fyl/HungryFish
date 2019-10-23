@@ -17,7 +17,7 @@ public class ViewMenuPrincipal {
     private Group root;
     private ModelMenuPrincipal model;
     private Text txtTitle;
-    private Button btnStart, btnOption, btnExit;
+    private Text btnStart, btnOption, btnExit;
     private ImageView imgBg;
 
     ViewMenuPrincipal(Group root, ModelMenuPrincipal model){
@@ -27,19 +27,19 @@ public class ViewMenuPrincipal {
         //Tu géres l'affichage ici //
         //TODO ajouter les boutons restant (btnExit) et faire la mise en forme du Menu ICI //
 
-        txtTitle = initText(50,"HUNGRY FISH");
+        txtTitle = initText(80,"HUNGRY FISH");
         txtTitle.setLayoutX(100);
         txtTitle.setLayoutY(100);
 
-        btnStart = initButton("JOUER");
+        btnStart = initTextBtn(30,"JOUER");
         btnStart.setLayoutX(100);
         btnStart.setLayoutY(200);
 
-        btnOption = initButton("OPTION");
+        btnOption = initTextBtn(30,"OPTION");
         btnOption.setLayoutX(100);
         btnOption.setLayoutY(300);
 
-        btnExit = initButton("QUITTER");
+        btnExit = initTextBtn(30,"QUITTER");
         btnExit.setLayoutX(100);
         btnExit.setLayoutY(400);
 
@@ -53,45 +53,38 @@ public class ViewMenuPrincipal {
         ////////////////////////////////////////////////////////////
     }
 
-    private void initBackground() {
-        imgBg = new ImageView(Path.urlBackgroundImgMenuPrincipal);
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getBounds(); // Récupération de la taille de l'écran
-        imgBg.setFitHeight((int) primaryScreenBounds.getHeight());
-        imgBg.setFitWidth((int) primaryScreenBounds.getWidth());
-    }
-
-    public static Button initButton( String texteDuBouton) {
-        Button b = new Button();
-        b.setText(texteDuBouton);
-        b.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.marioFont),25));
-        b.getStyleClass().add("btn");
-        return b;
-
-    }
-
     public Text initText(int fontSize, String textContent){
         Text t = new Text();
         t.setText(textContent);
-        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.marioFont), fontSize));
+        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontPoloBubble), fontSize));
+        return t;
+    }
+
+    public Text initTextBtn(int fontSize, String textContent){
+        Text t = new Text();
+        t.setText(textContent);
+        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontUniversal), fontSize));
+        t.getStyleClass().add("text-btn");
         return t;
     }
 
     void setEvents(ControllerMenuPrincipal mc){
         btnStart.setOnMouseClicked(mc);
         btnOption.setOnMouseClicked(mc);
-        model.parallax.getRoot().setOnMouseMoved(mc);
         btnExit.setOnMouseClicked(mc);
+        this.root.setOnMouseMoved(mc);
+
     }
 
     public Text getTxtTitle(){
         return txtTitle ;
     }
 
-    public Button getBtnStart(){return btnStart;}
+    public Text getBtnStart(){return btnStart;}
 
-    public Button getBtnOption(){return btnOption;}
+    public Text getBtnOption(){return btnOption;}
 
-    public Button getBtnExit(){return btnExit;}
+    public Text getBtnExit(){return btnExit;}
 
     public Group getRoot(){return root;}
 

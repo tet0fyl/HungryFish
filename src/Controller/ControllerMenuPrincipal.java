@@ -18,7 +18,6 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
         model.bubbles.generateBubbleList(40,launcher.getVmp().getRoot());
     }
 
-
     @Override
     public void handle(MouseEvent mouseEvent) {
         if(mouseEvent.getSource().equals(launcher.getVmp().getBtnStart())){
@@ -31,5 +30,4 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
         model.bubbles.launchBubble(mouseEvent.getScreenX(),mouseEvent.getScreenY());
         model.parallax.move(mouseEvent.getScreenX(),mouseEvent.getScreenY());
     }
-
 }

@@ -1,7 +1,9 @@
-.btn{
-    -fx-background-color: none;
+.text-btn {
+    -fx-fill:#525252;
 }
 
-.btn:hover{
-    -fx-cursor: hand;
+.text-btn:hover {
+    -fx-cursor : hand;
+    -fx-fill:#d4d7dd;
+    -fx-underline: true;
 }
