@@ -9,16 +9,19 @@ import javafx.stage.Screen;
 
 
 public class Parallax {
-    private ImageView panel1, panel2, panel3, panel4,panel5;
+    private ImageView panel1, panel2, panel3, panel4;
     private Rectangle2D primaryScreenBounds;
     private double screenHeight, screenWidth;
     private Group root = new Group();
     private double relX,relY;
+
+    // MACRO CONTROL //
     private int ratio = 110;
     private float coef1 = 0.08f;
     private float coef2 = 0.04f;
     private float coef3 = 0.02f;
     private float coef4 = 0.01f;
+    ///////////////////
 
     public Parallax(String url){
 
@@ -30,8 +33,6 @@ public class Parallax {
         panel2 = new ImageView(new Image(url + "02" + Path.imgTypePng));
         panel3 = new ImageView(new Image(url + "03" + Path.imgTypePng));
         panel4 = new ImageView(new Image(url + "04" + Path.imgTypePng));
-        panel5 = new ImageView(new Image(url + "05" + Path.imgTypePng));
-        setRatio(panel5,ratio);
         setRatio(panel4,ratio);
         setRatio(panel3,ratio);
         setRatio(panel2,ratio);

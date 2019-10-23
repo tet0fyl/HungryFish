@@ -41,11 +41,8 @@ public class ViewMenuPrincipal {
         btnOption.setLayoutX(100);
         btnOption.setLayoutY(300);
 
-        //initBackground();
-
         root.getChildren().clear();
         root.getChildren().add(model.parallax.getRoot());
-        //root.getChildren().add(imgBg);
         root.getChildren().add(txtTitle);
         root.getChildren().add(btnStart);
         root.getChildren().add(btnOption);
@@ -78,7 +75,6 @@ public class ViewMenuPrincipal {
     void setEvents(ControllerMenuPrincipal mc){
         btnStart.setOnMouseClicked(mc);
         btnOption.setOnMouseClicked(mc);
-        //imgBg.setOnMouseMoved(mc);
         model.parallax.getRoot().setOnMouseMoved(mc);
     }
 

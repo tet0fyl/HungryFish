@@ -4,14 +4,24 @@ import Tool.Path;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+
+/**
+                                        ! HOW TO USE IT !
+                                        -----------------
+      1. Create an object Bubble in the concerned Model.
+      2. Call the model in the proper controller with the method model.bubble.generateBubble(int,Group)
+      with the number of bubble to generate and the group who must belong to in parameter.
+      3. Call the model in your Controller eventListener with de method model.launchBubble(target x : double,target y : double)
+      with the X Y position of target in parameter.
+      4. ENJOY !!
+        © copyright all right reserved to Theophile&co.
+ */
 
 public class BubblePop {
 
@@ -21,9 +31,8 @@ public class BubblePop {
     private Double mouseMemoryX = null;
     private Double mouseMemoryY = null;
     private double randomDeltaMousePosition;
+    private int randomSize;
     private int currentBubbleKey;
-    private int nbBubbleLoadBeforeRunning;
-    private int size;
     private Timeline timeline;
     private Image frame1, frame2,frame3,frame4,frame5,frame6,frame7;
 
@@ -37,6 +46,9 @@ public class BubblePop {
     private double rotate = 80;
     ////////////////////
 
+    /**
+     *
+     */
     BubblePop(){
         frame1 = new Image(Path.urlBubblePopDirectory + "01" + Path.imgTypePng);
         frame2 = new Image(Path.urlBubblePopDirectory + "02" + Path.imgTypePng);
@@ -46,16 +58,17 @@ public class BubblePop {
         frame6 = new Image(Path.urlBubblePopDirectory + "06" + Path.imgTypePng);
         frame7 = new Image(Path.urlBubblePopDirectory + "07" + Path.imgTypePng);
 
-        loadDefautConfig();
-
-        randomDeltaMousePosition = (Math.random()* deltaMax) + deltaMin;
-
         timeline = new Timeline();
 
         prepareAnimation();
     }
 
+    /**
+     * Describe the animation and init the timeline object, only once in the constructor method
+     */
     public void prepareAnimation(){
+        randomizeThing();
+
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.ZERO,new KeyValue(mainImg.imageProperty(),frame1), new KeyValue(mainImg.scaleYProperty(),0),new KeyValue(mainImg.scaleXProperty(),0),new KeyValue(mainImg.translateYProperty(), 0),new KeyValue(mainImg.rotateProperty(), 0)),
                 new KeyFrame(new Duration(500),new KeyValue(mainImg.scaleXProperty(), scaleSize), new KeyValue(mainImg.scaleYProperty(), scaleSize),new KeyValue(mainImg.translateYProperty(),translateY)),
@@ -70,6 +83,11 @@ public class BubblePop {
                 timeline.setCycleCount(1);
     }
 
+    /**
+     * Start the animation of the bubble at the right position. Use in launchBubble methode.
+     * @param x the x position of the target where the bubble start
+     * @param y the x position of the target where the bubble start
+     */
     public void startAnimation(double x, double y){
         timeline.stop();
         mainImg.setY(y);
@@ -77,59 +95,51 @@ public class BubblePop {
         timeline.play();
     }
 
+    /**
+     * Get the main box image to fix it on the group. Use in the generateBubbleList method
+     * @return The main image of the bubble
+     */
     public ImageView getMainImg(){
         return mainImg;
     }
 
-    public void loadDefautConfig(){
-        int rand = (int) (Math.random()* maxSize) + minSize;
-        size = rand;
+
+    /**
+     * Randomize value for more natural comportment of the bubble (size and when there are launch)
+     */
+    public void randomizeThing(){
+        randomDeltaMousePosition = (Math.random()* deltaMax) + deltaMin;
+        randomSize = (int) (Math.random()* maxSize) + minSize;
         mainImg = new ImageView();
-        mainImg.setFitHeight(size);
-        mainImg.setFitWidth(size);
+        mainImg.setFitHeight(randomSize);
+        mainImg.setFitWidth(randomSize);
     }
 
-    public void reloadBubble(){
-        int i = currentBubbleKey + (nbBubbleLoadBeforeRunning /2);
-        for (; i < currentBubbleKey ; i++) {
-            listBubblePop.get(i).loadDefautConfig();
-        }
-    }
-
+    /**
+     * Method to use in the Controller model to generate list of bubble and attache it to a View Group
+     * @param nbBubbleToGenerate nombre of bubble to generate
+     * @param root  the View Group
+     */
     public void generateBubbleList(int nbBubbleToGenerate, Group root){
-        nbBubbleLoadBeforeRunning = nbBubbleToGenerate;
         for (int i = 0; i < nbBubbleToGenerate ; i++) {
             listBubblePop.add(new BubblePop());
             root.getChildren().add(listBubblePop.get(i).getMainImg());
         }
     }
 
+    /**
+     * Method to use in the Controller EventListener to launch bubble in the the right position and right timing  .
+     * @param x the x position of the target where the bubble start
+     * @param y the x position of the target where the bubble start
+     */
     public void launchBubble(double x, double y){
         if(mouseMemoryY == null || x>mouseMemoryX+randomDeltaMousePosition || x<mouseMemoryX-randomDeltaMousePosition || y>mouseMemoryY + randomDeltaMousePosition || y<mouseMemoryY - randomDeltaMousePosition){
-            randomDeltaMousePosition = (Math.random()* deltaMax) + deltaMin;
             bubble = listBubblePop.get(currentBubbleKey);
+            randomizeThing();
             bubble.startAnimation(x,y);
             currentBubbleKey++;
-            System.out.println(currentBubbleKey);
-            if(currentBubbleKey == nbBubbleLoadBeforeRunning){
+            if(currentBubbleKey == listBubblePop.size()){
                 currentBubbleKey=0;
-            }
-            if(currentBubbleKey % (nbBubbleLoadBeforeRunning/2) == 0){
-                final Service<Void> calculateService = new Service<Void>() {
-
-                    @Override
-                    protected Task<Void> createTask() {
-                        return new Task<Void>() {
-
-                            @Override
-                            protected Void call() throws Exception {
-                                reloadBubble();
-                                return null;
-                            }
-                        };
-                    }
-                };
-                calculateService.start();
             }
             mouseMemoryX = x;
             mouseMemoryY = y;
