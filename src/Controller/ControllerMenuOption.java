@@ -22,6 +22,5 @@ public class ControllerMenuOption implements EventHandler<MouseEvent> {
             launcher.getVmo().getBtnReturn().disarm();
             launcher.launchViewMenuPrincipal();
         }
-
     }
 }

@@ -18,7 +18,7 @@ public class Path {
     public static final String urlBackgroundOption = "Asset/img/background/imgBackOption.png";
     public static final String urlBubblePopDirectory = "Asset/img/bubblePop/bubble_pop_frame_";
     public static final String imgTypePng = ".png";
-    public static final String firstFish = "Asset/img/poisson/fish.png";
+    public static final String skinMainFish = "Asset/img/skin/skin";
     public static final String urlStyleshet = "Asset/css/styles.css";
 
                                         // SOUNDS //

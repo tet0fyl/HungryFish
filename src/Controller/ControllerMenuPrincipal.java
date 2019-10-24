@@ -23,7 +23,6 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
         model.bubbles.launchBubble(mouseEvent.getScreenX(),mouseEvent.getScreenY());
         model.parallax.move(mouseEvent.getScreenX(),mouseEvent.getScreenY());
         if(mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
-            System.out.println("Ca clique");
             if(mouseEvent.getSource().equals(launcher.getVmp().getBtnStart())){
                 launcher.launchViewInGame();
             }
