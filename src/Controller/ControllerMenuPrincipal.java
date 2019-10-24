@@ -20,17 +20,19 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent mouseEvent) {
-        if(mouseEvent.getSource().equals(launcher.getVmp().getBtnStart())){
-            launcher.launchViewInGame();
-        }
-        if(mouseEvent.getSource().equals(launcher.getVmp().getBtnOption())){
-            launcher.launchViewMenuOption();
-        }
-        if(mouseEvent.getSource().equals(launcher.getVmp().getBtnExit())){
-            launcher.getPrimaryStage().close();
-        }
-
         model.bubbles.launchBubble(mouseEvent.getScreenX(),mouseEvent.getScreenY());
         model.parallax.move(mouseEvent.getScreenX(),mouseEvent.getScreenY());
+        if(mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
+            System.out.println("Ca clique");
+            if(mouseEvent.getSource().equals(launcher.getVmp().getBtnStart())){
+                launcher.launchViewInGame();
+            }
+            if(mouseEvent.getSource().equals(launcher.getVmp().getBtnOption())){
+                launcher.launchViewMenuOption();
+            }
+            if(mouseEvent.getSource().equals(launcher.getVmp().getBtnExit())){
+                launcher.getPrimaryStage().close();
+            }
+        }
     }
 }
