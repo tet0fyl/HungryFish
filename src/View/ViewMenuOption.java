@@ -141,8 +141,8 @@ public class ViewMenuOption {
         }
         b.setLayoutX(middle);
         b.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), fontSize));
-        if(textContent.equals("VALIDER") || textContent.equals("Facile")){
-            b.getStyleClass().add("btn");
+        if(textContent.equals("VALIDER")){
+            b.getStyleClass().add("btn-validation");
         }else{
             b.getStyleClass().add("btn-secondary");
         }
