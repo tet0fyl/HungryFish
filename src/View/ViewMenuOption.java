@@ -16,7 +16,7 @@ public class ViewMenuOption {
     private Group root;
     private Text txtTitle;
     private Text testText;
-    private Button btnReturn;
+    private Button btnReturn, btnValider;
     private ImageView imgBackground;
 
     ViewMenuOption(Group root){
@@ -28,6 +28,10 @@ public class ViewMenuOption {
 
         testText = new Text(100,100,"On est dans la vue des options");
 
+        btnValider = new Button("Valider");
+        btnValider.setLayoutX(200);
+        btnValider.setLayoutY(400);
+
         btnReturn = new Button("Retour");
         btnReturn.setLayoutX(200);
         btnReturn.setLayoutY(200);
@@ -36,7 +40,9 @@ public class ViewMenuOption {
 
         root.getChildren().clear();
         root.getChildren().add(imgBackground);
+        root.getChildren().add(txtTitle);
         root.getChildren().add(testText);
+        root.getChildren().add(btnValider);
         root.getChildren().add(btnReturn);
     }
 
