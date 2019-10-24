@@ -19,6 +19,7 @@ public class ControllerMenuOption implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getSource().equals(launcher.getVmo().getBtnReturn())) {
+            launcher.getVmo().getBtnReturn().disarm();
             launcher.launcViewMenuOption();
         }
 

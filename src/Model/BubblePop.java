@@ -36,7 +36,7 @@ public class BubblePop {
     private Timeline timeline;
     private Image frame1, frame2,frame3,frame4,frame5,frame6,frame7;
 
-    // MACRO CONTROLE //
+    /** MACRO CONTROL */
     private double deltaMin = 20;
     private double deltaMax = 300;
     private int minSize = 10;
