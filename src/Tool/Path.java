@@ -7,7 +7,9 @@ public class Path {
     public static final String fontAquarium = "../Asset/Font/aquarium.ttf";
     public static final String fontBubbleButt = "../Asset/Font/bubblebuttacad.ttf";
     public static final String fontMadBubble = "../Asset/Font/Mad Bubbles.ttf";
-    public static final String fontAqua = "../wmaquatic1.TTF";
+    public static final String fontAqua = "../Asset/Font/wmaquatic1.TTF";
+    public static final String fontWavePool = "../Asset/Font/Wavepool.ttf";
+    public static final String fontFindetNemo = "../Asset/Font/Findet Nemo";
 
     /////////////////////////////////////////////////////////////////////////////////////////
                                         // URL DIRECTORY OR FILE //

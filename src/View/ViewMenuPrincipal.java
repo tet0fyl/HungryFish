@@ -23,9 +23,9 @@ public class ViewMenuPrincipal {
         //Tu géres l'affichage ici //
         //TODO ajouter les boutons restant (btnExit) et faire la mise en forme du Menu ICI //
 
-        txtTitle = initText(80,"HUNGRY FISH");
-        txtTitle.setLayoutX(100);
-        txtTitle.setLayoutY(400);
+        txtTitle = initText(150,"HUNGRY FISH");
+        txtTitle.setLayoutX(650);
+        txtTitle.setLayoutY(220);
 
         btnStart = initTextBtn(30,"JOUER");
         btnStart.setLayoutX(100);
@@ -53,14 +53,14 @@ public class ViewMenuPrincipal {
         Text t = new Text();
         t.setText(textContent);
         t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontBubbleButt), fontSize));
-        t.setRotate(45);
+        t.setRotate(15);
         return t;
     }
 
     public Text initTextBtn(int fontSize, String textContent){
         Text t = new Text();
         t.setText(textContent);
-        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontUniversal), fontSize));
+        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontMadBubble), fontSize));
         t.getStyleClass().add("text-btn");
         return t;
     }
