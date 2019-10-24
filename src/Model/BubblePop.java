@@ -7,8 +7,11 @@ import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -35,6 +38,7 @@ public class BubblePop {
     private int currentBubbleKey;
     private Timeline timeline;
     private Image frame1, frame2,frame3,frame4,frame5,frame6,frame7;
+    private MediaPlayer bubbleSound;
 
     /** MACRO CONTROL */
     private double deltaMin = 20;
@@ -50,6 +54,8 @@ public class BubblePop {
      *The constructor prepare the images and init The Animation timelime by the method prepareAnimation
      */
     BubblePop(){
+        bubbleSound = new MediaPlayer(new Media(Paths.get(Path.soundBubblePop).toUri().toString()));
+
         frame1 = new Image(Path.urlBubblePopDirectory + "01" + Path.imgTypePng);
         frame2 = new Image(Path.urlBubblePopDirectory + "02" + Path.imgTypePng);
         frame3 = new Image(Path.urlBubblePopDirectory + "03" + Path.imgTypePng);
@@ -135,6 +141,8 @@ public class BubblePop {
     public void launchBubble(double x, double y){
         if(mouseMemoryY == null || x>mouseMemoryX+randomDeltaMousePosition || x<mouseMemoryX-randomDeltaMousePosition || y>mouseMemoryY + randomDeltaMousePosition || y<mouseMemoryY - randomDeltaMousePosition){
             bubble = listBubblePop.get(currentBubbleKey);
+            bubble.bubbleSound.play();
+
             randomizeThing();
             bubble.startAnimation(x,y);
             currentBubbleKey++;

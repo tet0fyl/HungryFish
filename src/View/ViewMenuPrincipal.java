@@ -3,13 +3,10 @@ package View;
 import Controller.ControllerMenuPrincipal;
 import Model.ModelMenuPrincipal;
 import Tool.Path;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
+
 
 public class ViewMenuPrincipal {
 
@@ -18,7 +15,6 @@ public class ViewMenuPrincipal {
     private ModelMenuPrincipal model;
     private Text txtTitle;
     private Text btnStart, btnOption, btnExit;
-    private ImageView imgBg;
 
     ViewMenuPrincipal(Group root, ModelMenuPrincipal model){
         this.root = root;
@@ -29,7 +25,7 @@ public class ViewMenuPrincipal {
 
         txtTitle = initText(80,"HUNGRY FISH");
         txtTitle.setLayoutX(100);
-        txtTitle.setLayoutY(100);
+        txtTitle.setLayoutY(400);
 
         btnStart = initTextBtn(30,"JOUER");
         btnStart.setLayoutX(100);
@@ -56,7 +52,8 @@ public class ViewMenuPrincipal {
     public Text initText(int fontSize, String textContent){
         Text t = new Text();
         t.setText(textContent);
-        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontPoloBubble), fontSize));
+        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontBubbleButt), fontSize));
+        t.setRotate(45);
         return t;
     }
 
@@ -74,10 +71,6 @@ public class ViewMenuPrincipal {
         btnExit.setOnMouseClicked(mc);
         this.root.setOnMouseMoved(mc);
 
-    }
-
-    public Text getTxtTitle(){
-        return txtTitle ;
     }
 
     public Text getBtnStart(){return btnStart;}
