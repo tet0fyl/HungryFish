@@ -30,7 +30,6 @@ public class ViewMenuPrincipal {
         //TODO ajouter les boutons restant (btnExit) et faire la mise en forme du Menu ICI //
 
         txtTitle = initText(150,"HUNGRY FISH");
-        txtTitle.setLayoutX(300);
         txtTitle.setLayoutY(200);
 
         btnStart = initBtnCenter(25,"JOUER");
@@ -57,6 +56,10 @@ public class ViewMenuPrincipal {
     public Text initText(int fontSize, String textContent){
         Text t = new Text();
         t.setText(textContent);
+        double width = 800;
+        t.setWrappingWidth(width);
+        double middle = (psb.getWidth()/2) - (width/2);
+        t.setLayoutX(middle);
         t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontBubbleButt), fontSize));
         t.setRotate(15);
         return t;
