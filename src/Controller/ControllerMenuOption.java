@@ -22,5 +22,35 @@ public class ControllerMenuOption implements EventHandler<MouseEvent> {
             launcher.getVmo().getBtnReturn().disarm();
             launcher.launchViewMenuPrincipal();
         }
+        if (mouseEvent.getSource().equals(launcher.getVmo().getBtnValider())) {
+            launcher.getVmo().getBtnValider().disarm();
+            launcher.launchViewMenuPrincipal();
+        }
+        if(mouseEvent.getSource().equals(launcher.getVmo().getBtnImpossible())){
+            launcher.getVmo().getBtnImpossible().getStyleClass().add("btnOptionPressed");
+
+            launcher.getVmo().getBtnEasy().getStyleClass().clear();
+            launcher.getVmo().getBtnEasy().getStyleClass().add("btn-secondary");
+            launcher.getVmo().getBtnMedium().getStyleClass().clear();
+            launcher.getVmo().getBtnMedium().getStyleClass().add("btn-secondary");
+        }
+
+        if(mouseEvent.getSource().equals(launcher.getVmo().getBtnEasy())){
+            launcher.getVmo().getBtnEasy().getStyleClass().add("btnOptionPressed");
+
+            launcher.getVmo().getBtnImpossible().getStyleClass().clear();
+            launcher.getVmo().getBtnImpossible().getStyleClass().add("btn-secondary");
+            launcher.getVmo().getBtnMedium().getStyleClass().clear();
+            launcher.getVmo().getBtnMedium().getStyleClass().add("btn-secondary");
+        }
+
+        if(mouseEvent.getSource().equals(launcher.getVmo().getBtnMedium())){
+            launcher.getVmo().getBtnMedium().getStyleClass().add("btnOptionPressed");
+
+            launcher.getVmo().getBtnEasy().getStyleClass().clear();
+            launcher.getVmo().getBtnEasy().getStyleClass().add("btn-secondary");
+            launcher.getVmo().getBtnImpossible().getStyleClass().clear();
+            launcher.getVmo().getBtnImpossible().getStyleClass().add("btn-secondary");
+        }
     }
 }

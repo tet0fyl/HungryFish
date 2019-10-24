@@ -141,10 +141,13 @@ public class ViewMenuOption {
         }
         b.setLayoutX(middle);
         b.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), fontSize));
-        if(textContent.equals("VALIDER")){
+        if(textContent.equals("VALIDER") || textContent.equals("Facile")){
             b.getStyleClass().add("btn");
         }else{
             b.getStyleClass().add("btn-secondary");
+        }
+        if(textContent.equals("Facile")){
+            b.getStyleClass().add("btnOptionPressed");
         }
         return b;
     }
@@ -170,9 +173,30 @@ public class ViewMenuOption {
 
     public void setEvents(ControllerMenuOption model){
         btnReturn.setOnMouseClicked(model);
+        btnValider.setOnMouseClicked(model);
+
+        btnEasy.setOnMouseClicked(model);
+        btnMedium.setOnMouseClicked(model);
+        btnImpossible.setOnMouseClicked(model);
+
+
     }
 
     public Button getBtnReturn() {
         return btnReturn;
+    }
+
+    public Button getBtnValider(){return btnValider;}
+
+    public Button getBtnEasy() {
+        return btnEasy;
+    }
+
+    public Button getBtnMedium() {
+        return btnMedium;
+    }
+
+    public Button getBtnImpossible() {
+        return btnImpossible;
     }
 }
