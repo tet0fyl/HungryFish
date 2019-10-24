@@ -3,9 +3,13 @@ package View;
 import Controller.ControllerMenuPrincipal;
 import Model.ModelMenuPrincipal;
 import Tool.Path;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 
 
 public class ViewMenuPrincipal {
@@ -14,7 +18,9 @@ public class ViewMenuPrincipal {
     private Group root;
     private ModelMenuPrincipal model;
     private Text txtTitle;
-    private Text btnStart, btnOption, btnExit;
+    private Button btnStart, btnOption, btnExit;
+    private Rectangle2D psb = Screen.getPrimary().getBounds();
+    private GridPane gridMenu;
 
     ViewMenuPrincipal(Group root, ModelMenuPrincipal model){
         this.root = root;
@@ -24,20 +30,18 @@ public class ViewMenuPrincipal {
         //TODO ajouter les boutons restant (btnExit) et faire la mise en forme du Menu ICI //
 
         txtTitle = initText(150,"HUNGRY FISH");
-        txtTitle.setLayoutX(650);
-        txtTitle.setLayoutY(220);
+        txtTitle.setLayoutX(300);
+        txtTitle.setLayoutY(200);
 
-        btnStart = initTextBtn(30,"JOUER");
-        btnStart.setLayoutX(100);
-        btnStart.setLayoutY(200);
+        btnStart = initBtnCenter(25,"JOUER");
+        btnStart.setLayoutY(300);
 
-        btnOption = initTextBtn(30,"OPTION");
-        btnOption.setLayoutX(100);
-        btnOption.setLayoutY(300);
+        btnOption = initBtnCenter(25,"OPTION");
+        btnOption.setLayoutY(400);
 
-        btnExit = initTextBtn(30,"QUITTER");
-        btnExit.setLayoutX(100);
-        btnExit.setLayoutY(400);
+        btnExit = initBtnCenter(25,"QUITTER");
+        btnExit.setLayoutY(500);
+
 
         root.getChildren().clear();
         root.getChildren().add(model.parallax.getRoot());
@@ -45,6 +49,7 @@ public class ViewMenuPrincipal {
         root.getChildren().add(btnStart);
         root.getChildren().add(btnOption);
         root.getChildren().add(btnExit);
+
 
         ////////////////////////////////////////////////////////////
     }
@@ -57,12 +62,23 @@ public class ViewMenuPrincipal {
         return t;
     }
 
-    public Text initTextBtn(int fontSize, String textContent){
-        Text t = new Text();
-        t.setText(textContent);
-        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), fontSize));
-        t.getStyleClass().add("text-btn");
-        return t;
+    public Button initBtnCenter(int fontSize, String textContent){
+        Button b = new Button(textContent);
+        double width = 250;
+        b.setMinWidth(width);
+        double middle = (psb.getWidth()/2) - (width/2);
+        b.setLayoutX(middle);
+        b.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), fontSize));
+        b.getStyleClass().add("btn");
+        return b;
+    }
+
+
+    public Button initBtn(int fontSize, String textContent){
+        Button b = new Button();
+        b.setText(textContent);
+        b.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), fontSize));
+        return b;
     }
 
     void setEvents(ControllerMenuPrincipal mc){
@@ -70,14 +86,16 @@ public class ViewMenuPrincipal {
         btnOption.setOnMouseClicked(mc);
         btnExit.setOnMouseClicked(mc);
         this.root.setOnMouseMoved(mc);
-
+        btnStart.setOnMouseMoved(mc);
+        btnOption.setOnMouseMoved(mc);
+        btnExit.setOnMouseMoved(mc);
     }
 
-    public Text getBtnStart(){return btnStart;}
+    public Button getBtnStart(){return btnStart;}
 
-    public Text getBtnOption(){return btnOption;}
+    public Button getBtnOption(){return btnOption;}
 
-    public Text getBtnExit(){return btnExit;}
+    public Button getBtnExit(){return btnExit;}
 
     public Group getRoot(){return root;}
 
