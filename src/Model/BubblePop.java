@@ -141,12 +141,14 @@ public class BubblePop {
     public void launchBubble(double x, double y){
         if(mouseMemoryY == null || x>mouseMemoryX+randomDeltaMousePosition || x<mouseMemoryX-randomDeltaMousePosition || y>mouseMemoryY + randomDeltaMousePosition || y<mouseMemoryY - randomDeltaMousePosition){
             bubble = listBubblePop.get(currentBubbleKey);
+            listBubblePop.get(((currentBubbleKey+1)*2)%(listBubblePop.size()-1)).bubbleSound.stop();
             bubble.bubbleSound.play();
-
             randomizeThing();
             bubble.startAnimation(x,y);
             currentBubbleKey++;
-            if(currentBubbleKey == listBubblePop.size()){
+            if(currentBubbleKey >= listBubblePop.size()){
+                for(BubblePop bubble:listBubblePop){
+                }
                 currentBubbleKey=0;
             }
             mouseMemoryX = x;
