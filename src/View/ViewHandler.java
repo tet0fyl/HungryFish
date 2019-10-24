@@ -77,7 +77,7 @@ public class ViewHandler extends Application {
         cig = new ControllerInGame(this, mig);
     }
 
-    public void launcViewMenuOption(){
+    public void launchViewMenuOption(){
         mmo = new ModelMenuOption();
         vmo = new ViewMenuOption(root);
         cmo = new ControllerMenuOption(this,mmo);

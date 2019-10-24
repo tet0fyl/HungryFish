@@ -24,7 +24,7 @@ public class ControllerMenuPrincipal implements EventHandler<MouseEvent> {
             launcher.launchViewInGame();
         }
         if(mouseEvent.getSource().equals(launcher.getVmp().getBtnOption())){
-            launcher.launcViewMenuOption();
+            launcher.launchViewMenuOption();
         }
         if(mouseEvent.getSource().equals(launcher.getVmp().getBtnExit())){
             launcher.getPrimaryStage().close();

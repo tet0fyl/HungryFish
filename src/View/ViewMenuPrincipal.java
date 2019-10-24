@@ -60,7 +60,7 @@ public class ViewMenuPrincipal {
     public Text initTextBtn(int fontSize, String textContent){
         Text t = new Text();
         t.setText(textContent);
-        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontMadBubble), fontSize));
+        t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), fontSize));
         t.getStyleClass().add("text-btn");
         return t;
     }

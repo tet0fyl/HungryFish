@@ -1,8 +1,6 @@
 package View;
 
 import Controller.ControllerInGame;
-import Controller.ControllerMenuOption;
-import Model.ModelInGame;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
