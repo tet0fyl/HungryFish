@@ -2,13 +2,14 @@ package Controller;
 
 import Model.ModelInGame;
 import View.ViewHandler;
+import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.util.Hashtable;
 
-public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
+public class ControllerInGameKeyboard extends AnimationTimer implements EventHandler<KeyEvent> {
 
     private ViewHandler launcher;
     private ModelInGame model;
@@ -18,6 +19,8 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
         this.model = model;
         this.launcher = launcher;
         this.launcher.setEventHandlerInGameKeyboard(this);
+
+        this.start();
     }
 
     @Override
@@ -43,8 +46,26 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
             }
         }
 
-        System.out.println(listKeyPressed);
 
 
+    }
+
+    @Override
+    public void handle(long l) {
+        if(listKeyPressed.get(KeyCode.RIGHT) != null && listKeyPressed.get(KeyCode.RIGHT).booleanValue()){
+            model.getPlayer().move("right");
+        }
+
+        if(listKeyPressed.get(KeyCode.LEFT) != null && listKeyPressed.get(KeyCode.LEFT).booleanValue()){
+            model.getPlayer().move("left");
+        }
+
+        if(listKeyPressed.get(KeyCode.UP) != null && listKeyPressed.get(KeyCode.UP).booleanValue()){
+            model.getPlayer().move("up");
+        }
+
+        if(listKeyPressed.get(KeyCode.DOWN) != null && listKeyPressed.get(KeyCode.DOWN).booleanValue()){
+            model.getPlayer().move("down");
+        }
     }
 }
