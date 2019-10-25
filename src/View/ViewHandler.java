@@ -1,6 +1,7 @@
 package View;
 
-import Controller.ControllerInGame;
+import Controller.ControllerInGameKeyboard;
+import Controller.ControllerInGameMouse;
 import Controller.ControllerMenuPrincipal;
 import Controller.ControllerMenuOption;
 import Model.ModelInGame;
@@ -21,7 +22,8 @@ public class ViewHandler extends Application {
     private ModelInGame mig;
     private ModelMenuOption mmo;
     private ControllerMenuPrincipal cmp;
-    private ControllerInGame cig;
+    private ControllerInGameMouse cigm;
+    private ControllerInGameKeyboard cigk;
     private ControllerMenuOption cmo;
     private Group root;
     private Scene scene;
@@ -29,11 +31,12 @@ public class ViewHandler extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         root = new Group();
-        scene = new Scene(root);
+        scene = new Scene(root, 800, 1000);
 
         this.primaryStage = primaryStage;
 
-        launchViewMenuPrincipal();
+        //launchViewMenuPrincipal();
+        launchViewInGame();
 
         primaryStage.setTitle("HungryFish");
         root.getStylesheets().add(Path.urlStyleshet);
@@ -41,7 +44,7 @@ public class ViewHandler extends Application {
         primaryStage.setScene(scene);
         //primaryStage.setResizable(false);
         //primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
 
     }
@@ -50,10 +53,14 @@ public class ViewHandler extends Application {
         vmp.setEvents(cm);
     }
 
-    public void setEventHandlerInGame(ControllerInGame cig){
+    public void setEventHandlerInGame(ControllerInGameMouse cig){
         vig.setEvents(cig);}
 
     public void setEventHandlerMenuOption(ControllerMenuOption cmo){ vmo.setEvents(cmo);}
+
+    public void setEventHandlerInGameKeyboard(ControllerInGameKeyboard cigk){
+        vig.setEvents(cigk);
+    }
 
     public ViewMenuPrincipal getVmp() {
         return vmp;
@@ -74,7 +81,8 @@ public class ViewHandler extends Application {
     public void launchViewInGame(){
         mig = new ModelInGame();
         vig = new ViewInGame(root);
-        cig = new ControllerInGame(this, mig);
+        cigm = new ControllerInGameMouse(this, mig);
+        cigk = new ControllerInGameKeyboard(this,mig);
     }
 
     public void launchViewMenuOption(){

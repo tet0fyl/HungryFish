@@ -147,8 +147,6 @@ public class BubblePop {
             bubble.startAnimation(x,y);
             currentBubbleKey++;
             if(currentBubbleKey >= listBubblePop.size()){
-                for(BubblePop bubble:listBubblePop){
-                }
                 currentBubbleKey=0;
             }
             mouseMemoryX = x;

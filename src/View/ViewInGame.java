@@ -1,13 +1,13 @@
 package View;
 
-import Controller.ControllerInGame;
+import Controller.ControllerInGameKeyboard;
+import Controller.ControllerInGameMouse;
 import Tool.Path;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
 public class ViewInGame {
@@ -56,12 +56,19 @@ public class ViewInGame {
         return b;
     }
 
-    public void setEvents(ControllerInGame model){
+    public void setEvents(ControllerInGameMouse model){
         btnReturn.setOnMouseClicked(model);
+    }
+
+    public void setEvents(ControllerInGameKeyboard model){
+        root.setOnKeyPressed(model);
     }
 
     public Button getBtnReturn() {
         return btnReturn;
     }
 
+    public Group getRoot() {
+        return root;
+    }
 }
