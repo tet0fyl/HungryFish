@@ -11,7 +11,7 @@ public class ModelInGame {
     private ArrayList<Fish> listFishPNJ = new ArrayList<Fish>();
 
     public ModelInGame(){
-        player = new PlayerFish(Path.skinMainFish+"1.png",500,Screen.getPrimary().getBounds().getHeight()-200);
+        player = new PlayerFish();
     }
 
     public void generateFish(Group root){
@@ -23,21 +23,14 @@ public class ModelInGame {
     public void addFish(Group root){
         Fish newfish;
         int random = (int)(Math.random()* 20);
-        double randomYStart = (Math.random()*Screen.getPrimary().getBounds().getHeight()-200);
-        double randomXStart;
-        if(random>10){
-            randomXStart = Screen.getPrimary().getBounds().getWidth()+100;
-        }else{
-            randomXStart = -200;
-        }
         if(random>18){
-            newfish = new Shark(randomXStart,randomYStart);
+            newfish = new Shark();
         }else if (random>15){
-            newfish = new BigFish(randomXStart,randomYStart);
+            newfish = new BigFish();
         }else if(random>8){
-            newfish = new MediumFish(randomXStart,randomYStart);
+            newfish = new MediumFish();
         }else{
-            newfish = new SmallFish(randomXStart,randomYStart);
+            newfish = new SmallFish();
         }
         listFishPNJ.add(newfish);
         root.getChildren().add(newfish.getMainImg());

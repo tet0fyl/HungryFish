@@ -1,12 +1,11 @@
 package Model;
 
 import Tool.Path;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class SmallFish extends FishPNJ {
-    public SmallFish(double x, double y){
-        super(75,x,y);
-        mainImg.setImage(new Image(Path.skinMainFish+"4.png"));
+    public SmallFish(){
+        size=75;
+        speed=10;
+        initPnj(Path.skinMainFish+"4",speed,size);
     }
 }

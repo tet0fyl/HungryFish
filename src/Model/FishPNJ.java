@@ -12,37 +12,29 @@ public abstract class FishPNJ extends Fish {
     protected double a;
     protected double b;
 
-    public FishPNJ(int size, double x, double y){
-        super(size,x,y);
+    public FishPNJ(){
+    }
+
+    public void initPnj(String url, double speed, double size){
+        int random = (int)(Math.random()* 20);
+        double randomYStart = (Math.random()*Screen.getPrimary().getBounds().getHeight());
+        System.out.println(randomYStart);
+        double randomXStart;
+        if(random>10){
+            randomXStart = Screen.getPrimary().getBounds().getWidth()+(Math.random()*300)-100;
+        }else{
+            randomXStart = (Math.random()*300)-100;
+        }
+        init(url,randomXStart,randomYStart,speed,size);
         defineADestination();
         moveToTarget();
         sensX=1;
         sensY=1;
     }
 
-    public void setExpEarn(int expEarn) {
-        this.expEarn = expEarn;
-    }
-
-    public void setDetectionArea(int detectionArea) {
-        this.detectionArea = detectionArea;
-    }
-
-    public void setPlayerDetected(boolean playerDetected) {
-        this.playerDetected = playerDetected;
-    }
-
-    public int getExpEarn() {
-        return expEarn;
-    }
-
-    public int getDetectionArea() {
-        return detectionArea;
-    }
-
     public void defineADestination(){
-        randomX = (int) (Math.random()* 50) + 200;
-        randomY = (int) (Math.random()* 10) + 100;
+        randomX = (int) (Math.random()* 200) + 50;
+        randomY = (int) (Math.random()* 100) + 10;
 
         if(sensX==1){
             targetDirectionX = (int)Screen.getPrimary().getBounds().getWidth() + randomX;

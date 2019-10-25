@@ -1,44 +1,24 @@
 package Model;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import Tool.Path;
 import javafx.stage.Screen;
 
 public class PlayerFish extends Fish {
     protected int exp;
     protected int level;
 
-    public PlayerFish(String url,double x,double y){
-        super(125,x,y);
-        mainImg.setImage(new Image(url));
+    public PlayerFish(){
+        size=100;
+        speed=15;
+        x= Screen.getPrimary().getBounds().getWidth()/2 - size/2;
+        y= Screen.getPrimary().getBounds().getHeight() - size;
+        init(Path.skinMainFish+"1",x,y,speed,size);
     }
-
-    public void setExp(int exp) {
-        this.exp = exp;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public int getExp() {
-        return exp;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void grown(){
-
-    }
-
-    public void chekLevel(){
-
-    }
-
 
     public void move(String direction){
+        if(sensX != memorySensX){
+            memorySensX=sensX;
+        }
         if(direction.equals(moveRight)) {
             sensX=1;
             sensY=0;
@@ -61,5 +41,4 @@ public class PlayerFish extends Fish {
         colisionBoxY();
         refreshImg(x,y);
     }
-
 }
