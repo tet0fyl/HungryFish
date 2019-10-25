@@ -5,6 +5,10 @@ public class FishPNJ extends Fish {
     protected int detectionArea;
     protected boolean playerDetected;
 
+    public FishPNJ(){
+        super();
+    }
+
     public void setExpEarn(int expEarn) {
         this.expEarn = expEarn;
     }

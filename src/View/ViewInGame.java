@@ -2,6 +2,7 @@ package View;
 
 import Controller.ControllerInGameKeyboard;
 import Controller.ControllerInGameMouse;
+import Model.ModelInGame;
 import Tool.Path;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
@@ -13,11 +14,13 @@ import javafx.stage.Screen;
 public class ViewInGame {
 
     private Group root;
+    private ModelInGame model;
     private Button btnReturn;
     private ImageView imgBackground;
 
-    ViewInGame(Group root){
+    ViewInGame(Group root, ModelInGame model){
         this.root = root;
+        this.model = model;
 
         btnReturn = initBtnRightOrLeft(20,"RETOUR","left");
         btnReturn.setLayoutY(25);
@@ -26,6 +29,7 @@ public class ViewInGame {
 
         root.getChildren().clear();
         root.getChildren().add(imgBackground);
+        root.getChildren().add(model.getPlayerImg());
         root.getChildren().add(btnReturn);
     }
 
@@ -56,12 +60,13 @@ public class ViewInGame {
         return b;
     }
 
-    public void setEvents(ControllerInGameMouse model){
-        btnReturn.setOnMouseClicked(model);
+    public void setEvents(ControllerInGameMouse controller){
+        btnReturn.setOnMouseClicked(controller);
     }
 
-    public void setEvents(ControllerInGameKeyboard model){
-        root.setOnKeyPressed(model);
+    public void setEvents(ControllerInGameKeyboard controller){
+        root.setOnKeyPressed(controller);
+        root.setOnKeyReleased(controller);
     }
 
     public Button getBtnReturn() {

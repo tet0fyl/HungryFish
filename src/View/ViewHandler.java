@@ -80,7 +80,7 @@ public class ViewHandler extends Application {
 
     public void launchViewInGame(){
         mig = new ModelInGame();
-        vig = new ViewInGame(root);
+        vig = new ViewInGame(root,mig);
         cigm = new ControllerInGameMouse(this, mig);
         cigk = new ControllerInGameKeyboard(this,mig);
     }
