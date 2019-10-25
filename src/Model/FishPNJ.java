@@ -7,17 +7,17 @@ public abstract class FishPNJ extends Fish {
     protected int expEarn;
     protected int detectionArea;
     protected boolean playerDetected;
-    protected double randomX, randomY, targetDirectionY, targetDirectionX;
+    protected int randomX, randomY, targetDirectionY, targetDirectionX;
     protected AnimationTimer animation;
-    protected int pente;
+    protected double a;
+    protected double b;
 
-
-    public FishPNJ(){};
-
-    public FishPNJ(String url, int size, int x, int y){
-        super(url,size,x,y);
+    public FishPNJ(int size, double x, double y){
+        super(size,x,y);
         defineADestination();
         moveToTarget();
+        sensX=1;
+        sensY=1;
     }
 
     public void setExpEarn(int expEarn) {
@@ -41,26 +41,45 @@ public abstract class FishPNJ extends Fish {
     }
 
     public void defineADestination(){
-        randomX = (int) (Math.random()* 400) + 200;
-        randomY = (int) (Math.random()* 10) + 20;
+        randomX = (int) (Math.random()* 50) + 200;
+        randomY = (int) (Math.random()* 10) + 100;
 
-        targetDirectionX = Screen.getPrimary().getBounds().getWidth() - randomX;
-        targetDirectionY = Screen.getPrimary().getBounds().getHeight() - randomY;
+        if(sensX==1){
+            targetDirectionX = (int)Screen.getPrimary().getBounds().getWidth() + randomX;
+        }else{
+            targetDirectionX = -1*randomX;
+        }
+        targetDirectionY = (int)y + sensY*randomY;
 
-        pente = (int)((y - targetDirectionY)/(x - targetDirectionX));
+        a = ((y - targetDirectionY)/(x - targetDirectionX));
+        b = ((targetDirectionX*y)-(x*targetDirectionY))/(targetDirectionX-x);
+
     }
 
     public void moveToTarget(){
         animation = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                   x=(x+speed)*pente;
-                   y=(y+speed)*pente;
-                   mainImg.setX(x);
-                   mainImg.setY(y);
+                    x=x+(speed * sensX);
+                    y=a*x+b;
+
+                    colisionBoxY();
+                    refreshImg(x,y);
+
+                   if((x >= targetDirectionX && sensX == 1) || (x<= targetDirectionX && sensX == -1)){
+                       int random = (int)(Math.random()* 20);
+                       if(random > 13){
+                           sensX = sensX * -1;
+
+                       }
+                       sensY = sensY * -1;
+
+                       defineADestination();
+                   }
             }
         };
         animation.start();
     }
+
 
 }

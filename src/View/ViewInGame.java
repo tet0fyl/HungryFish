@@ -22,6 +22,7 @@ public class ViewInGame {
         this.root = root;
         this.model = model;
 
+
         btnReturn = initBtnRightOrLeft(20,"RETOUR","left");
         btnReturn.setLayoutY(25);
 
@@ -30,7 +31,6 @@ public class ViewInGame {
         root.getChildren().clear();
         root.getChildren().add(imgBackground);
         root.getChildren().add(model.getPlayer().getMainImg());
-        root.getChildren().add(model.getSmallFish().getMainImg());
         root.getChildren().add(btnReturn);
     }
 

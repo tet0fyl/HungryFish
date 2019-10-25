@@ -1,99 +1,40 @@
 package Model;
 
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Screen;
 
 import java.util.ArrayList;
 
 public abstract class Fish {
     protected ImageView mainImg;
-    protected Image forImg, backImg;
-    protected int x;
-    protected int y;
-    protected int size;
-    protected int speed;
+    protected double x;
+    protected double y;
+    protected double size;
+    protected double speed;
     protected boolean isAlive;
     protected ArrayList spriteImg;
-    protected double inclinaison;
-    protected int vitesseInclinaison;
-    private int sens;
-    private String state;
+    protected int sensX=0;
+    protected int sensY=0;
     public static final String moveRight = "droite";
     public static final String moveLeft = "gauche";
     public static final String moveUp = "haut";
     public static final String moveDown = "bas";
 
 
-
-
-    public Fish(){
-
-    }
-
-    public Fish(String url, int size, int x, int y){
-        forImg = new Image(url);
-        backImg = new Image("Asset/img/skin/skinRiverse1.png");
-        mainImg = new ImageView(forImg);
-        this.size = size;
+    public Fish(int size, double x, double y){
+        //this.speed = (float)(1/this.size)*300;
+        speed=4;
+        mainImg = new ImageView();
+        this.size=size;
         this.x=x;
         this.y=y;
-        sens=1;
         refreshImg(x,y);
-        speed=20;
+    }
+
+    public void refreshImg(double x, double y){
         mainImg.setFitHeight(size);
         mainImg.setFitWidth(size);
-        inclinaison = 0;
-        vitesseInclinaison = 5;
-        state = "droite";
-
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public void setAlive(boolean alive) {
-        isAlive = alive;
-    }
-
-    public void setSpriteImg(ArrayList spriteImg) {
-        this.spriteImg = spriteImg;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public ArrayList getSpriteImg() {
-        return spriteImg;
-    }
-
-    public void refreshImg(int x, int y){
         mainImg.setX(x);
         mainImg.setY(y);
     }
@@ -102,55 +43,22 @@ public abstract class Fish {
 
     }
 
-    public void move(String direction){
-        if(direction.equals(moveRight)) {
-            state="droite";
-            x=x+speed;
-            if(inclinaison >= 0){
-                inclinaison=inclinaison-vitesseInclinaison;
-                mainImg.setRotate(inclinaison);
-            }else if(inclinaison <= 0){
-                inclinaison=inclinaison+vitesseInclinaison;
-                mainImg.setRotate(inclinaison);
-            }
+    public void colisionBoxX(){
+        if (x>(Screen.getPrimary().getBounds().getWidth()-size)){
+            x=Screen.getPrimary().getBounds().getWidth()-size;
         }
-        if(direction.equals(moveLeft)) {
-            state="gauche";
-            x=x-speed;
-            mainImg.setImage(backImg);
-            if(inclinaison >= 0){
-                inclinaison=inclinaison-vitesseInclinaison;
-                mainImg.setRotate(inclinaison);
-            }else if(inclinaison <= 0){
-                inclinaison=inclinaison+vitesseInclinaison;
-                mainImg.setRotate(inclinaison);
-            }
+        if(x<0){
+            x=0;
         }
-        if(direction.equals(moveUp)) {
-            y=y-speed;
-            if(inclinaison >= -90 && state == "droite"){
-            inclinaison=inclinaison-vitesseInclinaison;
-            mainImg.setRotate(inclinaison);
-            }else if(inclinaison <= -90 && state == "gauche"){
-                inclinaison=inclinaison+vitesseInclinaison;
-                mainImg.setRotate(inclinaison);
-            }
-        }
-        if(direction.equals(moveDown)) {
-            y=y+speed;
-            if(inclinaison <= 90 && state == "droite"){
-                inclinaison=inclinaison+vitesseInclinaison;
-                mainImg.setRotate(inclinaison);
-            }else if(inclinaison <= 90 && state == "gauche"){
-                inclinaison=inclinaison-vitesseInclinaison;
-                mainImg.setRotate(inclinaison);
-            }
+    }
 
+    public void colisionBoxY(){
+        if (y>(Screen.getPrimary().getBounds().getHeight()-size)){
+            y=Screen.getPrimary().getBounds().getHeight()-size;
         }
-        x=x+speed;
-        y=y+speed;
-        refreshImg(x,y);
-        System.out.println("Je regarde vers le " + state);
+        if(y<0){
+            y=0;
+        }
     }
 
     public ImageView getMainImg() {
