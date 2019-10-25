@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Fish;
 import Model.ModelInGame;
 import View.ViewHandler;
 import javafx.animation.AnimationTimer;
@@ -53,19 +54,19 @@ public class ControllerInGameKeyboard extends AnimationTimer implements EventHan
     @Override
     public void handle(long l) {
         if(listKeyPressed.get(KeyCode.RIGHT) != null && listKeyPressed.get(KeyCode.RIGHT).booleanValue()){
-            model.getPlayer().move("right");
+            model.getPlayer().move(Fish.moveRight);
         }
 
         if(listKeyPressed.get(KeyCode.LEFT) != null && listKeyPressed.get(KeyCode.LEFT).booleanValue()){
-            model.getPlayer().move("left");
+            model.getPlayer().move(Fish.moveLeft);
         }
 
         if(listKeyPressed.get(KeyCode.UP) != null && listKeyPressed.get(KeyCode.UP).booleanValue()){
-            model.getPlayer().move("up");
+            model.getPlayer().move(Fish.moveUp);
         }
 
         if(listKeyPressed.get(KeyCode.DOWN) != null && listKeyPressed.get(KeyCode.DOWN).booleanValue()){
-            model.getPlayer().move("down");
+            model.getPlayer().move(Fish.moveDown);
         }
     }
 }
