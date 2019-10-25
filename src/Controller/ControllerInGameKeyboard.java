@@ -27,13 +27,8 @@ public class ControllerInGameKeyboard extends AnimationTimer implements EventHan
 
     @Override
     public void handle(KeyEvent event) {
-        System.out.println("--------------------------------------------------");
         nbEvent++;
-        System.out.println(nbEvent + " . ");
-        System.out.println("Le type de l'evenement est " + event.getEventType());
-        System.out.println("Sur : " + event.getCode());
         if (event.getEventType() == KeyEvent.KEY_RELEASED){
-            System.out.println("On est bien dans la condition release");
 
             if(listKeyPressed.containsKey(event.getCode())){
                 listKeyPressed.replace(event.getCode(),false);
@@ -42,7 +37,6 @@ public class ControllerInGameKeyboard extends AnimationTimer implements EventHan
             }
         }
         if(event.getEventType() == KeyEvent.KEY_PRESSED){
-            System.out.println("On est bien dans la condition PRESSED");
 
             if(listKeyPressed.containsKey(event.getCode())){
                 listKeyPressed.replace(event.getCode(),true);
