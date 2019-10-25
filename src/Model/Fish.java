@@ -115,17 +115,23 @@ public class Fish {
             }else if(inclinaison <= 0){
                 inclinaison=inclinaison+vitesseInclinaison;
                 mainImg.setRotate(inclinaison);
-            };
-
+            }
         }
         if(direction.equals(moveLeft)) {
             state="gauche";
             x=x-speed;
             mainImg.setImage(backImg);
+            if(inclinaison >= 0){
+                inclinaison=inclinaison-vitesseInclinaison;
+                mainImg.setRotate(inclinaison);
+            }else if(inclinaison <= 0){
+                inclinaison=inclinaison+vitesseInclinaison;
+                mainImg.setRotate(inclinaison);
+            }
         }
         if(direction.equals(moveUp)) {
             y=y-speed;
-            if(inclinaison >= -90){
+            if(inclinaison >= -90 && state == "droite"){
             inclinaison=inclinaison-vitesseInclinaison;
             mainImg.setRotate(inclinaison);
             }else if(inclinaison <= -90 && state == "gauche"){
@@ -135,9 +141,13 @@ public class Fish {
         }
         if(direction.equals(moveDown)) {
             y=y+speed;
-            if(inclinaison <= 90 && state == ""){
+            if(inclinaison <= 90 && state == "droite"){
                 inclinaison=inclinaison+vitesseInclinaison;
-                mainImg.setRotate(inclinaison);}
+                mainImg.setRotate(inclinaison);
+            }else if(inclinaison <= 90 && state == "gauche"){
+                inclinaison=inclinaison-vitesseInclinaison;
+                mainImg.setRotate(inclinaison);
+            }
 
         }
         x=x+speed;
