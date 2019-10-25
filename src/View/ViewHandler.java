@@ -53,14 +53,14 @@ public class ViewHandler extends Application {
         vmp.setEvents(cm);
     }
 
-    public void setEventHandlerInGame(ControllerInGameMouse cig){
-        vig.setEvents(cig);}
-
-    public void setEventHandlerMenuOption(ControllerMenuOption cmo){ vmo.setEvents(cmo);}
+    public void setEventHandlerInGame(ControllerInGameMouse cig){ vig.setEvents(cig);}
 
     public void setEventHandlerInGameKeyboard(ControllerInGameKeyboard cigk){
         vig.setEvents(cigk);
     }
+
+    public void setEventHandlerMenuOption(ControllerMenuOption cmo){ vmo.setEvents(cmo);}
+
 
     public ViewMenuPrincipal getVmp() {
         return vmp;
