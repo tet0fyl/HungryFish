@@ -1,15 +1,12 @@
 package Model;
 
 
-import javafx.animation.Timeline;
-import javafx.geometry.Point3D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.transform.Rotate;
 
 import java.util.ArrayList;
 
-public class Fish {
+public abstract class Fish {
     protected ImageView mainImg;
     protected Image forImg, backImg;
     protected int x;

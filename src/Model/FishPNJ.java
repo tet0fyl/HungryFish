@@ -3,7 +3,7 @@ package Model;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Screen;
 
-public class FishPNJ extends Fish {
+public abstract class FishPNJ extends Fish {
     protected int expEarn;
     protected int detectionArea;
     protected boolean playerDetected;
@@ -56,6 +56,8 @@ public class FishPNJ extends Fish {
             public void handle(long l) {
                    x=(x+speed)*pente;
                    y=(y+speed)*pente;
+                   mainImg.setX(x);
+                   mainImg.setY(y);
             }
         };
         animation.start();
