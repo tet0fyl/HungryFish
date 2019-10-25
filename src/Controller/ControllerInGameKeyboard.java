@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.Hashtable;
 
-public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
+public class ControllerInGameKeyboard extends AnimationTimer implements EventHandler<KeyEvent> {
 
     private ViewHandler launcher;
     private ModelInGame model;
@@ -22,7 +22,7 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
         this.launcher = launcher;
         this.launcher.setEventHandlerInGameKeyboard(this);
 
-        //this.start();
+        this.start();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
 
     }
 
-    /*@Override
+    @Override
     public void handle(long l) {
         if(listKeyPressed.get(KeyCode.RIGHT) != null && listKeyPressed.get(KeyCode.RIGHT).booleanValue()){
             model.getPlayer().move(Fish.moveRight);
@@ -72,5 +72,5 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
         if(listKeyPressed.get(KeyCode.DOWN) != null && listKeyPressed.get(KeyCode.DOWN).booleanValue()){
             model.getPlayer().move(Fish.moveDown);
         }
-    }*/
+    }
 }
