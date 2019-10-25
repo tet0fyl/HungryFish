@@ -30,6 +30,7 @@ public class ViewInGame {
         root.getChildren().clear();
         root.getChildren().add(imgBackground);
         root.getChildren().add(model.getPlayerImg());
+        //root.getChildren().add(model.getSmallFishImg());
         root.getChildren().add(btnReturn);
     }
 
