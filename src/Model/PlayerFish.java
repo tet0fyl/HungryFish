@@ -1,11 +1,14 @@
 package Model;
 
 import Tool.Path;
+import javafx.animation.AnimationTimer;
+import javafx.animation.Timeline;
 import javafx.stage.Screen;
 
 public class PlayerFish extends Fish {
     protected int exp;
     protected int level;
+    protected AnimationTimer eatThread;
 
     public PlayerFish(){
         size=100;
@@ -40,5 +43,10 @@ public class PlayerFish extends Fish {
         colisionBoxX();
         colisionBoxY();
         refreshImg(x,y);
+    }
+
+
+    public void eat(Fish fish){
+
     }
 }

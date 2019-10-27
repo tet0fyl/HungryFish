@@ -52,10 +52,6 @@ public abstract class Fish {
         mainImg.setY(y);
     }
 
-    public void eat(Fish fish){
-
-    }
-
     public void colisionBoxX(){
         if (x>(Screen.getPrimary().getBounds().getWidth()-size)){
             x=Screen.getPrimary().getBounds().getWidth()-size;

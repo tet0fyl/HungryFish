@@ -53,7 +53,17 @@ public abstract class FishPNJ extends Fish {
             @Override
             public void handle(long l) {
                     x=x+(speed * sensX);
-                    y=a*x+b;
+                    y=10*Math.cos(a*x+b) + a*x+b;
+
+                    /*if(speed>=20){
+                        y=a*x+b + 10*Math.cos(30*x);
+                    }else if(speed>=10){
+                        y=a*x+b + 10*Math.cos(10*x);
+                    }else if (speed>=7){
+                        y=a*x+b + 10*Math.cos(5/4*x);
+                    }else{
+                        y=a*x+b + 10*Math.cos(1/3*x);
+                    }*/
 
                     colisionBoxY();
                     refreshImg(x,y);
