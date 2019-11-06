@@ -23,7 +23,7 @@ public class ControllerInGameKeyboard extends AnimationTimer implements EventHan
         this.launcher = launcher;
         this.launcher.setEventHandlerInGameKeyboard(this);
         jeuTL = new JeuTL(this);
-
+        launcher.getVig().getRoot().requestFocus(); // Je demande le focus au group root pour Fixer le Bug des KeyEvent sur les Arrows de direction
         this.start();
     }
 
@@ -49,19 +49,15 @@ public class ControllerInGameKeyboard extends AnimationTimer implements EventHan
 
     @Override
     public void handle(long l) {
-        if(listKeyPressed.get(KeyCode.RIGHT) != null && listKeyPressed.get(KeyCode.RIGHT).booleanValue() || listKeyPressed.get(KeyCode.D) != null && listKeyPressed.get(KeyCode.D).booleanValue()){
+        if(listKeyPressed.get(KeyCode.RIGHT) != null && listKeyPressed.get(KeyCode.RIGHT).booleanValue()){
             model.getPlayer().move(Fish.moveRight);
-        }
-
-        if(listKeyPressed.get(KeyCode.LEFT) != null && listKeyPressed.get(KeyCode.LEFT).booleanValue() || listKeyPressed.get(KeyCode.A) != null && listKeyPressed.get(KeyCode.A).booleanValue()){
+        }else if(listKeyPressed.get(KeyCode.LEFT) != null && listKeyPressed.get(KeyCode.LEFT).booleanValue()){
             model.getPlayer().move(Fish.moveLeft);
         }
 
-        if(listKeyPressed.get(KeyCode.UP) != null && listKeyPressed.get(KeyCode.UP).booleanValue() || listKeyPressed.get(KeyCode.W) != null && listKeyPressed.get(KeyCode.W).booleanValue()){
+        if(listKeyPressed.get(KeyCode.UP) != null && listKeyPressed.get(KeyCode.UP).booleanValue()){
             model.getPlayer().move(Fish.moveUp);
-        }
-
-        if(listKeyPressed.get(KeyCode.DOWN) != null && listKeyPressed.get(KeyCode.DOWN).booleanValue() || listKeyPressed.get(KeyCode.S) != null && listKeyPressed.get(KeyCode.S).booleanValue() ){
+        }else if(listKeyPressed.get(KeyCode.DOWN) != null && listKeyPressed.get(KeyCode.DOWN).booleanValue()){
             model.getPlayer().move(Fish.moveDown);
         }
     }
