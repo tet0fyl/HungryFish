@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Fish;
 import Model.ModelInGame;
+import Timeline.JeuTL;
 import View.ViewHandler;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -12,6 +13,7 @@ import java.util.Hashtable;
 
 public class ControllerInGameKeyboard extends AnimationTimer implements EventHandler<KeyEvent> {
 
+    private JeuTL jeuTL;
     private ViewHandler launcher;
     private ModelInGame model;
     private Hashtable<KeyCode,Boolean> listKeyPressed= new Hashtable<KeyCode,Boolean>();
@@ -20,8 +22,7 @@ public class ControllerInGameKeyboard extends AnimationTimer implements EventHan
         this.model = model;
         this.launcher = launcher;
         this.launcher.setEventHandlerInGameKeyboard(this);
-
-        model.generateFish(launcher.getVig().getRoot());
+        jeuTL = new JeuTL(this);
 
         this.start();
     }
@@ -63,5 +64,13 @@ public class ControllerInGameKeyboard extends AnimationTimer implements EventHan
         if(listKeyPressed.get(KeyCode.DOWN) != null && listKeyPressed.get(KeyCode.DOWN).booleanValue() || listKeyPressed.get(KeyCode.S) != null && listKeyPressed.get(KeyCode.S).booleanValue() ){
             model.getPlayer().move(Fish.moveDown);
         }
+    }
+
+    public ViewHandler getLauncher() {
+        return launcher;
+    }
+
+    public ModelInGame getModel() {
+        return model;
     }
 }

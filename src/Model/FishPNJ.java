@@ -18,7 +18,6 @@ public abstract class FishPNJ extends Fish {
     public void initPnj(String url, double speed, double size){
         int random = (int)(Math.random()* 20);
         double randomYStart = (Math.random()*Screen.getPrimary().getBounds().getHeight());
-        System.out.println(randomYStart);
         double randomXStart;
         if(random>10){
             randomXStart = Screen.getPrimary().getBounds().getWidth()+(Math.random()*300)-100;

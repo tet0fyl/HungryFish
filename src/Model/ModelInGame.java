@@ -1,6 +1,7 @@
 package Model;
 
 import Tool.Path;
+import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.stage.Screen;
 
@@ -10,12 +11,15 @@ public class ModelInGame {
     private PlayerFish player;
     private ArrayList<Fish> listFishPNJ = new ArrayList<Fish>();
 
+
     public ModelInGame(){
         player = new PlayerFish();
+
     }
 
-    public void generateFish(Group root){
-        for (int i = 0; i < 10 ; i++) {
+
+    public void generateFish(Group root , int nbFish){
+        for (int i = 0; i < nbFish ; i++) {
             addFish(root);
         }
     }
@@ -38,5 +42,9 @@ public class ModelInGame {
 
     public PlayerFish getPlayer() {
         return player;
+    }
+
+    public ArrayList<Fish> getListFishPNJ() {
+        return listFishPNJ;
     }
 }

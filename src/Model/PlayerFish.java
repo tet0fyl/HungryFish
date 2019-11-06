@@ -44,9 +44,4 @@ public class PlayerFish extends Fish {
         colisionBoxY();
         refreshImg(x,y);
     }
-
-
-    public void eat(Fish fish){
-
-    }
 }

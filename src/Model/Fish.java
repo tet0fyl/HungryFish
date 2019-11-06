@@ -31,6 +31,7 @@ public abstract class Fish {
 
     public void init(String url, double x, double y, double speed, double size){
         mainImg = new ImageView();
+        mainImg.setPickOnBounds(false);
         forImg = new Image(url +".png");
         backImg = new Image(url+"backward.png");
         mainImg.setImage(forImg);
@@ -38,6 +39,7 @@ public abstract class Fish {
         this.speed=speed;
         refreshImg(x,y);
         memorySensX = sensX;
+        isAlive=true;
     }
 
     public void refreshImg(double x, double y){
@@ -50,6 +52,11 @@ public abstract class Fish {
         mainImg.setFitWidth(size);
         mainImg.setX(x);
         mainImg.setY(y);
+    }
+
+    public void refreshImg(){
+        mainImg.setFitHeight(size);
+        mainImg.setFitWidth(size);
     }
 
     public void colisionBoxX(){
@@ -73,4 +80,24 @@ public abstract class Fish {
     public ImageView getMainImg() {
         return mainImg;
     }
+
+    public boolean getIsAlive(){
+        return isAlive;
+    }
+
+    public void setIsAlive(boolean isAlive){
+        this.isAlive = isAlive;
+    }
+
+    public void eat(Fish fish){
+        fish.setIsAlive(false);
+        grow();
+
+    }
+
+    public void grow(){
+        size++;
+        refreshImg();
+    }
 }
+
