@@ -3,66 +3,62 @@ package View;
 import Controller.ControllerMenuPrincipal;
 import Model.ModelMenuPrincipal;
 import Tool.Path;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
-
-public class ViewMenuPrincipal {
+public class ViewMenuPrincipal{
 
     private Group root;
     private ModelMenuPrincipal model;
-    private Text txtTitle;
+    private Label txtTitle;
     private Button btnStart, btnOption, btnExit;
 
     ViewMenuPrincipal(Group root, ModelMenuPrincipal model){
         this.root = root;
         this.model = model;
 
-        txtTitle = initText(150,"HUNGRY FISH");
-        txtTitle.setLayoutY(200);
+        VBox vBox = new VBox();
+        vBox.setPadding(new Insets(10, 0, 50, 100));
+        vBox.setSpacing(70);
 
-        btnStart = initBtnCenter(25,"JOUER");
-        btnStart.setLayoutY(300);
+        txtTitle = initText(90, "HUNGRY FISH");
+        vBox.getChildren().add(txtTitle);
+        vBox.setLayoutX(400);
 
-        btnOption = initBtnCenter(25,"OPTION");
-        btnOption.setLayoutY(400);
+        btnStart = initBtn(20, "JOUER");
+        vBox.getChildren().add(btnStart);
 
-        btnExit = initBtnCenter(25,"QUITTER");
-        btnExit.setLayoutY(500);
+        btnOption = initBtn(20, "OPTION");
+        vBox.getChildren().add(btnOption);
 
+        btnExit = initBtn(20, "QUITTER");
+        vBox.getChildren().add(btnExit);
 
         root.getChildren().clear();
         root.getChildren().add(model.parallax.getRoot());
-        root.getChildren().add(txtTitle);
-        root.getChildren().add(btnStart);
-        root.getChildren().add(btnOption);
-        root.getChildren().add(btnExit);
+        root.getChildren().add(vBox);
 
 
         ////////////////////////////////////////////////////////////
     }
 
-    public Text initText(int fontSize, String textContent){
-        Text t = new Text();
+    public Label initText(int fontSize, String textContent){
+        Label t = new Label();
         t.setText(textContent);
-        double width = 800;
-        t.setWrappingWidth(width);
-        double middle = (Screen.getPrimary().getBounds().getWidth()/2) - (width/2);
-        t.setLayoutX(middle);
         t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontBubbleButt), fontSize));
         t.setRotate(15);
         return t;
     }
 
-    public Button initBtnCenter(int fontSize, String textContent){
+    public Button initBtn(int fontSize, String textContent){
         Button b = new Button(textContent);
-        double width = 250;
-        b.setMinWidth(width);
-        double middle = (Screen.getPrimary().getBounds().getWidth()/2) - (width/2);
-        b.setLayoutX(middle);
+        b.setMinWidth(150);
         b.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), fontSize));
         b.getStyleClass().add("btn");
         return b;
