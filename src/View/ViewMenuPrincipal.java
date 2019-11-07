@@ -76,10 +76,12 @@ public class ViewMenuPrincipal{
         btnOption.setOnMouseClicked(mc);
         btnExit.setOnMouseClicked(mc);
 
-        for(Node node: vBox.getChildren()){  // <== Je met un evenement sur le mouvement de la souris pour pas perdre le focus du parallax
+        for(Node node: vBox.getChildren()){  // <== Je met un evenement sur le mouvement de la souris pour tout les element de la vBox pas perdre le focus du parallax quand je passe dessus
             node.setOnMouseMoved(mc);
         }
 
+        vBox.setOnMouseMoved(mc); //<== Et je noublie pas de mettre un event sur le move de la souris pour la vBox sinon le parallax ne veut pas bouger du tout xD
+        root.setOnMouseMoved(mc); // <== Et sur le root aussi sinon quand je passe la souris en bas de l'ecran sa ne bougera pas car la vBox ne prend pas toute la hauteur de l'ecran
         //model.parallax.getRoot().setOnMouseMoved(mc);
         //btnStart.setOnMouseMoved(mc);
         //btnOption.setOnMouseMoved(mc);
