@@ -20,9 +20,9 @@ public abstract class FishPNJ extends Fish {
         double randomYStart = (Math.random()*Screen.getPrimary().getBounds().getHeight());
         double randomXStart;
         if(random>10){
-            randomXStart = Screen.getPrimary().getBounds().getWidth()+(Math.random()*300)-100;
+            randomXStart = Screen.getPrimary().getBounds().getWidth()+(Math.random()*300)+100;
         }else{
-            randomXStart = (Math.random()*300)-100;
+            randomXStart = ((Math.random()*500)+300);
         }
         init(url,randomXStart,randomYStart,speed,size);
         defineADestination();
@@ -32,7 +32,7 @@ public abstract class FishPNJ extends Fish {
     }
 
     public void defineADestination(){
-        randomX = (int) (Math.random()* 200) + 50;
+        randomX = (int) (Math.random()* 500) + 300;
         randomY = (int) (Math.random()* 100) + 10;
 
         if(sensX==1){
@@ -53,16 +53,6 @@ public abstract class FishPNJ extends Fish {
             public void handle(long l) {
                     x=x+(speed * sensX);
                     y=10*Math.cos(a*x+b) + a*x+b;
-
-                    /*if(speed>=20){
-                        y=a*x+b + 10*Math.cos(30*x);
-                    }else if(speed>=10){
-                        y=a*x+b + 10*Math.cos(10*x);
-                    }else if (speed>=7){
-                        y=a*x+b + 10*Math.cos(5/4*x);
-                    }else{
-                        y=a*x+b + 10*Math.cos(1/3*x);
-                    }*/
 
                     colisionBoxY();
                     refreshImg(x,y);

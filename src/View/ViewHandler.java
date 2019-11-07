@@ -35,8 +35,7 @@ public class ViewHandler extends Application {
 
         this.primaryStage = primaryStage;
 
-        //launchViewMenuPrincipal();
-        launchViewInGame();
+        launchViewMenuPrincipal();
 
         primaryStage.setTitle("HungryFish");
         root.getStylesheets().add(Path.urlStyleshet);
