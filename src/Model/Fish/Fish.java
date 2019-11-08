@@ -1,13 +1,13 @@
-package Model;
+package Model.Fish;
 
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
 
-import java.util.ArrayList;
 
 public abstract class Fish {
+
     protected ImageView mainImg;
     protected Image forImg,backImg;
     protected double x;
@@ -15,29 +15,22 @@ public abstract class Fish {
     protected double size;
     protected double speed;
     protected boolean isAlive;
-    protected ArrayList spriteImg;
     protected int sensX=1;
-    protected int memorySensX;
     protected int sensY=0;
+    protected int memorySensX;
+
     public static final String moveRight = "droite";
     public static final String moveLeft = "gauche";
     public static final String moveUp = "haut";
     public static final String moveDown = "bas";
 
-
-    public Fish(){
-        //this.speed = (float)(1/this.size)*300;
-    }
-
-    public void init(String url, double x, double y, double speed, double size){
+    public Fish(String url, double speed, double size){
         mainImg = new ImageView();
-        mainImg.setPickOnBounds(false);
         forImg = new Image(url +".png");
         backImg = new Image(url+"backward.png");
         mainImg.setImage(forImg);
         this.size = size;
         this.speed=speed;
-        refreshImg(x,y);
         memorySensX = sensX;
         isAlive=true;
     }
@@ -77,6 +70,17 @@ public abstract class Fish {
         }
     }
 
+    public void eat(Fish fish){
+        fish.setIsAlive(false);
+        grow();
+
+    }
+
+    public void grow(){
+        size++;
+        refreshImg();
+    }
+
     public ImageView getMainImg() {
         return mainImg;
     }
@@ -87,17 +91,6 @@ public abstract class Fish {
 
     public void setIsAlive(boolean isAlive){
         this.isAlive = isAlive;
-    }
-
-    public void eat(Fish fish){
-        fish.setIsAlive(false);
-        grow();
-
-    }
-
-    public void grow(){
-        size++;
-        refreshImg();
     }
 }
 

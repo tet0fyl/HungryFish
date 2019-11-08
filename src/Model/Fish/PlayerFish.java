@@ -1,21 +1,15 @@
-package Model;
+package Model.Fish;
 
+import Tool.Cst;
 import Tool.Path;
-import javafx.animation.AnimationTimer;
-import javafx.animation.Timeline;
-import javafx.stage.Screen;
 
 public class PlayerFish extends Fish {
-    protected int exp;
-    protected int level;
-    protected AnimationTimer eatThread;
 
     public PlayerFish(){
-        size=100;
-        speed=15;
-        x= Screen.getPrimary().getBounds().getWidth()/2 - size/2;
-        y= Screen.getPrimary().getBounds().getHeight() - size;
-        init(Path.skinMainFish+"1",x,y,speed,size);
+        super(Path.skinMainFish+"4",15,100);
+        x= Cst.screenWidth/2 - size/2;
+        y= Cst.screenHeight - size;
+        refreshImg(x,y);
     }
 
     public void move(String direction){

@@ -1,42 +1,47 @@
-package Model;
+package Model.Fish;
 
+import Tool.Cst;
 import javafx.animation.AnimationTimer;
-import javafx.stage.Screen;
 
 public abstract class FishPNJ extends Fish {
-    protected int expEarn;
-    protected int detectionArea;
-    protected boolean playerDetected;
     protected int randomX, randomY, targetDirectionY, targetDirectionX;
     protected AnimationTimer animation;
     protected double a;
     protected double b;
 
-    public FishPNJ(){
+
+
+    public FishPNJ(String url, double speed, double size){
+        super(url,speed,size);
+        startMoving();
     }
 
-    public void initPnj(String url, double speed, double size){
-        int random = (int)(Math.random()* 20);
-        double randomYStart = (Math.random()*Screen.getPrimary().getBounds().getHeight());
+    public void startMoving(){
+        int random = randomize(20,0);
+        double randomYStart = randomize(Cst.screenHeight-300,0);
         double randomXStart;
         if(random>10){
-            randomXStart = Screen.getPrimary().getBounds().getWidth()+(Math.random()*300)+100;
+            randomXStart = randomize(Cst.screenWidth+500,Cst.screenWidth+200);
         }else{
-            randomXStart = ((Math.random()*500)+300);
+            randomXStart = -1*randomize(500,100);
         }
-        init(url,randomXStart,randomYStart,speed,size);
+        this.x = randomXStart;
+        this.y= randomYStart;
+        refreshImg(x,y);
         defineADestination();
         moveToTarget();
-        sensX=1;
-        sensY=1;
+    }
+
+    public int randomize(int max,int min){
+        return (int) (Math.random()* max) + min;
     }
 
     public void defineADestination(){
-        randomX = (int) (Math.random()* 500) + 300;
-        randomY = (int) (Math.random()* 100) + 10;
+        randomX = randomize(500,300);
+        randomY = randomize(200,100);
 
         if(sensX==1){
-            targetDirectionX = (int)Screen.getPrimary().getBounds().getWidth() + randomX;
+            targetDirectionX = Cst.screenWidth + randomX;
         }else{
             targetDirectionX = -1*randomX;
         }

@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Fish;
+import Model.Fish.Fish;
 import Model.ModelInGame;
 import Timeline.JeuTL;
 import View.ViewHandler;

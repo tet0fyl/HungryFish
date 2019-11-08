@@ -1,10 +1,9 @@
 package Timeline;
 
 import Controller.ControllerInGameKeyboard;
-import Model.Fish;
+import Model.Fish.Fish;
 import javafx.animation.AnimationTimer;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class JeuTL extends AnimationTimer {

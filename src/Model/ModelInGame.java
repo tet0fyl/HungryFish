@@ -1,9 +1,7 @@
 package Model;
 
-import Tool.Path;
-import javafx.animation.AnimationTimer;
+import Model.Fish.*;
 import javafx.scene.Group;
-import javafx.stage.Screen;
 
 import java.util.ArrayList;
 
