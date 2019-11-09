@@ -3,6 +3,8 @@ package View;
 import Controller.ControllerInGameKeyboard;
 import Controller.ControllerInGameMouse;
 import Model.Menu;
+import Model.Parallax;
+import Model.Scroll;
 import Tool.Cst;
 import Tool.Path;
 import javafx.geometry.Pos;
@@ -22,6 +24,8 @@ public class ViewInGame {
     private ImageView imgBackground;
     private Label lblGameOver;
     private VBox vBoxGameOverPopUp;
+    private Parallax parallax;
+
 
     ViewInGame(Group root, Menu model){
         this.root = root;
@@ -35,9 +39,12 @@ public class ViewInGame {
     }
 
     public  void clearAndInitRoot(){
-        initBackground();
+
+        //initBackground();
+        parallax = new Parallax(Path.urlParallaxLevelBackgroundImg, Scroll.maxX,Scroll.maxY,Parallax.game);
         root.getChildren().clear();
-        root.getChildren().add(imgBackground);
+        //root.getChildren().add(imgBackground);
+        root.getChildren().add(parallax.getRoot());
         root.getChildren().add(btnReturn);
     }
 
@@ -98,6 +105,10 @@ public class ViewInGame {
 
     public Group getRoot() {
         return root;
+    }
+
+    public Parallax getParallax() {
+        return parallax;
     }
 
     public ImageView getImgBackground() {

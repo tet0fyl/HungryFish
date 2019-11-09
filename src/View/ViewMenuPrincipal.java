@@ -3,6 +3,7 @@ package View;
 import Controller.ControllerMenu;
 import Model.Menu;
 import Model.Parallax;
+import Tool.Cst;
 import Tool.Path;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,7 +28,7 @@ public class ViewMenuPrincipal{
         this.root = root;
         this.model = model;
 
-        parallax = new Parallax(Path.urlParallaxMenuPrincipalBackgroundImg);
+        parallax = new Parallax(Path.urlParallaxMenuPrincipalBackgroundImg, Cst.screenWidth,Cst.screenHeight,Parallax.menu);
         //VBox vBox = new VBox();
         vBox = new VBox(); //<== On initialise la vBox
         vBox.setMinWidth(Screen.getPrimary().getBounds().getWidth()); //<== Je donne une taille Minimun a ma vBox qui est la largueur de l´écran

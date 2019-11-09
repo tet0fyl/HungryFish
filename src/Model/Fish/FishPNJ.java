@@ -1,14 +1,17 @@
 package Model.Fish;
 
+import Model.Scroll;
 import Tool.Cst;
 import javafx.animation.AnimationTimer;
 
 public abstract class FishPNJ extends Fish {
     protected int randomX, randomY, targetDirectionY, targetDirectionX;
+    protected int boxX = (int)Scroll.maxX;
+    protected int boxY = (int)Scroll.maxY;
+
     protected AnimationTimer animation;
     protected double a;
     protected double b;
-
 
 
     public FishPNJ(String url, double speed, double size){
@@ -18,10 +21,10 @@ public abstract class FishPNJ extends Fish {
 
     public void startMoving(){
         int random = randomize(20,0);
-        double randomYStart = randomize(Cst.screenHeight-300,0);
+        double randomYStart = randomize(boxY -300,0);
         double randomXStart;
         if(random>10){
-            randomXStart = randomize(Cst.screenWidth+500,Cst.screenWidth+200);
+            randomXStart = randomize(boxX+500,boxX+200);
         }else{
             randomXStart = -1*randomize(500,100);
         }
@@ -41,7 +44,7 @@ public abstract class FishPNJ extends Fish {
         randomY = randomize(200,100);
 
         if(sensX==1){
-            targetDirectionX = Cst.screenWidth + randomX;
+            targetDirectionX = boxX + randomX;
         }else{
             targetDirectionX = -1*randomX;
         }

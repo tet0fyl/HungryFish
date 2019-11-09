@@ -13,6 +13,7 @@ import javafx.stage.Screen;
 public class Scroll {
 
     private ImageView img;
+    private Parallax parallax;
     private double sensX,sensY,x,y,speed,subjectX,subjectY;
     private PerspectiveCamera camera;
     private boolean waitTheSubjectXRight = false;
@@ -27,24 +28,20 @@ public class Scroll {
     public static final String moveUp = "haut";
     public static final String moveDown = "bas";
 
-    public static final double maxX = Screen.getPrimary().getBounds().getWidth()*2;
+    public static final double maxX = Screen.getPrimary().getBounds().getWidth()*5;
     public static final double maxY = Screen.getPrimary().getBounds().getWidth()*2;
 
-    public Scroll(ImageView scrollBg, Fish subject, Scene scene){
-        img=scrollBg;
-        img.setFitHeight(maxY);
-        img.setFitWidth(maxX);
+    public Scroll(Parallax parallax, Fish subject, Scene scene){
+        this.parallax=parallax;
         speed=subject.getSpeed();
         camera = new PerspectiveCamera();
+        camera.setTranslateZ(-500);
         scene.setCamera(camera);
         y=camera.getLayoutY();
         x=camera.getLayoutX();
         this.subject=subject;
         subjectX=subject.getX();
         subjectY=subject.getY();
-        img.setX(x);
-        img.setY(y);
-
     }
 
     public void move(String direction){
@@ -76,7 +73,7 @@ public class Scroll {
         colisionBoxY();
         camera.setLayoutX(x);
         camera.setLayoutY(y);
-
+        parallax.move(x,y);
     }
 
     public void colisionBoxX(){

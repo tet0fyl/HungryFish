@@ -25,7 +25,7 @@ public class JeuTL extends AnimationTimer {
         generateFish(this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot(),15);
         player = new PlayerFish();
         this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot().getChildren().add(player.getMainImg());
-        scroll = new Scroll(this.controllerInGameKeyboard.getLauncher().getViewInGame().getImgBackground(),player,controllerInGameKeyboard.getLauncher().getScene());
+        scroll = new Scroll(this.controllerInGameKeyboard.getLauncher().getViewInGame().getParallax(),player,controllerInGameKeyboard.getLauncher().getScene());
     }
 
     public void generateFish(Group root , int nbFish){

@@ -1,8 +1,6 @@
 package Controller;
 
-import Model.Fish.PlayerFish;
 import Model.Menu;
-import Model.Scroll;
 import Timeline.JeuTL;
 import View.ViewHandler;
 import javafx.event.EventHandler;
