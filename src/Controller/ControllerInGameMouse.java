@@ -1,18 +1,16 @@
 package Controller;
 
-import Model.ModelInGame;
+import Model.Menu;
 import View.ViewHandler;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class ControllerInGameMouse implements EventHandler<MouseEvent> {
 
     private ViewHandler launcher;
-    private ModelInGame model;
+    private Menu model;
 
-    public ControllerInGameMouse(ViewHandler launcher, ModelInGame model){
+    public ControllerInGameMouse(ViewHandler launcher, Menu model){
         this.model = model;
         this.launcher = launcher;
         this.launcher.setEventHandlerInGame(this);
@@ -20,9 +18,10 @@ public class ControllerInGameMouse implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
-        if(event.getSource().equals(launcher.getVig().getBtnReturn())){
-            launcher.getVig().getBtnReturn().disarm();
-            launcher.launchViewMenuPrincipal();
+        if(event.getSource().equals(launcher.getViewInGame().getBtnReturn())){
+            launcher.getViewInGame().getBtnReturn().disarm();
+            launcher.afficherMenuPrincipal();
         }
+
     }
 }

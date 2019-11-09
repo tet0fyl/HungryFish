@@ -1,6 +1,6 @@
 package View;
 
-import Controller.ControllerMenuOption;
+import Controller.ControllerMenu;
 import Tool.Path;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
@@ -24,11 +24,12 @@ public class ViewMenuOption {
     private Button btnReturn, btnValider, btnEasy, btnMedium, btnImpossible, btnHowToPlay;
     private ImageView imgBackground, skin1,skin2,skin3,skin4,skin5;
     private ArrayList<ImageView> listSkin = new ArrayList<ImageView>();
+    private VBox vBox;
 
     ViewMenuOption(Group root){
         this.root = root;
 
-        VBox vBox = new VBox();
+        vBox = new VBox();
         vBox.setPadding(new Insets(10, 50, 50, 50));
         vBox.setSpacing(10);
 
@@ -79,8 +80,10 @@ public class ViewMenuOption {
         vBox.getChildren().add(btnReturn);
         btnReturn.setLayoutY(700);
 
-        initBackground();
+    }
 
+    public void clearAndInitRoot(){
+        initBackground();
         root.getChildren().clear();
         root.getChildren().add(imgBackground);
         root.getChildren().add(txtSelectSkin);
@@ -94,8 +97,6 @@ public class ViewMenuOption {
         root.getChildren().add(btnValider);
         root.getChildren().add(btnReturn);
         root.getChildren().add(vBox);
-
-
     }
 
     public void initBackground(){
@@ -184,13 +185,13 @@ public class ViewMenuOption {
 
 
 
-    public void setEvents(ControllerMenuOption model){
-        btnReturn.setOnMouseClicked(model);
-        btnValider.setOnMouseClicked(model);
+    public void setEvents(ControllerMenu controllerMenu){
+        btnReturn.setOnMouseClicked(controllerMenu);
+        btnValider.setOnMouseClicked(controllerMenu);
 
-        btnEasy.setOnMouseClicked(model);
-        btnMedium.setOnMouseClicked(model);
-        btnImpossible.setOnMouseClicked(model);
+        btnEasy.setOnMouseClicked(controllerMenu);
+        btnMedium.setOnMouseClicked(controllerMenu);
+        btnImpossible.setOnMouseClicked(controllerMenu);
 
 
     }

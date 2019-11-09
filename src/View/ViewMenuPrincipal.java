@@ -1,7 +1,8 @@
 package View;
 
-import Controller.ControllerMenuPrincipal;
-import Model.ModelMenuPrincipal;
+import Controller.ControllerMenu;
+import Model.Menu;
+import Model.Parallax;
 import Tool.Path;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,21 +12,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
 public class ViewMenuPrincipal{
 
     private Group root;
-    private ModelMenuPrincipal model;
+    private Menu model;
     private Label txtTitle;
     private Button btnStart, btnOption, btnExit;
     private VBox vBox; // <== On declare la variable privé pour quelle soit accessible en dehors de la classe constructor (pour le setEvents plus bas)
+    private Parallax parallax;
 
-    ViewMenuPrincipal(Group root, ModelMenuPrincipal model){
+    ViewMenuPrincipal(Group root, Menu model){
         this.root = root;
         this.model = model;
 
+        parallax = new Parallax(Path.urlParallaxMenuPrincipalBackgroundImg);
         //VBox vBox = new VBox();
         vBox = new VBox(); //<== On initialise la vBox
         vBox.setMinWidth(Screen.getPrimary().getBounds().getWidth()); //<== Je donne une taille Minimun a ma vBox qui est la largueur de l´écran
@@ -47,12 +49,15 @@ public class ViewMenuPrincipal{
         btnExit = initBtn(20, "QUITTER");
         vBox.getChildren().add(btnExit);
 
-        root.getChildren().clear();
-        root.getChildren().add(model.parallax.getRoot());
-        root.getChildren().add(vBox);
 
 
         ////////////////////////////////////////////////////////////
+    }
+
+    public void clearAndInitRoot(){
+        root.getChildren().clear();
+        root.getChildren().add(parallax.getRoot());
+        root.getChildren().add(vBox);
     }
 
     public Label initText(int fontSize, String textContent){
@@ -71,17 +76,17 @@ public class ViewMenuPrincipal{
         return b;
     }
 
-    void setEvents(ControllerMenuPrincipal mc){
-        btnStart.setOnMouseClicked(mc);
-        btnOption.setOnMouseClicked(mc);
-        btnExit.setOnMouseClicked(mc);
+    void setEvents(ControllerMenu controllerMenu){
+        btnStart.setOnMouseClicked(controllerMenu);
+        btnOption.setOnMouseClicked(controllerMenu);
+        btnExit.setOnMouseClicked(controllerMenu);
 
         for(Node node: vBox.getChildren()){  // <== Je met un evenement sur le mouvement de la souris pour tout les element de la vBox pas perdre le focus du parallax quand je passe dessus
-            node.setOnMouseMoved(mc);
+            node.setOnMouseMoved(controllerMenu);
         }
 
-        vBox.setOnMouseMoved(mc); //<== Et je noublie pas de mettre un event sur le move de la souris pour la vBox sinon le parallax ne veut pas bouger du tout xD
-        root.setOnMouseMoved(mc); // <== Et sur le root aussi sinon quand je passe la souris en bas de l'ecran sa ne bougera pas car la vBox ne prend pas toute la hauteur de l'ecran
+        vBox.setOnMouseMoved(controllerMenu); //<== Et je noublie pas de mettre un event sur le move de la souris pour la vBox sinon le parallax ne veut pas bouger du tout xD
+        root.setOnMouseMoved(controllerMenu); // <== Et sur le root aussi sinon quand je passe la souris en bas de l'ecran sa ne bougera pas car la vBox ne prend pas toute la hauteur de l'ecran
         //model.parallax.getRoot().setOnMouseMoved(mc);
         //btnStart.setOnMouseMoved(mc);
         //btnOption.setOnMouseMoved(mc);
@@ -96,5 +101,9 @@ public class ViewMenuPrincipal{
     public Button getBtnExit(){return btnExit;}
 
     public Group getRoot(){return root;}
+
+    public Parallax getParallax(){
+        return parallax;
+    }
 
 }

@@ -2,6 +2,7 @@ package Model;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;

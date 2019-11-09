@@ -2,11 +2,8 @@ package View;
 
 import Controller.ControllerInGameKeyboard;
 import Controller.ControllerInGameMouse;
-import Controller.ControllerMenuPrincipal;
-import Controller.ControllerMenuOption;
-import Model.ModelInGame;
-import Model.ModelMenuOption;
-import Model.ModelMenuPrincipal;
+import Controller.ControllerMenu;
+import Model.Menu;
 import Tool.Path;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -15,16 +12,13 @@ import javafx.stage.Stage;
 
 public class ViewHandler extends Application {
     private Stage primaryStage;
-    private ViewMenuPrincipal vmp;
-    private ViewInGame vig;
-    private ViewMenuOption vmo;
-    private ModelMenuPrincipal mmp;
-    private ModelInGame mig;
-    private ModelMenuOption mmo;
-    private ControllerMenuPrincipal cmp;
-    private ControllerInGameMouse cigm;
-    private ControllerInGameKeyboard cigk;
-    private ControllerMenuOption cmo;
+    private ViewMenuPrincipal viewMenuPrincipal;
+    private ViewInGame viewInGame;
+    private ViewMenuOption viewMenuOption;
+    private Menu model;
+    private ControllerMenu controllerMenu;
+    private ControllerInGameMouse controllerInGameMouse;
+    private ControllerInGameKeyboard controllerInGameKeyboard;
     private Group root;
     private Scene scene;
 
@@ -35,7 +29,19 @@ public class ViewHandler extends Application {
 
         this.primaryStage = primaryStage;
 
-        launchViewMenuPrincipal();
+
+        model = new Menu();
+        viewMenuPrincipal = new ViewMenuPrincipal(root, model);
+        viewMenuOption = new ViewMenuOption(root);
+        viewInGame = new ViewInGame(root,model);
+        controllerInGameMouse = new ControllerInGameMouse(this, model);
+        controllerInGameKeyboard = new ControllerInGameKeyboard(this,model);
+
+
+        controllerMenu = new ControllerMenu(this, model);
+
+        afficherMenuPrincipal();
+
 
         primaryStage.setTitle("HungryFish");
         root.getStylesheets().add(Path.urlStyleshet);
@@ -48,51 +54,51 @@ public class ViewHandler extends Application {
 
     }
 
-    public void setEventHandlerMenu(ControllerMenuPrincipal cm) {
-        vmp.setEvents(cm);
+    public void setEventHandlerMenu(ControllerMenu cm) {
+        viewMenuPrincipal.setEvents(cm);
     }
 
-    public void setEventHandlerInGame(ControllerInGameMouse cig){ vig.setEvents(cig);}
+    public void setEventHandlerOption(ControllerMenu cm) {
+        viewMenuOption.setEvents(cm);
+    }
+
+    public void setEventHandlerInGame(ControllerInGameMouse cig){ viewInGame.setEvents(cig);}
 
     public void setEventHandlerInGameKeyboard(ControllerInGameKeyboard cigk){
-        vig.setEvents(cigk);
+        viewInGame.setEvents(cigk);
     }
 
-    public void setEventHandlerMenuOption(ControllerMenuOption cmo){ vmo.setEvents(cmo);}
-
-
-    public ViewMenuPrincipal getVmp() {
-        return vmp;
+    public ViewMenuPrincipal getViewMenuPrincipal() {
+        return viewMenuPrincipal;
     }
 
-    public ViewMenuOption getVmo() {
-        return vmo;
+    public ViewMenuOption getViewMenuOption() {
+        return viewMenuOption;
     }
 
-    public ViewInGame getVig(){return vig;}
+    public ViewInGame getViewInGame(){return viewInGame;}
 
-    public void setVig(ViewInGame vig){this.vig =vig;}
+    public void setViewInGame(ViewInGame viewInGame){this.viewInGame = viewInGame;}
 
     public Stage getPrimaryStage(){
         return primaryStage;
     }
 
-    public void launchViewInGame(){
-        mig = new ModelInGame();
-        vig = new ViewInGame(root,mig);
-        cigm = new ControllerInGameMouse(this, mig);
-        cigk = new ControllerInGameKeyboard(this,mig);
+    public void afficherMenuPrincipal(){
+        controllerInGameKeyboard.stopJeuTL();
+        viewMenuPrincipal.clearAndInitRoot();
+        controllerMenu.initObject();
     }
 
-    public void launchViewMenuOption(){
-        mmo = new ModelMenuOption();
-        vmo = new ViewMenuOption(root);
-        cmo = new ControllerMenuOption(this,mmo);
+    public void afficherJeu(){
+        viewInGame.clearAndInitRoot();
+        controllerMenu.destroyObject();
+        controllerInGameKeyboard.startJeuTL();
     }
 
-    public void launchViewMenuPrincipal(){
-        mmp = new ModelMenuPrincipal();
-        vmp = new ViewMenuPrincipal(root, mmp);
-        cmp = new ControllerMenuPrincipal(this, mmp);
+    public void afficherMenuOption(){
+        viewMenuOption.clearAndInitRoot();
+        controllerMenu.destroyObject();
     }
+
 }

@@ -1,31 +1,43 @@
 package Controller;
 
-import Model.Fish.Fish;
-import Model.ModelInGame;
+import Model.Fish.PlayerFish;
+import Model.Menu;
+import Model.Scroll;
 import Timeline.JeuTL;
 import View.ViewHandler;
-import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.util.Hashtable;
 
-public class ControllerInGameKeyboard extends AnimationTimer implements EventHandler<KeyEvent> {
+public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
 
     private JeuTL jeuTL;
     private ViewHandler launcher;
-    private ModelInGame model;
+    private Menu model;
+    private Scroll scroll;
     private Hashtable<KeyCode,Boolean> listKeyPressed= new Hashtable<KeyCode,Boolean>();
 
-    public ControllerInGameKeyboard(ViewHandler launcher, ModelInGame model){
+    public ControllerInGameKeyboard(ViewHandler launcher, Menu model){
         this.model = model;
         this.launcher = launcher;
-        this.launcher.setEventHandlerInGameKeyboard(this);
-        jeuTL = new JeuTL(this);
-        launcher.getVig().getRoot().requestFocus(); // Je demande le focus au group root pour Fixer le Bug des KeyEvent sur les Arrows de direction
-        this.start();
     }
+
+    public void startJeuTL(){
+        jeuTL = new JeuTL(this);
+        this.launcher.setEventHandlerInGameKeyboard(this);
+        jeuTL.start();
+        launcher.getViewInGame().getRoot().requestFocus();
+    }
+
+    public void stopJeuTL(){
+        if(jeuTL!=null){
+            jeuTL.stop();
+            jeuTL = null;
+        }
+    }
+
 
     @Override
     public void handle(KeyEvent event) {
@@ -47,26 +59,15 @@ public class ControllerInGameKeyboard extends AnimationTimer implements EventHan
         }
     }
 
-    @Override
-    public void handle(long l) {
-        if(listKeyPressed.get(KeyCode.RIGHT) != null && listKeyPressed.get(KeyCode.RIGHT).booleanValue()){
-            model.getPlayer().move(Fish.moveRight);
-        }else if(listKeyPressed.get(KeyCode.LEFT) != null && listKeyPressed.get(KeyCode.LEFT).booleanValue()){
-            model.getPlayer().move(Fish.moveLeft);
-        }
-
-        if(listKeyPressed.get(KeyCode.UP) != null && listKeyPressed.get(KeyCode.UP).booleanValue()){
-            model.getPlayer().move(Fish.moveUp);
-        }else if(listKeyPressed.get(KeyCode.DOWN) != null && listKeyPressed.get(KeyCode.DOWN).booleanValue()){
-            model.getPlayer().move(Fish.moveDown);
-        }
-    }
-
     public ViewHandler getLauncher() {
         return launcher;
     }
 
-    public ModelInGame getModel() {
-        return model;
+    public Scroll getScroll(){
+        return scroll;
+    }
+
+    public Hashtable<KeyCode, Boolean> getListKeyPressed() {
+        return listKeyPressed;
     }
 }

@@ -53,7 +53,7 @@ public class BubblePop {
     /**
      *The constructor prepare the images and init The Animation timelime by the method prepareAnimation
      */
-    BubblePop(){
+    public BubblePop(){
         bubbleSound = new MediaPlayer(new Media(Paths.get(Path.soundBubblePop).toUri().toString()));
 
         frame1 = new Image(Path.urlBubblePopDirectory + "01" + Path.imgTypePng);
