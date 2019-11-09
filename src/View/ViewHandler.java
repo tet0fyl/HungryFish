@@ -84,6 +84,10 @@ public class ViewHandler extends Application {
         return primaryStage;
     }
 
+    public Scene getScene() {
+        return scene;
+    }
+
     public void afficherMenuPrincipal(){
         controllerInGameKeyboard.stopJeuTL();
         viewMenuPrincipal.clearAndInitRoot();

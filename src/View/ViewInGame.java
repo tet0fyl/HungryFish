@@ -44,8 +44,6 @@ public class ViewInGame {
 
     public void initBackground(){
         imgBackground = new ImageView(Path.urlBackgroundOption);
-        imgBackground.setFitHeight(Screen.getPrimary().getBounds().getWidth()*2);
-        imgBackground.setPreserveRatio(true);
     }
 
     public VBox initvBoxGameOverPopUp(){

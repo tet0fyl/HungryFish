@@ -1,9 +1,9 @@
 package Model.Fish;
 
 
+import Model.Scroll;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Screen;
 
 
 public abstract class Fish {
@@ -53,8 +53,8 @@ public abstract class Fish {
     }
 
     public void colisionBoxX(){
-        if (x>(Screen.getPrimary().getBounds().getWidth()-size)){
-            x=Screen.getPrimary().getBounds().getWidth()-size;
+        if (x>(Scroll.maxX-size)){
+            x=Scroll.maxX-size;
         }
         if(x<0){
             x=0;
@@ -62,8 +62,8 @@ public abstract class Fish {
     }
 
     public void colisionBoxY(){
-        if (y>(Screen.getPrimary().getBounds().getHeight()-size)){
-            y=Screen.getPrimary().getBounds().getHeight()-size;
+        if (y>(Scroll.maxY -size)){
+            y=Scroll.maxY-size;
         }
         if(y<0){
             y=0;
@@ -91,6 +91,18 @@ public abstract class Fish {
 
     public void setIsAlive(boolean isAlive){
         this.isAlive = isAlive;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 }
 

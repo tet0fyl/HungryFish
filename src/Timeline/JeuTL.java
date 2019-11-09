@@ -2,6 +2,7 @@ package Timeline;
 
 import Controller.ControllerInGameKeyboard;
 import Model.Fish.*;
+import Model.Scroll;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
@@ -14,6 +15,7 @@ public class JeuTL extends AnimationTimer {
     private ControllerInGameKeyboard controllerInGameKeyboard;
     private ArrayList<Fish> listFishPNJ = new ArrayList<Fish>();
     private PlayerFish player;
+    private Scroll scroll;
 
 
 
@@ -23,6 +25,7 @@ public class JeuTL extends AnimationTimer {
         generateFish(this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot(),15);
         player = new PlayerFish();
         this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot().getChildren().add(player.getMainImg());
+        scroll = new Scroll(this.controllerInGameKeyboard.getLauncher().getViewInGame().getImgBackground(),player,controllerInGameKeyboard.getLauncher().getScene());
     }
 
     public void generateFish(Group root , int nbFish){
@@ -52,14 +55,18 @@ public class JeuTL extends AnimationTimer {
     public void handle(long now) {
         if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT).booleanValue()){
             player.move(Fish.moveRight);
+            scroll.move(Scroll.moveRight);
         }else if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.LEFT) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.LEFT).booleanValue()){
             player.move(Fish.moveLeft);
+            scroll.move(Scroll.moveLeft);
         }
 
         if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.UP) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.UP).booleanValue()){
             player.move(Fish.moveUp);
+            scroll.move(Scroll.moveUp);
         }else if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.DOWN) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.DOWN).booleanValue()){
             player.move(Fish.moveDown);
+            scroll.move(Scroll.moveDown);
         }
 
 

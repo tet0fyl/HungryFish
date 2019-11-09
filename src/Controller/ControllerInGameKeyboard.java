@@ -16,7 +16,6 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
     private JeuTL jeuTL;
     private ViewHandler launcher;
     private Menu model;
-    private Scroll scroll;
     private Hashtable<KeyCode,Boolean> listKeyPressed= new Hashtable<KeyCode,Boolean>();
 
     public ControllerInGameKeyboard(ViewHandler launcher, Menu model){
@@ -61,10 +60,6 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
 
     public ViewHandler getLauncher() {
         return launcher;
-    }
-
-    public Scroll getScroll(){
-        return scroll;
     }
 
     public Hashtable<KeyCode, Boolean> getListKeyPressed() {
