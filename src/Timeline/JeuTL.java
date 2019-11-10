@@ -3,6 +3,7 @@ package Timeline;
 import Controller.ControllerInGameKeyboard;
 import Model.Fish.*;
 import Model.Scroll;
+import View.ViewInGame;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
@@ -16,13 +17,16 @@ public class JeuTL extends AnimationTimer {
     private ArrayList<Fish> listFishPNJ = new ArrayList<Fish>();
     private PlayerFish player;
     private Scroll scroll;
+    private ViewInGame viewGame;
+
 
     public JeuTL (ControllerInGameKeyboard controllerInGameKeyboard){
         this.controllerInGameKeyboard = controllerInGameKeyboard;
-        generateFish(this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot(),20);
+        viewGame=controllerInGameKeyboard.getLauncher().getViewInGame();
+        generateFish(viewGame.getRoot(),20);
         player = new PlayerFish();
-        this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot().getChildren().add(player.getMainImg());
-        scroll = new Scroll(this.controllerInGameKeyboard.getLauncher().getViewInGame().getImgBackground(),player,controllerInGameKeyboard.getLauncher().getScene());
+        viewGame.getRoot().getChildren().add(player.getMainImg());
+        scroll = new Scroll(viewGame.getImgBackground(),player,controllerInGameKeyboard.getLauncher().getScene());
     }
 
     public void generateFish(Group root , int nbFish){
@@ -47,9 +51,21 @@ public class JeuTL extends AnimationTimer {
         root.getChildren().add(newfish.getMainImg());
     }
 
+    public void gameOver(){
+        scroll.getCamera().setTranslateZ(0);
+        viewGame.getGameOverPopUp().setLayoutX(scroll.getCamera().getLayoutX());
+        viewGame.getGameOverPopUp().setLayoutY(scroll.getCamera().getLayoutY());
+        viewGame.getRoot().getChildren().add(viewGame.getGameOverPopUp());
+        this.stop();
+
+    }
+
 
     @Override
     public void handle(long now) {
+
+        /** DEPLACEMENT DU PLAYER ET DU SCROLL */
+
         if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT)){
             player.move(Fish.moveRight);
             scroll.move(Scroll.moveRight);
@@ -66,30 +82,31 @@ public class JeuTL extends AnimationTimer {
             scroll.move(Scroll.moveDown);
         }
 
+        /**  REGLE DU JEU  : LES POISSONS MANGE D'AUTRE POISSON */
+
         for(int i = 0; i < listFishPNJ.size(); i++){
             if (!listFishPNJ.get(i).getIsAlive()){
-                controllerInGameKeyboard.getLauncher().getViewInGame().getRoot().getChildren().remove(listFishPNJ.get(i).getMainImg());
+                viewGame.getRoot().getChildren().remove(listFishPNJ.get(i).getMainImg());
                 listFishPNJ.remove(listFishPNJ.get(i));
-                generateFish(this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot(),1);
+                generateFish(viewGame.getRoot(),1);
             }
         }
+
+        /**  REGLE DU JEU  : LE PLAYER MANGE D'AUTRE POISSON OU SE FAIT MANGER PUIS GAME OVER */
 
         for(int i = 0; i < listFishPNJ.size(); i++){
             if(player.getMainImg().intersects(listFishPNJ.get(i).getMainImg().getBoundsInLocal()) && !listFishPNJ.get(i).getIsDying()){
                 if(player.getSize() > listFishPNJ.get(i).getSize()) {
                     player.eat(listFishPNJ.get(i));
-                    scroll.deZoom();
+                    scroll.deZoom(listFishPNJ.get(i).getSize());
                 }else{
                   listFishPNJ.get(i).eat(player);
-                  scroll.getCamera().setTranslateY(0);
-                     controllerInGameKeyboard.getLauncher().getViewInGame().getvBoxGameOverPopUp().setLayoutX(scroll.getCamera().getLayoutX());
-                    controllerInGameKeyboard.getLauncher().getViewInGame().getvBoxGameOverPopUp().setLayoutY(scroll.getCamera().getLayoutY());
-                    controllerInGameKeyboard.getLauncher().getViewInGame().initvBoxGameOverPopUp();
-                  controllerInGameKeyboard.getLauncher().getViewInGame().getRoot().getChildren().add(controllerInGameKeyboard.getLauncher().getViewInGame().getvBoxGameOverPopUp());
-                  this.stop();
-              }
+                  gameOver();
+                }
             }
         }
+
+        /**  REGLE DU JEU  : SI UN POISSON MEURT IL EST ENLVER DE LA LISTE APRES SON ANIMATION */
 
         for (int i = 0; i < listFishPNJ.size(); i++){
             for (int j = 0; j < listFishPNJ.size(); j++) {
@@ -100,7 +117,6 @@ public class JeuTL extends AnimationTimer {
                 }
             }
         }
-
     }
 
     public Scroll getScroll() {

@@ -48,7 +48,9 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent event) {
-        bubblePop.launchBubble(jeuTL.getPlayer().getX(),jeuTL.getPlayer().getY());
+        if(jeuTL!=null){
+            bubblePop.launchBubble(jeuTL.getPlayer().getX(),jeuTL.getPlayer().getY());
+        }
 
         if (event.getEventType() == KeyEvent.KEY_RELEASED){
 

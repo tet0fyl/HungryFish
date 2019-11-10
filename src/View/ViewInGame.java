@@ -3,7 +3,7 @@ package View;
 import Controller.ControllerInGameKeyboard;
 import Controller.ControllerInGameMouse;
 import Model.Menu;
-import Model.Parallax;
+import Model.Scroll;
 import Tool.Cst;
 import Tool.Path;
 import javafx.geometry.Pos;
@@ -11,6 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -22,19 +23,22 @@ public class ViewInGame {
     private ImageView imgBackground;
     private Label lblGameOver,lblScore,lblScoreValue;
     private Button btnRetourMenu;
-    private VBox vBoxGameOverPopUp;
-    private Parallax parallax;
+    private Group grpPanePopUp;
+    private HBox vBoxGameOverPopUp;
+    private HBox hBox;
 
 
     ViewInGame(Group root, Menu model){
         this.root = root;
         this.model = model;
+        this.root.minWidth(Scroll.maxX);
+        this.root.minHeight(Scroll.maxY);
+
         initvBoxGameOverPopUp();
 
     }
 
     public  void clearAndInitRoot(){
-
         initBackground();
         root.getChildren().clear();
         root.getChildren().add(imgBackground);
@@ -46,17 +50,13 @@ public class ViewInGame {
     }
 
     public void initvBoxGameOverPopUp(){
-        vBoxGameOverPopUp = new VBox();
-        vBoxGameOverPopUp.setMinWidth(Cst.screenWidth);
-        vBoxGameOverPopUp.setMinHeight(Cst.screenHeight);
-        vBoxGameOverPopUp.setAlignment(Pos.CENTER);
-        lblGameOver = initTitle(50,"GAME OVER");
+        grpPanePopUp = new Group();
+        vBoxGameOverPopUp = new HBox();
+        lblGameOver = initTitle(100,"GAME OVER");
 
-        HBox hBox = new HBox();
-        hBox.setMinWidth(Cst.screenWidth);
+        hBox = new HBox();
         lblScore = initText(20,"Score:");
         lblScoreValue = initText(20, "0000");
-        hBox.setAlignment(Pos.CENTER);
         hBox.getChildren().add(lblScore);
         hBox.getChildren().add(lblScoreValue);
 
@@ -65,8 +65,12 @@ public class ViewInGame {
         vBoxGameOverPopUp.getChildren().add(lblGameOver);
         vBoxGameOverPopUp.getChildren().add(hBox);
         vBoxGameOverPopUp.getChildren().add(btnRetourMenu);
+        grpPanePopUp.getChildren().add(vBoxGameOverPopUp);
 
+    }
 
+    public void stick(){
+        vBoxGameOverPopUp.setAlignment(Pos.CENTER);
     }
 
     public Label initTitle(int fontSize, String textContent){
@@ -93,7 +97,7 @@ public class ViewInGame {
     }
 
     public void setEvents(ControllerInGameMouse controller){
-        btnRetourMenu.setOnMouseClicked(controller);
+            btnRetourMenu.setOnMouseClicked(controller);
     }
 
     public void setEvents(ControllerInGameKeyboard controller){
@@ -109,15 +113,15 @@ public class ViewInGame {
         return root;
     }
 
-    public Parallax getParallax() {
-        return parallax;
-    }
-
     public ImageView getImgBackground() {
         return imgBackground;
     }
 
-    public VBox getvBoxGameOverPopUp() {
-        return vBoxGameOverPopUp;
+    public Group getGameOverPopUp() {
+        return grpPanePopUp;
+    }
+
+    public HBox gethBox() {
+        return hBox;
     }
 }

@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
 
-
 public class Scroll {
 
     private ImageView imgBg;
@@ -27,8 +26,8 @@ public class Scroll {
     public static final String moveUp = "haut";
     public static final String moveDown = "bas";
 
-    public static final double maxX = Screen.getPrimary().getBounds().getWidth()*5;
-    public static final double maxY = Screen.getPrimary().getBounds().getWidth()*2;
+    public static final double maxX = Screen.getPrimary().getBounds().getWidth()*10;
+    public static final double maxY = Screen.getPrimary().getBounds().getWidth()*4;
 
     public Scroll(ImageView imgBg, Fish subject, Scene scene){
         this.imgBg=imgBg;
@@ -88,16 +87,16 @@ public class Scroll {
     }
 
     public void colisionBoxY(){
-        if (y>(maxY- Cst.screenHeight + deZoom/3)){
-            y=maxY - Cst.screenHeight + deZoom/3;
+        if (y>(maxY- Cst.screenHeight)){
+            y=maxY - Cst.screenHeight;
         }
-        if(y<0-deZoom/3){
-            y=0-deZoom/3;
+        if(y<0){
+            y=0;
         }
     }
 
     public void isTheSubjectInTheCenter(){
-        if(subject.getX()-x>Cst.screenWidth/2){
+        if(subject.getX()-x>(Cst.screenWidth-subject.getSize())/2){
             waitTheSubjectXRight = false;
             waitTheSubjectXLeft = true;
         }else{
@@ -105,7 +104,7 @@ public class Scroll {
             waitTheSubjectXLeft = false;
         }
 
-        if(subject.getY()-y<Cst.screenHeight/2){
+        if(subject.getY()-y<(Cst.screenHeight-subject.getSize())/2){
             waitTheSubjectYUp = false;
             waitTheSubjectYDown = true;
         }else{
@@ -115,19 +114,13 @@ public class Scroll {
 
     }
 
-    public void deZoom(){
-        camera.setTranslateZ(deZoom--);
-    }
-
-    public ImageView getImgBg() {
-        return imgBg;
+    public void deZoom(double deZoomValue){
+        deZoom =deZoom-(int)deZoomValue;
+        camera.setTranslateZ(deZoom);
     }
 
     public PerspectiveCamera getCamera() {
         return camera;
     }
 
-    public int getDeZoom() {
-        return deZoom;
-    }
 }
