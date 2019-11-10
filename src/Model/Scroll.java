@@ -5,11 +5,13 @@ import Model.Fish.Fish;
 import Tool.Cst;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
+
 
 public class Scroll {
 
-    private Parallax parallax;
+    private ImageView imgBg;
     private double sensX,sensY,x,y,speed,subjectX,subjectY;
     private PerspectiveCamera camera;
     private boolean waitTheSubjectXRight = false;
@@ -26,11 +28,12 @@ public class Scroll {
     public static final String moveDown = "bas";
 
     public static final double maxX = Screen.getPrimary().getBounds().getWidth()*5;
-    public static final double maxScrollX = Screen.getPrimary().getBounds().getWidth()*6;
     public static final double maxY = Screen.getPrimary().getBounds().getWidth()*2;
 
-    public Scroll(Parallax parallax, Fish subject, Scene scene){
-        this.parallax=parallax;
+    public Scroll(ImageView imgBg, Fish subject, Scene scene){
+        this.imgBg=imgBg;
+        this.imgBg.setFitWidth(maxX);
+        this.imgBg.setFitHeight(maxY);
         speed=subject.getSpeed();
         camera = new PerspectiveCamera();
         scene.setCamera(camera);
@@ -73,7 +76,6 @@ public class Scroll {
         colisionBoxY();
         camera.setLayoutX(x);
         camera.setLayoutY(y);
-        parallax.move(x,y);
     }
 
     public void colisionBoxX(){
@@ -117,8 +119,8 @@ public class Scroll {
         camera.setTranslateZ(deZoom--);
     }
 
-    public Parallax getParallax() {
-        return parallax;
+    public ImageView getImgBg() {
+        return imgBg;
     }
 
     public PerspectiveCamera getCamera() {

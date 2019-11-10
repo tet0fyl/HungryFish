@@ -4,7 +4,6 @@ import Controller.ControllerInGameKeyboard;
 import Controller.ControllerInGameMouse;
 import Model.Menu;
 import Model.Parallax;
-import Model.Scroll;
 import Tool.Cst;
 import Tool.Path;
 import javafx.geometry.Pos;
@@ -36,11 +35,9 @@ public class ViewInGame {
 
     public  void clearAndInitRoot(){
 
-        //initBackground();
-        parallax = new Parallax(Path.urlParallaxLevelBackgroundImg, Scroll.maxScrollX,Scroll.maxY,Parallax.game);
+        initBackground();
         root.getChildren().clear();
-        //root.getChildren().add(imgBackground);
-        root.getChildren().add(parallax.getRoot());
+        root.getChildren().add(imgBackground);
     }
 
 
