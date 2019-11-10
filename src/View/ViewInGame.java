@@ -41,7 +41,7 @@ public class ViewInGame {
     public  void clearAndInitRoot(){
 
         //initBackground();
-        parallax = new Parallax(Path.urlParallaxLevelBackgroundImg, Scroll.maxX,Scroll.maxY,Parallax.game);
+        parallax = new Parallax(Path.urlParallaxLevelBackgroundImg, Scroll.maxScrollX,Scroll.maxY,Parallax.game);
         root.getChildren().clear();
         //root.getChildren().add(imgBackground);
         root.getChildren().add(parallax.getRoot());

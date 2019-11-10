@@ -2,8 +2,14 @@ package Model.Fish;
 
 
 import Model.Scroll;
+import Tool.Cst;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 
 public abstract class Fish {
@@ -14,10 +20,12 @@ public abstract class Fish {
     protected double y;
     protected double size;
     protected double speed;
-    protected boolean isAlive;
+    protected boolean isAlive,isDying;
     protected int sensX=1;
     protected int sensY=0;
     protected int memorySensX;
+    protected Timeline timeline;
+    private ColorAdjust colorAdjust;
 
     public static final String moveRight = "droite";
     public static final String moveLeft = "gauche";
@@ -29,10 +37,12 @@ public abstract class Fish {
         forImg = new Image(url +".png");
         backImg = new Image(url+"backward.png");
         mainImg.setImage(forImg);
-        this.size = size;
+        this.size = (size* Cst.screenWidth/100);
         this.speed=speed;
         memorySensX = sensX;
         isAlive=true;
+        isDying=false;
+        dieAnimationprepare();
     }
 
     public void refreshImg(double x, double y){
@@ -71,9 +81,20 @@ public abstract class Fish {
     }
 
     public void eat(Fish fish){
-        fish.setIsAlive(false);
+        fish.setDying(true);
         grow();
+        fish.getTimeline().play();
+    }
 
+    public void dieAnimationprepare(){
+        timeline = new Timeline();
+        timeline.getKeyFrames().addAll(
+                new KeyFrame(new Duration(500),new KeyValue(mainImg.rotateProperty(), 90), new KeyValue(mainImg.scaleYProperty(), 0),new KeyValue(mainImg.scaleXProperty(),0))
+                );
+        timeline.setCycleCount(1);
+        timeline.setOnFinished((e)->{
+            isAlive=false;
+        });
     }
 
     public void grow(){
@@ -103,6 +124,22 @@ public abstract class Fish {
 
     public double getY() {
         return y;
+    }
+
+    public Timeline getTimeline() {
+        return timeline;
+    }
+
+    public void setDying(boolean dying) {
+        isDying = dying;
+    }
+
+    public boolean getIsDying(){
+        return  isDying;
+    }
+
+    public double getSize(){
+        return size;
     }
 }
 

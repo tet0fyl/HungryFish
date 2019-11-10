@@ -16,16 +16,17 @@ public class JeuTL extends AnimationTimer {
     private ArrayList<Fish> listFishPNJ = new ArrayList<Fish>();
     private PlayerFish player;
     private Scroll scroll;
-
-
-
+    private boolean gameOver;
 
     public JeuTL (ControllerInGameKeyboard controllerInGameKeyboard){
+        gameOver=false;
         this.controllerInGameKeyboard = controllerInGameKeyboard;
-        generateFish(this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot(),15);
+        generateFish(this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot(),20);
         player = new PlayerFish();
         this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot().getChildren().add(player.getMainImg());
         scroll = new Scroll(this.controllerInGameKeyboard.getLauncher().getViewInGame().getParallax(),player,controllerInGameKeyboard.getLauncher().getScene());
+        scroll.getParallax().initForGround(this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot());
+        scroll.getParallax().move(scroll.getCamera().getLayoutX(),scroll.getCamera().getLayoutY());
     }
 
     public void generateFish(Group root , int nbFish){
@@ -53,36 +54,61 @@ public class JeuTL extends AnimationTimer {
 
     @Override
     public void handle(long now) {
-        if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT).booleanValue()){
+        if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT)){
             player.move(Fish.moveRight);
             scroll.move(Scroll.moveRight);
-        }else if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.LEFT) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.LEFT).booleanValue()){
+        }else if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.LEFT) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.LEFT)){
             player.move(Fish.moveLeft);
             scroll.move(Scroll.moveLeft);
         }
 
-        if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.UP) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.UP).booleanValue()){
+        if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.UP) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.UP)){
             player.move(Fish.moveUp);
             scroll.move(Scroll.moveUp);
-        }else if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.DOWN) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.DOWN).booleanValue()){
+        }else if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.DOWN) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.DOWN)){
             player.move(Fish.moveDown);
             scroll.move(Scroll.moveDown);
         }
 
-
         for(int i = 0; i < listFishPNJ.size(); i++){
-            if(player.getMainImg().intersects(listFishPNJ.get(i).getMainImg().getBoundsInLocal()) && listFishPNJ.get(i).getIsAlive()){
-               player.eat(listFishPNJ.get(i));
-                //System.out.println(fish.getIsAlive());
-            }
-
             if (!listFishPNJ.get(i).getIsAlive()){
                 controllerInGameKeyboard.getLauncher().getViewInGame().getRoot().getChildren().remove(listFishPNJ.get(i).getMainImg());
                 listFishPNJ.remove(listFishPNJ.get(i));
                 generateFish(this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot(),1);
-                //System.out.println("Un poisson a été manger");
             }
         }
 
+
+        for(int i = 0; i < listFishPNJ.size(); i++){
+            if(player.getMainImg().intersects(listFishPNJ.get(i).getMainImg().getBoundsInLocal()) && !listFishPNJ.get(i).getIsDying()){
+                if(player.getSize() > listFishPNJ.get(i).getSize()) {
+                    player.eat(listFishPNJ.get(i));
+                    scroll.deZoom();
+                }else{
+                  listFishPNJ.get(i).eat(player);
+                  gameOver=true;
+                  this.stop();
+              }
+            }
+        }
+
+        for (int i = 0; i < listFishPNJ.size(); i++){
+            for (int j = 0; j < listFishPNJ.size(); j++) {
+                if (listFishPNJ.get(i).getMainImg().intersects(listFishPNJ.get(j).getMainImg().getBoundsInLocal()) && !listFishPNJ.get(j).getIsDying()) {
+                    if (listFishPNJ.get(i).getSize() > listFishPNJ.get(j).getSize() && !listFishPNJ.get(j).getClass().equals(Shark.class)) {
+                        listFishPNJ.get(i).eat(listFishPNJ.get(j));
+                    }
+                }
+            }
+        }
+
+    }
+
+    public Scroll getScroll() {
+        return scroll;
+    }
+
+    public boolean getGameOver(){
+        return gameOver;
     }
 }

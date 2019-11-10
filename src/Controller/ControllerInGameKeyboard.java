@@ -31,6 +31,8 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
     public void stopJeuTL(){
         if(jeuTL!=null){
             jeuTL.stop();
+            jeuTL.getScroll().getCamera().setLayoutX(0);
+            jeuTL.getScroll().getCamera().setLayoutY(0);
             jeuTL = null;
         }
     }

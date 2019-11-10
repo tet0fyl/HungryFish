@@ -78,8 +78,6 @@ public class ViewHandler extends Application {
 
     public ViewInGame getViewInGame(){return viewInGame;}
 
-    public void setViewInGame(ViewInGame viewInGame){this.viewInGame = viewInGame;}
-
     public Stage getPrimaryStage(){
         return primaryStage;
     }

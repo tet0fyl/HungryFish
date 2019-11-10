@@ -4,6 +4,6 @@ import Tool.Path;
 
 public class SmallFish extends FishPNJ {
     public SmallFish(){
-        super(Path.skinMainFish+"4",10,75);
+        super(Path.skinMainFish+"4",10,5);
     }
 }

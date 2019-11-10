@@ -1,7 +1,6 @@
 package Model.Fish;
 
 import Model.Scroll;
-import Tool.Cst;
 import javafx.animation.AnimationTimer;
 
 public abstract class FishPNJ extends Fish {
@@ -60,7 +59,7 @@ public abstract class FishPNJ extends Fish {
             @Override
             public void handle(long l) {
                     x=x+(speed * sensX);
-                    y=10*Math.cos(a*x+b) + a*x+b;
+                    y=a*x+b;
 
                     colisionBoxY();
                     refreshImg(x,y);
@@ -79,6 +78,5 @@ public abstract class FishPNJ extends Fish {
         };
         animation.start();
     }
-
 
 }

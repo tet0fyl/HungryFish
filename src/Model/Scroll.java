@@ -3,16 +3,12 @@ package Model;
 
 import Model.Fish.Fish;
 import Tool.Cst;
-import javafx.scene.Camera;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
 
 public class Scroll {
 
-    private ImageView img;
     private Parallax parallax;
     private double sensX,sensY,x,y,speed,subjectX,subjectY;
     private PerspectiveCamera camera;
@@ -21,6 +17,7 @@ public class Scroll {
     private boolean waitTheSubjectYUp = false;
     private boolean waitTheSubjectYDown = false;
     private Fish subject;
+    private int deZoom=-1000;
 
 
     public static final String moveRight = "droite";
@@ -29,19 +26,22 @@ public class Scroll {
     public static final String moveDown = "bas";
 
     public static final double maxX = Screen.getPrimary().getBounds().getWidth()*5;
+    public static final double maxScrollX = Screen.getPrimary().getBounds().getWidth()*6;
     public static final double maxY = Screen.getPrimary().getBounds().getWidth()*2;
 
     public Scroll(Parallax parallax, Fish subject, Scene scene){
         this.parallax=parallax;
         speed=subject.getSpeed();
         camera = new PerspectiveCamera();
-        camera.setTranslateZ(-500);
         scene.setCamera(camera);
-        y=camera.getLayoutY();
-        x=camera.getLayoutX();
+        y=maxY/2-Cst.screenHeight/2;
+        x=maxX/2-Cst.screenWidth/2;
         this.subject=subject;
         subjectX=subject.getX();
         subjectY=subject.getY();
+        camera.setLayoutX(x);
+        camera.setLayoutY(y);
+        camera.setTranslateZ(deZoom);
     }
 
     public void move(String direction){
@@ -86,11 +86,11 @@ public class Scroll {
     }
 
     public void colisionBoxY(){
-        if (y>(maxY- Cst.screenHeight)){
-            y=maxY - Cst.screenHeight;
+        if (y>(maxY- Cst.screenHeight + deZoom/3)){
+            y=maxY - Cst.screenHeight + deZoom/3;
         }
-        if(y<0){
-            y=0;
+        if(y<0-deZoom/3){
+            y=0-deZoom/3;
         }
     }
 
@@ -113,4 +113,19 @@ public class Scroll {
 
     }
 
+    public void deZoom(){
+        camera.setTranslateZ(deZoom--);
+    }
+
+    public Parallax getParallax() {
+        return parallax;
+    }
+
+    public PerspectiveCamera getCamera() {
+        return camera;
+    }
+
+    public int getDeZoom() {
+        return deZoom;
+    }
 }
