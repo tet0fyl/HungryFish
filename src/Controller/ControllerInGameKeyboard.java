@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.BubblePop;
 import Model.Menu;
 import Timeline.JeuTL;
 import View.ViewHandler;
@@ -15,6 +16,7 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
     private ViewHandler launcher;
     private Menu model;
     private Hashtable<KeyCode,Boolean> listKeyPressed= new Hashtable<KeyCode,Boolean>();
+    private BubblePop bubblePop;
 
     public ControllerInGameKeyboard(ViewHandler launcher, Menu model){
         this.model = model;
@@ -25,12 +27,18 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
         jeuTL = new JeuTL(this);
         this.launcher.setEventHandlerInGameKeyboard(this);
         jeuTL.start();
+        bubblePop = new BubblePop();
+        bubblePop.generateBubbleList(10,launcher.getViewInGame().getRoot());
         launcher.getViewInGame().getRoot().requestFocus();
     }
 
     public void stopJeuTL(){
         if(jeuTL!=null){
-            jeuTL.stop();
+            try{
+                jeuTL.stop();
+            }catch (NullPointerException e){
+
+            }
             jeuTL.getScroll().getCamera().setLayoutX(0);
             jeuTL.getScroll().getCamera().setLayoutY(0);
             jeuTL = null;
@@ -40,6 +48,8 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent event) {
+        bubblePop.launchBubble(jeuTL.getPlayer().getX(),jeuTL.getPlayer().getY());
+
         if (event.getEventType() == KeyEvent.KEY_RELEASED){
 
             if(listKeyPressed.containsKey(event.getCode())){

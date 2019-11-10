@@ -6,7 +6,6 @@ import Tool.Cst;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -25,7 +24,6 @@ public abstract class Fish {
     protected int sensY=0;
     protected int memorySensX;
     protected Timeline timeline;
-    private ColorAdjust colorAdjust;
 
     public static final String moveRight = "droite";
     public static final String moveLeft = "gauche";
@@ -82,7 +80,7 @@ public abstract class Fish {
 
     public void eat(Fish fish){
         fish.setDying(true);
-        grow();
+        grow(fish);
         fish.getTimeline().play();
     }
 
@@ -97,8 +95,9 @@ public abstract class Fish {
         });
     }
 
-    public void grow(){
-        size++;
+    public void grow(Fish fish){
+
+        size=size+fish.getSize()/3;
         refreshImg();
     }
 

@@ -16,10 +16,8 @@ public class JeuTL extends AnimationTimer {
     private ArrayList<Fish> listFishPNJ = new ArrayList<Fish>();
     private PlayerFish player;
     private Scroll scroll;
-    private boolean gameOver;
 
     public JeuTL (ControllerInGameKeyboard controllerInGameKeyboard){
-        gameOver=false;
         this.controllerInGameKeyboard = controllerInGameKeyboard;
         generateFish(this.controllerInGameKeyboard.getLauncher().getViewInGame().getRoot(),20);
         player = new PlayerFish();
@@ -78,7 +76,6 @@ public class JeuTL extends AnimationTimer {
             }
         }
 
-
         for(int i = 0; i < listFishPNJ.size(); i++){
             if(player.getMainImg().intersects(listFishPNJ.get(i).getMainImg().getBoundsInLocal()) && !listFishPNJ.get(i).getIsDying()){
                 if(player.getSize() > listFishPNJ.get(i).getSize()) {
@@ -86,7 +83,11 @@ public class JeuTL extends AnimationTimer {
                     scroll.deZoom();
                 }else{
                   listFishPNJ.get(i).eat(player);
-                  gameOver=true;
+                  scroll.getCamera().setTranslateY(0);
+                     controllerInGameKeyboard.getLauncher().getViewInGame().getvBoxGameOverPopUp().setLayoutX(scroll.getCamera().getLayoutX());
+                    controllerInGameKeyboard.getLauncher().getViewInGame().getvBoxGameOverPopUp().setLayoutY(scroll.getCamera().getLayoutY());
+                    controllerInGameKeyboard.getLauncher().getViewInGame().initvBoxGameOverPopUp();
+                  controllerInGameKeyboard.getLauncher().getViewInGame().getRoot().getChildren().add(controllerInGameKeyboard.getLauncher().getViewInGame().getvBoxGameOverPopUp());
                   this.stop();
               }
             }
@@ -108,7 +109,7 @@ public class JeuTL extends AnimationTimer {
         return scroll;
     }
 
-    public boolean getGameOver(){
-        return gameOver;
+    public PlayerFish getPlayer() {
+        return player;
     }
 }

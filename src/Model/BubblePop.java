@@ -14,18 +14,6 @@ import javafx.util.Duration;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-/**
-                                        ! HOW TO USE IT (IN MVC)!
-                                        -------------------------
-      1. Create an object Bubble in the concerned Model.
-      2. Call the model in the proper controller constructor with the method model.bubble.generateBubble(int,Group)
-      with the number of bubble to generate and the group who must belong to in parameter.
-      3. Call the model in your Controller eventListener with the method model.launchBubble(target x : double,target y : double)
-      with the X Y position of target in parameter.
-      4. ENJOY !!
-                                                        © copyright all right reserved to Theophile&Co.
- */
-
 public class BubblePop {
 
     private ImageView mainImg;

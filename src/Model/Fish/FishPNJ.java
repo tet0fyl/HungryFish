@@ -79,4 +79,12 @@ public abstract class FishPNJ extends Fish {
         animation.start();
     }
 
+    @Override
+    public void grow(Fish fish) {
+        size=size+(fish.getSize()/4);
+    }
+
+    public void animationStop(){
+        animation.stop();
+    }
 }

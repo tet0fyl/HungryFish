@@ -12,17 +12,17 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 
 public class ViewInGame {
 
     private Group root;
     private Menu model;
-    private Button btnReturn;
     private ImageView imgBackground;
-    private Label lblGameOver;
+    private Label lblGameOver,lblScore,lblScoreValue;
+    private Button btnRetourMenu;
     private VBox vBoxGameOverPopUp;
     private Parallax parallax;
 
@@ -30,11 +30,7 @@ public class ViewInGame {
     ViewInGame(Group root, Menu model){
         this.root = root;
         this.model = model;
-        vBoxGameOverPopUp = initvBoxGameOverPopUp();
-
-
-        btnReturn = initBtnRightOrLeft(20,"RETOUR","left");
-        btnReturn.setLayoutY(25);
+        initvBoxGameOverPopUp();
 
     }
 
@@ -45,7 +41,6 @@ public class ViewInGame {
         root.getChildren().clear();
         //root.getChildren().add(imgBackground);
         root.getChildren().add(parallax.getRoot());
-        root.getChildren().add(btnReturn);
     }
 
 
@@ -53,16 +48,31 @@ public class ViewInGame {
         imgBackground = new ImageView(Path.urlBackgroundOption);
     }
 
-    public VBox initvBoxGameOverPopUp(){
-        VBox vBox = new VBox();
-        vBox.setMinWidth(Cst.screenWidth);
-        vBox.setAlignment(Pos.CENTER);
-        lblGameOver = initText(90,"GAME OVER");
-        vBox.getChildren().add(lblGameOver);
-        return vBox;
+    public void initvBoxGameOverPopUp(){
+        vBoxGameOverPopUp = new VBox();
+        vBoxGameOverPopUp.setMinWidth(Cst.screenWidth);
+        vBoxGameOverPopUp.setMinHeight(Cst.screenHeight);
+        vBoxGameOverPopUp.setAlignment(Pos.CENTER);
+        lblGameOver = initTitle(50,"GAME OVER");
+
+        HBox hBox = new HBox();
+        hBox.setMinWidth(Cst.screenWidth);
+        lblScore = initText(20,"Score:");
+        lblScoreValue = initText(20, "0000");
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().add(lblScore);
+        hBox.getChildren().add(lblScoreValue);
+
+        btnRetourMenu = initBtn(20,"Retour");
+
+        vBoxGameOverPopUp.getChildren().add(lblGameOver);
+        vBoxGameOverPopUp.getChildren().add(hBox);
+        vBoxGameOverPopUp.getChildren().add(btnRetourMenu);
+
+
     }
 
-    public Label initText(int fontSize, String textContent){
+    public Label initTitle(int fontSize, String textContent){
         Label t = new Label();
         t.setText(textContent);
         t.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontBubbleButt), fontSize));
@@ -70,28 +80,23 @@ public class ViewInGame {
         return t;
     }
 
-    public Button initBtnRightOrLeft(int fontSize, String textContent,String position){
+    public Label initText(int fontSize, String textContent){
+        Label l = new Label(textContent);
+        l.setMinWidth(150);
+        l.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), fontSize));
+        return l;
+    }
+
+
+    public Button initBtn(int fontSize, String textContent){
         Button b = new Button(textContent);
-        double width = 150;
-        double middle;
-        b.setMinWidth(width);
-        if(position.equals("right")){
-            middle = (Screen.getPrimary().getBounds().getWidth()/5)*4 - (width/2);
-        }
-        else if (position.equals("left")){
-            middle = (Screen.getPrimary().getBounds().getWidth()/5) - (width/2);
-        }else{
-            middle = (Screen.getPrimary().getBounds().getWidth()/2) - (width/2);
-        }
-        b.setLayoutX(middle);
         b.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), fontSize));
-        b.getStyleClass().add("btn-secondary");
+        b.getStyleClass().add("btn");
         return b;
     }
 
     public void setEvents(ControllerInGameMouse controller){
-        btnReturn.setOnMouseClicked(controller);
-
+        btnRetourMenu.setOnMouseClicked(controller);
     }
 
     public void setEvents(ControllerInGameKeyboard controller){
@@ -99,8 +104,8 @@ public class ViewInGame {
         root.setOnKeyReleased(controller);
     }
 
-    public Button getBtnReturn() {
-        return btnReturn;
+    public Button getBtnReturnMenu() {
+        return btnRetourMenu;
     }
 
     public Group getRoot() {
@@ -113,5 +118,9 @@ public class ViewInGame {
 
     public ImageView getImgBackground() {
         return imgBackground;
+    }
+
+    public VBox getvBoxGameOverPopUp() {
+        return vBoxGameOverPopUp;
     }
 }
