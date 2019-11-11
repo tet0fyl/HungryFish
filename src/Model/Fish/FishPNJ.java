@@ -21,11 +21,19 @@ public abstract class FishPNJ extends Fish {
     public void startMoving(){
         int random = randomize(20,0);
         double randomYStart = randomize(boxY -300,0);
+        if(random>10){
+            sensY=-1;
+        }else{
+            sensY=1;
+        }
+        random = randomize(20,0);
         double randomXStart;
         if(random>10){
             randomXStart = randomize(boxX+500,boxX+200);
+            sensX=-1;
         }else{
             randomXStart = -1*randomize(500,100);
+            sensX=1;
         }
         this.x = randomXStart;
         this.y= randomYStart;
@@ -40,13 +48,14 @@ public abstract class FishPNJ extends Fish {
 
     public void defineADestination(){
         randomX = randomize(500,300);
-        randomY = randomize(200,100);
+        randomY = randomize(1000,100);
 
         if(sensX==1){
             targetDirectionX = boxX + randomX;
         }else{
             targetDirectionX = -1*randomX;
         }
+
         targetDirectionY = (int)y + sensY*randomY;
 
         a = ((y - targetDirectionY)/(x - targetDirectionX));
@@ -77,11 +86,6 @@ public abstract class FishPNJ extends Fish {
             }
         };
         animation.start();
-    }
-
-    @Override
-    public void grow(Fish fish) {
-        size=size+(fish.getSize()/4);
     }
 
     public void animationStop(){

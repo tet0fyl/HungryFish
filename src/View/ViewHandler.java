@@ -8,6 +8,7 @@ import Tool.Path;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class ViewHandler extends Application {
@@ -25,7 +26,7 @@ public class ViewHandler extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         root = new Group();
-        scene = new Scene(root, 800, 1000);
+        scene = new Scene(root, 800, 1000, Color.CORNFLOWERBLUE);
 
         this.primaryStage = primaryStage;
 

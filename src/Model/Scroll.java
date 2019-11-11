@@ -18,7 +18,7 @@ public class Scroll {
     private boolean waitTheSubjectYUp = false;
     private boolean waitTheSubjectYDown = false;
     private Fish subject;
-    private int deZoom=0;
+    private int deZoom=-200;
 
 
     public static final String moveRight = "droite";
@@ -27,7 +27,7 @@ public class Scroll {
     public static final String moveDown = "bas";
 
     public static final double maxX = Screen.getPrimary().getBounds().getWidth()*10;
-    public static final double maxY = Screen.getPrimary().getBounds().getWidth()*4;
+    public static final double maxY = Screen.getPrimary().getBounds().getWidth()*6;
 
     public Scroll(ImageView imgBg, Fish subject, Scene scene){
         this.imgBg=imgBg;

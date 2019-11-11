@@ -4,16 +4,13 @@ import Controller.ControllerInGameKeyboard;
 import Controller.ControllerInGameMouse;
 import Model.Menu;
 import Model.Scroll;
-import Tool.Cst;
 import Tool.Path;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class ViewInGame {
@@ -31,8 +28,6 @@ public class ViewInGame {
     ViewInGame(Group root, Menu model){
         this.root = root;
         this.model = model;
-        this.root.minWidth(Scroll.maxX);
-        this.root.minHeight(Scroll.maxY);
 
         initvBoxGameOverPopUp();
 

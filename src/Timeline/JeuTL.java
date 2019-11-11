@@ -2,6 +2,7 @@ package Timeline;
 
 import Controller.ControllerInGameKeyboard;
 import Model.Fish.*;
+import Model.Hub;
 import Model.Scroll;
 import View.ViewInGame;
 import javafx.animation.AnimationTimer;
@@ -17,16 +18,18 @@ public class JeuTL extends AnimationTimer {
     private ArrayList<Fish> listFishPNJ = new ArrayList<Fish>();
     private PlayerFish player;
     private Scroll scroll;
+    private Hub hub;
     private ViewInGame viewGame;
 
 
     public JeuTL (ControllerInGameKeyboard controllerInGameKeyboard){
         this.controllerInGameKeyboard = controllerInGameKeyboard;
         viewGame=controllerInGameKeyboard.getLauncher().getViewInGame();
-        generateFish(viewGame.getRoot(),20);
+        generateFish(viewGame.getRoot(),50);
         player = new PlayerFish();
         viewGame.getRoot().getChildren().add(player.getMainImg());
         scroll = new Scroll(viewGame.getImgBackground(),player,controllerInGameKeyboard.getLauncher().getScene());
+        hub= new Hub(player,scroll,viewGame);
     }
 
     public void generateFish(Group root , int nbFish){
@@ -117,6 +120,10 @@ public class JeuTL extends AnimationTimer {
                 }
             }
         }
+
+
+        hub.stickAndRefreshHub();
+
     }
 
     public Scroll getScroll() {

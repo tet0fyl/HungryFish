@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-
 public abstract class Fish {
 
     protected ImageView mainImg;
@@ -32,6 +31,7 @@ public abstract class Fish {
 
     public Fish(String url, double speed, double size){
         mainImg = new ImageView();
+        mainImg.setPreserveRatio(true);
         forImg = new Image(url +".png");
         backImg = new Image(url+"backward.png");
         mainImg.setImage(forImg);
@@ -49,14 +49,12 @@ public abstract class Fish {
         }else{
             mainImg.setImage(backImg);
         }
-        mainImg.setFitHeight(size);
         mainImg.setFitWidth(size);
         mainImg.setX(x);
         mainImg.setY(y);
     }
 
     public void refreshImg(){
-        mainImg.setFitHeight(size);
         mainImg.setFitWidth(size);
     }
 
@@ -70,8 +68,8 @@ public abstract class Fish {
     }
 
     public void colisionBoxY(){
-        if (y>(Scroll.maxY -size)){
-            y=Scroll.maxY-size;
+        if (y>(Scroll.maxY - mainImg.getFitHeight())){
+            y=Scroll.maxY-mainImg.getFitHeight();
         }
         if(y<0){
             y=0;

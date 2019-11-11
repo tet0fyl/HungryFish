@@ -5,9 +5,10 @@ import Tool.Cst;
 import Tool.Path;
 
 public class PlayerFish extends Fish {
+    private String status;
 
     public PlayerFish(){
-        super(Path.skinMainFish+"4",15,7);
+        super(Path.skinMainFish+"1",15,7);
         x= Scroll.maxX/2;
         y= Scroll.maxY/2;
         refreshImg(x,y);
@@ -34,5 +35,9 @@ public class PlayerFish extends Fish {
         colisionBoxX();
         colisionBoxY();
         refreshImg(x,y);
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
