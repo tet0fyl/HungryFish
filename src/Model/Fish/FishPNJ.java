@@ -15,10 +15,10 @@ public abstract class FishPNJ extends Fish {
 
     public FishPNJ(String url, double speed, double size){
         super(url,speed,size);
-        startMoving();
+        initPositionAndFirstDestination();
     }
 
-    public void startMoving(){
+    public void initPositionAndFirstDestination(){
         int random = randomize(20,0);
         double randomYStart = randomize(boxY -300,0);
         if(random>10){
@@ -29,7 +29,7 @@ public abstract class FishPNJ extends Fish {
         random = randomize(20,0);
         double randomXStart;
         if(random>10){
-            randomXStart = randomize(boxX+500,boxX+200);
+            randomXStart = randomize(500,boxX+200);
             sensX=-1;
         }else{
             randomXStart = -1*randomize(500,100);

@@ -107,10 +107,6 @@ public abstract class Fish {
         return isAlive;
     }
 
-    public void setIsAlive(boolean isAlive){
-        this.isAlive = isAlive;
-    }
-
     public double getSpeed() {
         return speed;
     }

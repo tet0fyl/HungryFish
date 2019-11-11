@@ -94,7 +94,7 @@ public class JeuTL extends AnimationTimer {
             scroll.move(Scroll.moveDown);
         }
 
-            /**  REGLE DU JEU  : LES POISSONS MANGE D'AUTRE POISSON */
+            /**  REGLE DU JEU  : LES POISSONS SONT RETIRER DE LA LISTE SI IL SONT MORT */
 
         for(int i = 0; i < listFishPNJ.size(); i++){
             if (!listFishPNJ.get(i).getIsAlive()){
@@ -104,7 +104,7 @@ public class JeuTL extends AnimationTimer {
             }
         }
 
-        /**  REGLE DU JEU  : LE PLAYER MANGE D'AUTRE POISSON OU SE FAIT MANGER PUIS GAME OVER */
+        /**  REGLE DU JEU  : LE PLAYER MANGE D'AUTRE POISSON OU SE FAIT MANGER */
 
         for(int i = 0; i < listFishPNJ.size(); i++){
             if(player.getMainImg().intersects(listFishPNJ.get(i).getMainImg().getBoundsInLocal()) && !listFishPNJ.get(i).getIsDying()){
@@ -113,12 +113,11 @@ public class JeuTL extends AnimationTimer {
                     scroll.deZoom(listFishPNJ.get(i).getSize());
                 }else{
                   listFishPNJ.get(i).eat(player);
-                  gameOver();
                 }
             }
         }
 
-        /**  REGLE DU JEU  : SI UN POISSON MEURT IL EST ENLVER DE LA LISTE APRES SON ANIMATION */
+        /**  REGLE DU JEU  : LES POISSON SE MANGENT ENTRE EUX */
 
         for (int i = 0; i < listFishPNJ.size(); i++){
             for (int j = 0; j < listFishPNJ.size(); j++) {
@@ -128,6 +127,12 @@ public class JeuTL extends AnimationTimer {
                     }
                 }
             }
+        }
+
+        /**  REGLE DU JEU  : SI PLAYER MORT -> GAME OVER */
+
+        if(!player.getIsAlive()){
+            gameOver();
         }
 
         /**  ON MET A JOUR LE HUD */
@@ -142,6 +147,8 @@ public class JeuTL extends AnimationTimer {
             this.stop();
             controllerInGameKeyboard.getLauncher().afficherMenuPrincipal();
         }
+
+
 
     }
 
