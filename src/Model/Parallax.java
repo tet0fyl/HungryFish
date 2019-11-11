@@ -15,7 +15,10 @@ public class Parallax {
 
     /** MACRO CONTROL */
     private int ratio = 110;
-    private float coef1,coef2,coef3,coef4;
+    private float coef1 = 0.065f;
+    private float coef2 = 0.04f;
+    private float coef3 = 0.02f;
+    private float coef4 = 0.01f;
     ///////////////////
 
     public Parallax(String url, double width, double height){
@@ -38,11 +41,7 @@ public class Parallax {
         root.getChildren().add(panel1);
 
             /** MACRO CONTROL MENU*/
-             coef1 = 0.065f;
-             coef2 = 0.04f;
-             coef3 = 0.02f;
-             coef4 = 0.01f;
-            ///////////////////
+
 
     }
 

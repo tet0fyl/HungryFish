@@ -5,6 +5,7 @@ import Model.Menu;
 import Timeline.JeuTL;
 import View.ViewHandler;
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -23,7 +24,10 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
         this.launcher = launcher;
     }
 
+
+    /** Fonction qui permet de demarer la timeline du jeu */
     public void startJeuTL(){
+        launcher.getScene().setCursor(Cursor.NONE);
         jeuTL = new JeuTL(this);
         this.launcher.setEventHandlerInGameKeyboard(this);
         jeuTL.start();
@@ -32,15 +36,15 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
         launcher.getViewInGame().getRoot().requestFocus();
     }
 
+    /** Fonction qui permet d'areter la timeline du jeu */
     public void stopJeuTL(){
         if(jeuTL!=null){
-            try{
-                jeuTL.stop();
-            }catch (NullPointerException e){
-
-            }
+            /** On remet la camera a sa position initiale */
             jeuTL.getScroll().getCamera().setLayoutX(0);
             jeuTL.getScroll().getCamera().setLayoutY(0);
+            jeuTL.getScroll().getCamera().setTranslateZ(0);
+            /** On ecrase la liste des poisson et la varaible jeuTL (pour faire propre) */
+            jeuTL.eraseListOfFish();
             jeuTL = null;
         }
     }
@@ -48,24 +52,26 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent event) {
+        /** CONDITION QUI PERMET DEVITER UNE ERREUR AU LANCEMENT DE LAPPLICATION */
         if(jeuTL!=null){
             bubblePop.launchBubble(jeuTL.getPlayer().getX(),jeuTL.getPlayer().getY());
         }
 
+        /** CONTROLE LA LISTE DE TOUCHE PRESSER OU RELACHER */
+
+        if(event.getEventType() == KeyEvent.KEY_PRESSED){
+            if(listKeyPressed.containsKey(event.getCode())){
+                listKeyPressed.replace(event.getCode(),true);
+            }else{
+                listKeyPressed.put(event.getCode(),true);
+            }
+        }
         if (event.getEventType() == KeyEvent.KEY_RELEASED){
 
             if(listKeyPressed.containsKey(event.getCode())){
                 listKeyPressed.replace(event.getCode(),false);
             }else{
                 listKeyPressed.put(event.getCode(),false);
-            }
-        }
-        if(event.getEventType() == KeyEvent.KEY_PRESSED){
-
-            if(listKeyPressed.containsKey(event.getCode())){
-                listKeyPressed.replace(event.getCode(),true);
-            }else{
-                listKeyPressed.put(event.getCode(),true);
             }
         }
     }

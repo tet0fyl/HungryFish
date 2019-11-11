@@ -3,14 +3,16 @@ package View;
 import Controller.ControllerInGameKeyboard;
 import Controller.ControllerInGameMouse;
 import Model.Menu;
-import Model.Scroll;
+import Tool.Cst;
 import Tool.Path;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class ViewInGame {
@@ -20,8 +22,7 @@ public class ViewInGame {
     private ImageView imgBackground;
     private Label lblGameOver,lblScore,lblScoreValue;
     private Button btnRetourMenu;
-    private Group grpPanePopUp;
-    private HBox vBoxGameOverPopUp;
+    private VBox vBoxGameOverPopUp, vBoxContentPopUp;
     private HBox hBox;
 
 
@@ -45,27 +46,39 @@ public class ViewInGame {
     }
 
     public void initvBoxGameOverPopUp(){
-        grpPanePopUp = new Group();
-        vBoxGameOverPopUp = new HBox();
-        lblGameOver = initTitle(100,"GAME OVER");
-
+        vBoxGameOverPopUp = new VBox();
+        vBoxContentPopUp= new VBox();
         hBox = new HBox();
-        lblScore = initText(20,"Score:");
-        lblScoreValue = initText(20, "0000");
+
+        vBoxGameOverPopUp.setMinHeight(Cst.screenHeight);
+        vBoxGameOverPopUp.setMinWidth(Cst.screenWidth);
+        vBoxGameOverPopUp.setAlignment(Pos.CENTER);
+
+        vBoxContentPopUp.setSpacing(50);
+        vBoxContentPopUp.setAlignment(Pos.CENTER);
+        vBoxContentPopUp.setMinWidth(Cst.screenWidth/2);
+        vBoxContentPopUp.getStyleClass().add("popUp");
+
+        lblGameOver = initTitle(100,"GAME OVER");
+        VBox.setMargin(lblGameOver,new Insets(100,0,0,0));
+
+        hBox.setAlignment(Pos.CENTER);
+
+        lblScore = initText(25,"Score:");
+        lblScoreValue = initText(25, "0000");
         hBox.getChildren().add(lblScore);
         hBox.getChildren().add(lblScoreValue);
-
-        btnRetourMenu = initBtn(20,"Retour");
-
-        vBoxGameOverPopUp.getChildren().add(lblGameOver);
-        vBoxGameOverPopUp.getChildren().add(hBox);
-        vBoxGameOverPopUp.getChildren().add(btnRetourMenu);
-        grpPanePopUp.getChildren().add(vBoxGameOverPopUp);
-
-    }
-
-    public void stick(){
         vBoxGameOverPopUp.setAlignment(Pos.CENTER);
+        hBox.setMinWidth(Cst.screenWidth/2);
+
+
+        btnRetourMenu = initBtn(25,"Retour");
+
+        vBoxContentPopUp.getChildren().add(lblGameOver);
+        vBoxContentPopUp.getChildren().add(hBox);
+        vBoxContentPopUp.getChildren().add(btnRetourMenu);
+        vBoxGameOverPopUp.getChildren().add(vBoxContentPopUp);
+
     }
 
     public Label initTitle(int fontSize, String textContent){
@@ -112,8 +125,8 @@ public class ViewInGame {
         return imgBackground;
     }
 
-    public Group getGameOverPopUp() {
-        return grpPanePopUp;
+    public VBox getGameOverPopUp() {
+        return vBoxGameOverPopUp;
     }
 
     public HBox gethBox() {

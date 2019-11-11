@@ -6,16 +6,17 @@ import Tool.Path;
 import View.ViewInGame;
 import View.ViewMenuPrincipal;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
-public class Hub {
+public class Hud {
 
-    private double point;
+    private double taille;
     private byte status = 0;
     private Scroll camera;
     private ViewInGame viewInGame;
@@ -24,9 +25,9 @@ public class Hub {
     private HBox hBox;
     private ArrayList<String> listOfStatus = new ArrayList<String>();
 
-    public Hub(PlayerFish player, Scroll camera, ViewInGame viewInGame){
+    public Hud(PlayerFish player, Scroll camera, ViewInGame viewInGame){
         this.player=player;
-        point = Math.round(player.getSize());
+        taille = Math.round(player.getSize());
         this.camera=camera;
         this.viewInGame=viewInGame;
 
@@ -38,14 +39,16 @@ public class Hub {
         hBox = new HBox();
         hBox.setMinWidth(Cst.screenWidth);
         hBox.setAlignment(Pos.CENTER);
-        hBox.getStyleClass().add("hub");
+        hBox.getStyleClass().add("hud");
         hBox.setLayoutX(camera.getCamera().getLayoutX());
         hBox.setLayoutY(camera.getCamera().getLayoutY());
         hBox.setTranslateZ(camera.getCamera().getTranslateZ());
 
-        lblPoint=initText("Point:");
-        lblPointValue=initText(point + " Cm");
+        lblPoint=initText("Taille:");
+        lblPoint.setTextFill(Color.WHITE);
+        lblPointValue=initText(taille + " Cm");
         lblStatus=initText("Status:");
+        lblStatus.setTextFill(Color.WHITE);
         lblStatusValue=initText(listOfStatus.get(status));
 
         hBox.getChildren().add(lblPoint);
@@ -57,19 +60,19 @@ public class Hub {
         hBox.setViewOrder(-10.0);
     }
 
-    public void stickAndRefreshHub(){
+    public void stickAndRefreshHud(){
         hBox.setLayoutX(camera.getCamera().getLayoutX());
         hBox.setLayoutY(camera.getCamera().getLayoutY());
         hBox.setTranslateZ(camera.getCamera().getTranslateZ());
-        point = Math.round(player.getSize());
-        lblPointValue.setText(point + "cm");
+        taille = Math.round(player.getSize());
+        lblPointValue.setText(taille + "cm");
         checkStatus();
     }
 
     public Label initText(String textContent){
         Label l = new Label(textContent);
         l.setMinWidth(150);
-        l.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), 35));
+        l.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), 20));
         return l;
     }
 
@@ -78,8 +81,8 @@ public class Hub {
         listOfStatus.add("Ninja");
         listOfStatus.add("Combattant");
         listOfStatus.add("Predateur");
-        listOfStatus.add("Monstre Des Mers");
-        listOfStatus.add("Creature Legendaire");
+        listOfStatus.add("MonstreDesMers");
+        listOfStatus.add("CreatureLegendaire");
     }
 
     public void checkStatus(){
@@ -91,7 +94,7 @@ public class Hub {
             status = 2;
         }else if (player.getSize()<Scroll.maxX/15){
             status = 3;
-        }else if (player.getSize()<Scroll.maxX/10){
+        }else if (player.getSize()<Scroll.maxX/5){
             status = 4;
         }else{
             status = 5;

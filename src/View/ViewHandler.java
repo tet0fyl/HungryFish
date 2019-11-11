@@ -6,10 +6,12 @@ import Controller.ControllerMenu;
 import Model.Menu;
 import Tool.Path;
 import javafx.application.Application;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ViewHandler extends Application {
     private Stage primaryStage;
@@ -30,26 +32,26 @@ public class ViewHandler extends Application {
 
         this.primaryStage = primaryStage;
 
-
+        /** ON INITIALISE LE MODEL MVC */
         model = new Menu();
         viewMenuPrincipal = new ViewMenuPrincipal(root, model);
         viewMenuOption = new ViewMenuOption(root);
         viewInGame = new ViewInGame(root,model);
-        controllerInGameMouse = new ControllerInGameMouse(this, model);
         controllerInGameKeyboard = new ControllerInGameKeyboard(this,model);
-
-
+        controllerInGameMouse = new ControllerInGameMouse(this, model);
         controllerMenu = new ControllerMenu(this, model);
+
+        /** ON AFFICHE PAR DEFAULT LE MENU PRINCIPAL */
 
         afficherMenuPrincipal();
 
-
+        /** ON EDITE LA SCENE */
         primaryStage.setTitle("HungryFish");
         root.getStylesheets().add(Path.urlStyleshet);
-        //primaryStage.setFullScreenExitHint("");
+        primaryStage.setFullScreenExitHint("");
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(scene);
-        //primaryStage.setResizable(false);
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setResizable(false);
         primaryStage.setFullScreen(true);
         primaryStage.show();
 
@@ -87,7 +89,9 @@ public class ViewHandler extends Application {
         return scene;
     }
 
+    /** LES METHODES SUIVANTES INITIALISE LE ROOT DE CHAQUE VUE EN DETRUISANT DES VALEURS */
     public void afficherMenuPrincipal(){
+        scene.setCursor(Cursor.DEFAULT);
         controllerInGameKeyboard.stopJeuTL();
         viewMenuPrincipal.clearAndInitRoot();
         controllerMenu.initObject();

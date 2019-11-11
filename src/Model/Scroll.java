@@ -46,6 +46,7 @@ public class Scroll {
         camera.setTranslateZ(deZoom);
     }
 
+    /** METHODE POUR QUE LA CAMERA BOUGE */
     public void move(String direction){
         sensX=0;
         sensY=0;
@@ -77,24 +78,7 @@ public class Scroll {
         camera.setLayoutY(y);
     }
 
-    public void colisionBoxX(){
-        if (x>maxX - Cst.screenWidth){
-            x=maxX - Cst.screenWidth;
-        }
-        if(x<0){
-            x=0;
-        }
-    }
-
-    public void colisionBoxY(){
-        if (y>(maxY- Cst.screenHeight)){
-            y=maxY - Cst.screenHeight;
-        }
-        if(y<0){
-            y=0;
-        }
-    }
-
+    /** VERIFIE SI LA CAMERA DOIT BOUGER */
     public void isTheSubjectInTheCenter(){
         if(subject.getX()-x>(Cst.screenWidth-subject.getSize())/2){
             waitTheSubjectXRight = false;
@@ -112,6 +96,24 @@ public class Scroll {
             waitTheSubjectYDown = false;
         }
 
+    }
+
+    /**GESTION DES COLISION DE LA CAMERA*/
+    public void colisionBoxX(){
+        if (x>maxX - Cst.screenWidth){
+            x=maxX - Cst.screenWidth;
+        }
+        if(x<0){
+            x=0;
+        }
+    }
+    public void colisionBoxY(){
+        if (y>(maxY- Cst.screenHeight)){
+            y=maxY - Cst.screenHeight;
+        }
+        if(y<0){
+            y=0;
+        }
     }
 
     public void deZoom(double deZoomValue){

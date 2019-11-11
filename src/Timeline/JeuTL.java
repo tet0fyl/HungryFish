@@ -2,15 +2,15 @@ package Timeline;
 
 import Controller.ControllerInGameKeyboard;
 import Model.Fish.*;
-import Model.Hub;
+import Model.Hud;
 import Model.Scroll;
 import View.ViewInGame;
 import javafx.animation.AnimationTimer;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 public class JeuTL extends AnimationTimer {
 
@@ -18,7 +18,7 @@ public class JeuTL extends AnimationTimer {
     private ArrayList<Fish> listFishPNJ = new ArrayList<Fish>();
     private PlayerFish player;
     private Scroll scroll;
-    private Hub hub;
+    private Hud hud;
     private ViewInGame viewGame;
 
 
@@ -29,7 +29,7 @@ public class JeuTL extends AnimationTimer {
         player = new PlayerFish();
         viewGame.getRoot().getChildren().add(player.getMainImg());
         scroll = new Scroll(viewGame.getImgBackground(),player,controllerInGameKeyboard.getLauncher().getScene());
-        hub= new Hub(player,scroll,viewGame);
+        hud = new Hud(player,scroll,viewGame);
     }
 
     public void generateFish(Group root , int nbFish){
@@ -55,12 +55,21 @@ public class JeuTL extends AnimationTimer {
     }
 
     public void gameOver(){
-        scroll.getCamera().setTranslateZ(0);
+        controllerInGameKeyboard.getLauncher().getScene().setCursor(Cursor.DEFAULT);
         viewGame.getGameOverPopUp().setLayoutX(scroll.getCamera().getLayoutX());
         viewGame.getGameOverPopUp().setLayoutY(scroll.getCamera().getLayoutY());
+        viewGame.getGameOverPopUp().setTranslateZ(scroll.getCamera().getTranslateZ());
         viewGame.getRoot().getChildren().add(viewGame.getGameOverPopUp());
         this.stop();
 
+    }
+
+    public void eraseListOfFish(){
+        for (int i = 0; i < listFishPNJ.size(); i++) {
+            ((FishPNJ) listFishPNJ.get(i)).animationStop();
+        }
+
+        listFishPNJ = null;
     }
 
 
@@ -85,7 +94,7 @@ public class JeuTL extends AnimationTimer {
             scroll.move(Scroll.moveDown);
         }
 
-        /**  REGLE DU JEU  : LES POISSONS MANGE D'AUTRE POISSON */
+            /**  REGLE DU JEU  : LES POISSONS MANGE D'AUTRE POISSON */
 
         for(int i = 0; i < listFishPNJ.size(); i++){
             if (!listFishPNJ.get(i).getIsAlive()){
@@ -121,8 +130,16 @@ public class JeuTL extends AnimationTimer {
             }
         }
 
+        /**  ON MET A JOUR LE HUD */
 
-        hub.stickAndRefreshHub();
+        hud.stickAndRefreshHud();
+
+        /**  TOUCHE EXIT PRESSED POUR QUITTER */
+
+        if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.ESCAPE) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.ESCAPE)){
+            this.stop();
+            controllerInGameKeyboard.getLauncher().afficherMenuPrincipal();
+        }
 
     }
 

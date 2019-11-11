@@ -31,10 +31,10 @@ public abstract class Fish {
 
     public Fish(String url, double speed, double size){
         mainImg = new ImageView();
-        mainImg.setPreserveRatio(true);
         forImg = new Image(url +".png");
         backImg = new Image(url+"backward.png");
         mainImg.setImage(forImg);
+        mainImg.setPreserveRatio(true);
         this.size = (size* Cst.screenWidth/100);
         this.speed=speed;
         memorySensX = sensX;
@@ -68,8 +68,8 @@ public abstract class Fish {
     }
 
     public void colisionBoxY(){
-        if (y>(Scroll.maxY - mainImg.getFitHeight())){
-            y=Scroll.maxY-mainImg.getFitHeight();
+        if (y>(Scroll.maxY - mainImg.getBoundsInLocal().getHeight())){
+            y=Scroll.maxY - mainImg.getBoundsInLocal().getHeight();
         }
         if(y<0){
             y=0;
