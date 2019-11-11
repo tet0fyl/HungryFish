@@ -9,7 +9,6 @@ public class ControllerInGameMouse implements EventHandler<MouseEvent> {
 
     private ViewHandler launcher;
     private Menu model;
-    private ControllerInGameKeyboard controllerInGameKeyboard;
 
     public ControllerInGameMouse(ViewHandler launcher, Menu model){
         this.model = model;

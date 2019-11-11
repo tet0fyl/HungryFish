@@ -91,7 +91,7 @@ public class Hud {
             status = 1;
         }else if (player.getSize()<Scroll.maxX/20){
             status = 2;
-        }else if (player.getSize()<Scroll.maxX/15){
+        }else if (player.getSize()<Scroll.maxX/10){
             status = 3;
         }else if (player.getSize()<Scroll.maxX/5){
             status = 4;
