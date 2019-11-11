@@ -10,9 +10,6 @@ public class Parallax {
     private Group root = new Group();
     private double width,height;
 
-    public static final String menu = "Menu";
-    public static final String game = "Game";
-
     /** MACRO CONTROL */
     private int ratio = 110;
     private float coef1 = 0.065f;
@@ -39,9 +36,6 @@ public class Parallax {
         root.getChildren().add(panel2);
         setRatio(panel1,ratio);
         root.getChildren().add(panel1);
-
-            /** MACRO CONTROL MENU*/
-
 
     }
 

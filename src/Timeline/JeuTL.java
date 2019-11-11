@@ -137,6 +137,8 @@ public class JeuTL extends AnimationTimer {
         /**  TOUCHE EXIT PRESSED POUR QUITTER */
 
         if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.ESCAPE) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.ESCAPE)){
+            controllerInGameKeyboard.getLauncher().getPrimaryStage().setFullScreen(true);
+            controllerInGameKeyboard.getLauncher().getPrimaryStage().setResizable(false);
             this.stop();
             controllerInGameKeyboard.getLauncher().afficherMenuPrincipal();
         }
