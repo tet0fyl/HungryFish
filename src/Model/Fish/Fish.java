@@ -1,8 +1,7 @@
 package Model.Fish;
 
 
-import Model.Menu;
-import Model.Scroll;
+import Model.ZoneDeJeu;
 import Tool.Cst;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -60,8 +59,8 @@ public abstract class Fish {
     }
 
     public void colisionBoxX(){
-        if (x>(Scroll.maxX-size)){
-            x=Scroll.maxX-size;
+        if (x>(ZoneDeJeu.maxX-size)){
+            x= ZoneDeJeu.maxX-size;
         }
         if(x<0){
             x=0;
@@ -69,8 +68,8 @@ public abstract class Fish {
     }
 
     public void colisionBoxY(){
-        if (y>(Scroll.maxY - mainImg.getBoundsInLocal().getHeight())){
-            y=Scroll.maxY - mainImg.getBoundsInLocal().getHeight();
+        if (y>(ZoneDeJeu.maxY - mainImg.getBoundsInLocal().getHeight())){
+            y= ZoneDeJeu.maxY - mainImg.getBoundsInLocal().getHeight();
         }
         if(y<0){
             y=0;

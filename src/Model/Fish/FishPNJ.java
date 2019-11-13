@@ -1,13 +1,13 @@
 package Model.Fish;
 
 import Model.Menu;
-import Model.Scroll;
+import Model.ZoneDeJeu;
 import javafx.animation.AnimationTimer;
 
 public abstract class FishPNJ extends Fish {
     protected int randomX, randomY, targetDirectionY, targetDirectionX;
-    protected int boxX = (int)Scroll.maxX;
-    protected int boxY = (int)Scroll.maxY;
+    protected int boxX = (int) ZoneDeJeu.maxX;
+    protected int boxY = (int) ZoneDeJeu.maxY;
 
     protected AnimationTimer animation;
     protected double a;

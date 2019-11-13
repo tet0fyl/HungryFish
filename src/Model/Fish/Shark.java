@@ -14,7 +14,7 @@ public class Shark extends FishPNJ {
             size=size+fish.getSize()/2.8;
             refreshImg();
         }else if(Menu.getDifficulte().equals(Menu.MOYEN) || Menu.getDifficulte().equals(Menu.IMPOSSIBLE)){
-            size=size+fish.getSize()/2.4;
+            size=size+fish.getSize()/2;
             refreshImg();
         }
     }

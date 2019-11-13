@@ -48,7 +48,7 @@ public class Menu {
                 VITESSE_PLAYER_FISH=1.40;
                 VITESSE_BIG=0.5;
                 VITESSE_MEDIUM=0.9;
-                VITESSE_SMALL=1.35;
+                VITESSE_SMALL=1.30;
                 VITESSE_SHARK=1.5;
                 break;
             case IMPOSSIBLE:

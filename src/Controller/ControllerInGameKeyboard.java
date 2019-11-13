@@ -39,9 +39,9 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
         if(jeuTL!=null){
             /** On remet la camera a sa position initiale */
             jeuTL.stop();
-            jeuTL.getScroll().getCamera().setLayoutX(0);
-            jeuTL.getScroll().getCamera().setLayoutY(0);
-            jeuTL.getScroll().getCamera().setTranslateZ(0);
+            jeuTL.getZoneDeJeu().getCamera().setLayoutX(0);
+            jeuTL.getZoneDeJeu().getCamera().setLayoutY(0);
+            jeuTL.getZoneDeJeu().getCamera().setTranslateZ(0);
             /** On ecrase la liste des poisson et la varaible jeuTL (pour faire propre) */
             bubblePop = null;
             jeuTL.eraseListOfFish();

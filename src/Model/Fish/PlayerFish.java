@@ -1,15 +1,14 @@
 package Model.Fish;
 
 import Model.Menu;
-import Model.Scroll;
-import Tool.Path;
+import Model.ZoneDeJeu;
 
 public class PlayerFish extends Fish {
 
     public PlayerFish(String url){
         super(url, Menu.VITESSE_PLAYER_FISH,7);
-        x= Scroll.maxX/2;
-        y= Scroll.maxY/2;
+        x= ZoneDeJeu.maxX/2;
+        y= ZoneDeJeu.maxY/2;
         refreshImg(x,y);
     }
 

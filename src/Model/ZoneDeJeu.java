@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
 
-public class Scroll {
+public class ZoneDeJeu {
 
     private ImageView imgBg;
     private double sensX,sensY,x,y,speed,subjectX,subjectY;
@@ -18,7 +18,7 @@ public class Scroll {
     private boolean waitTheSubjectYUp = false;
     private boolean waitTheSubjectYDown = false;
     private Fish subject;
-    private int deZoom=-11000;
+    private int deZoom=-500;
 
 
     public static final String moveRight = "droite";
@@ -29,7 +29,7 @@ public class Scroll {
     public static final double maxX = Screen.getPrimary().getBounds().getWidth()*10;
     public static final double maxY = Screen.getPrimary().getBounds().getWidth()*6;
 
-    public Scroll(ImageView imgBg, Fish subject, Scene scene){
+    public ZoneDeJeu(ImageView imgBg, Fish subject, Scene scene){
         this.imgBg=imgBg;
         this.imgBg.setFitWidth(maxX);
         this.imgBg.setFitHeight(maxY);

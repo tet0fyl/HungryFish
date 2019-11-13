@@ -3,7 +3,7 @@ package Timeline;
 import Controller.ControllerInGameKeyboard;
 import Model.Fish.*;
 import Model.Hud;
-import Model.Scroll;
+import Model.ZoneDeJeu;
 import View.ViewInGame;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Cursor;
@@ -17,7 +17,7 @@ public class JeuTL extends AnimationTimer {
     private ControllerInGameKeyboard controllerInGameKeyboard;
     private ArrayList<Fish> listFishPNJ = new ArrayList<Fish>();
     private PlayerFish player;
-    private Scroll scroll;
+    private ZoneDeJeu zoneDeJeu;
     private Hud hud;
     private ViewInGame viewGame;
     private boolean partieFinish = false;
@@ -29,8 +29,8 @@ public class JeuTL extends AnimationTimer {
         generateFish(viewGame.getRoot(),50);
         player = new PlayerFish(controllerInGameKeyboard.getModel().getSkin());
         viewGame.getRoot().getChildren().add(player.getMainImg());
-        scroll = new Scroll(viewGame.getImgBackground(),player,controllerInGameKeyboard.getLauncher().getScene());
-        hud = new Hud(player,scroll,viewGame);
+        zoneDeJeu = new ZoneDeJeu(viewGame.getImgBackground(),player,controllerInGameKeyboard.getLauncher().getScene());
+        hud = new Hud(player, zoneDeJeu,viewGame);
     }
 
     public void generateFish(Group root , int nbFish){
@@ -57,9 +57,9 @@ public class JeuTL extends AnimationTimer {
 
     public void stickPopUp(String title){
         controllerInGameKeyboard.getLauncher().getScene().setCursor(Cursor.DEFAULT);
-        viewGame.getGameOverPopUp().setLayoutX(scroll.getCamera().getLayoutX());
-        viewGame.getGameOverPopUp().setLayoutY(scroll.getCamera().getLayoutY());
-        viewGame.getGameOverPopUp().setTranslateZ(scroll.getCamera().getTranslateZ());
+        viewGame.getGameOverPopUp().setLayoutX(zoneDeJeu.getCamera().getLayoutX());
+        viewGame.getGameOverPopUp().setLayoutY(zoneDeJeu.getCamera().getLayoutY());
+        viewGame.getGameOverPopUp().setTranslateZ(zoneDeJeu.getCamera().getTranslateZ());
         viewGame.updateVBox(title,Math.round(player.getSize()) + "cm");
         viewGame.getRoot().getChildren().add(viewGame.getGameOverPopUp());
         this.stop();
@@ -79,18 +79,18 @@ public class JeuTL extends AnimationTimer {
 
         if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT)){
             player.move(Fish.moveRight);
-            scroll.move(Scroll.moveRight);
+            zoneDeJeu.move(ZoneDeJeu.moveRight);
         }else if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.LEFT) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.LEFT)){
             player.move(Fish.moveLeft);
-            scroll.move(Scroll.moveLeft);
+            zoneDeJeu.move(ZoneDeJeu.moveLeft);
         }
 
         if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.UP) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.UP)){
             player.move(Fish.moveUp);
-            scroll.move(Scroll.moveUp);
+            zoneDeJeu.move(ZoneDeJeu.moveUp);
         }else if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.DOWN) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.DOWN)){
             player.move(Fish.moveDown);
-            scroll.move(Scroll.moveDown);
+            zoneDeJeu.move(ZoneDeJeu.moveDown);
         }
 
             /*  REGLE DU JEU  : LES POISSONS SONT RETIRER DE LA LISTE SI IL SONT MORT */
@@ -110,7 +110,7 @@ public class JeuTL extends AnimationTimer {
             if(player.getMainImg().intersects(listFishPNJ.get(i).getMainImg().getBoundsInLocal()) && !listFishPNJ.get(i).getIsDying()){
                 if(player.getSize() > listFishPNJ.get(i).getSize()) {
                     player.eat(listFishPNJ.get(i));
-                    scroll.deZoom(listFishPNJ.get(i).getSize());
+                    zoneDeJeu.deZoom(listFishPNJ.get(i).getSize());
                 }else{
                   listFishPNJ.get(i).eat(player);
                 }
@@ -139,7 +139,7 @@ public class JeuTL extends AnimationTimer {
         }
 
         /*  REGLE DU JEU  : SI PLAYER EST SUPER GROS -> JEU GAGNE */
-        if(player.getSize()>Scroll.maxX){
+        if(player.getSize()> ZoneDeJeu.maxX){
             stickPopUp("GAGNÉ !");
         }
 
@@ -156,8 +156,8 @@ public class JeuTL extends AnimationTimer {
 
     }
 
-    public Scroll getScroll() {
-        return scroll;
+    public ZoneDeJeu getZoneDeJeu() {
+        return zoneDeJeu;
     }
 
     public PlayerFish getPlayer() {

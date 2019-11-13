@@ -17,14 +17,14 @@ public class Hud {
 
     private double taille;
     private byte status = 0;
-    private Scroll camera;
+    private ZoneDeJeu camera;
     private ViewInGame viewInGame;
     private PlayerFish player;
     private Label lblPoint, lblPointValue, lblStatus, lblStatusValue;
     private HBox hBox;
     private ArrayList<String> listOfStatus = new ArrayList<String>();
 
-    public Hud(PlayerFish player, Scroll camera, ViewInGame viewInGame){
+    public Hud(PlayerFish player, ZoneDeJeu camera, ViewInGame viewInGame){
         this.player=player;
         taille = Math.round(player.getSize());
         this.camera=camera;
@@ -85,15 +85,15 @@ public class Hud {
     }
 
     public void checkStatus(){
-       if(player.getSize()<Scroll.maxX/50){
+       if(player.getSize()< ZoneDeJeu.maxX/50){
            status = 0;
-       }else if (player.getSize()<Scroll.maxX/30){
+       }else if (player.getSize()< ZoneDeJeu.maxX/30){
             status = 1;
-        }else if (player.getSize()<Scroll.maxX/20){
+        }else if (player.getSize()< ZoneDeJeu.maxX/20){
             status = 2;
-        }else if (player.getSize()<Scroll.maxX/10){
+        }else if (player.getSize()< ZoneDeJeu.maxX/10){
             status = 3;
-        }else if (player.getSize()<Scroll.maxX/5){
+        }else if (player.getSize()< ZoneDeJeu.maxX/5){
             status = 4;
         }else{
             status = 5;
