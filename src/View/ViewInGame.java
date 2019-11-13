@@ -20,7 +20,7 @@ public class ViewInGame {
     private Group root;
     private Menu model;
     private ImageView imgBackground;
-    private Label lblGameOver,lblScore,lblScoreValue;
+    private Label lblPopUp,lblScore,lblScoreValue;
     private Button btnRetourMenu;
     private VBox vBoxGameOverPopUp, vBoxContentPopUp;
     private HBox hBox;
@@ -30,7 +30,7 @@ public class ViewInGame {
         this.root = root;
         this.model = model;
 
-        initvBoxGameOverPopUp();
+        initvBoxPopUp();
 
     }
 
@@ -45,7 +45,7 @@ public class ViewInGame {
         imgBackground = new ImageView(Path.urlBackgroundOption);
     }
 
-    public void initvBoxGameOverPopUp(){
+    public void initvBoxPopUp(){
         vBoxGameOverPopUp = new VBox();
         vBoxContentPopUp= new VBox();
         hBox = new HBox();
@@ -59,8 +59,8 @@ public class ViewInGame {
         vBoxContentPopUp.setMinWidth(Cst.screenWidth/2);
         vBoxContentPopUp.getStyleClass().add("popUp");
 
-        lblGameOver = initTitle(100,"GAME OVER");
-        VBox.setMargin(lblGameOver,new Insets(100,0,0,0));
+        lblPopUp = initTitle(100,"GAME OVER");
+        VBox.setMargin(lblPopUp,new Insets(100,0,0,0));
 
         hBox.setAlignment(Pos.CENTER);
 
@@ -71,10 +71,9 @@ public class ViewInGame {
         vBoxGameOverPopUp.setAlignment(Pos.CENTER);
         hBox.setMinWidth(Cst.screenWidth/2);
 
-
         btnRetourMenu = initBtn(25,"Retour");
-
-        vBoxContentPopUp.getChildren().add(lblGameOver);
+        VBox.setMargin(btnRetourMenu,new Insets(0,0,25,0));
+        vBoxContentPopUp.getChildren().add(lblPopUp);
         vBoxContentPopUp.getChildren().add(hBox);
         vBoxContentPopUp.getChildren().add(btnRetourMenu);
         vBoxGameOverPopUp.getChildren().add(vBoxContentPopUp);
@@ -102,6 +101,11 @@ public class ViewInGame {
         b.setFont(Font.loadFont(ViewMenuPrincipal.class.getResourceAsStream(Path.fontWavePool), fontSize));
         b.getStyleClass().add("btn");
         return b;
+    }
+
+    public void updateVBox(String title, String score){
+        lblPopUp.setText(title);
+        lblScoreValue.setText(score);
     }
 
     public void setEvents(ControllerInGameMouse controller){

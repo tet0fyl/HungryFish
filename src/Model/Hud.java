@@ -46,7 +46,7 @@ public class Hud {
         lblPoint=initText("Taille:");
         lblPoint.setTextFill(Color.WHITE);
         lblPointValue=initText(taille + " Cm");
-        lblStatus=initText("Status:");
+        lblStatus=initText("Rang:");
         lblStatus.setTextFill(Color.WHITE);
         lblStatusValue=initText(listOfStatus.get(status));
 
@@ -77,11 +77,11 @@ public class Hud {
 
     public void initListOfStatut(){
         listOfStatus.add("Proie");
-        listOfStatus.add("Ninja");
         listOfStatus.add("Combattant");
         listOfStatus.add("Predateur");
         listOfStatus.add("MonstreDesMers");
         listOfStatus.add("CreatureLegendaire");
+        listOfStatus.add("Leviathan");
     }
 
     public void checkStatus(){

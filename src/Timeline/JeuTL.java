@@ -20,13 +20,14 @@ public class JeuTL extends AnimationTimer {
     private Scroll scroll;
     private Hud hud;
     private ViewInGame viewGame;
+    private boolean partieFinish = false;
 
 
     public JeuTL (ControllerInGameKeyboard controllerInGameKeyboard){
         this.controllerInGameKeyboard = controllerInGameKeyboard;
         viewGame=controllerInGameKeyboard.getLauncher().getViewInGame();
         generateFish(viewGame.getRoot(),50);
-        player = new PlayerFish();
+        player = new PlayerFish(controllerInGameKeyboard.getModel().getSkin());
         viewGame.getRoot().getChildren().add(player.getMainImg());
         scroll = new Scroll(viewGame.getImgBackground(),player,controllerInGameKeyboard.getLauncher().getScene());
         hud = new Hud(player,scroll,viewGame);
@@ -54,29 +55,27 @@ public class JeuTL extends AnimationTimer {
         root.getChildren().add(newfish.getMainImg());
     }
 
-    public void gameOver(){
+    public void stickPopUp(String title){
         controllerInGameKeyboard.getLauncher().getScene().setCursor(Cursor.DEFAULT);
         viewGame.getGameOverPopUp().setLayoutX(scroll.getCamera().getLayoutX());
         viewGame.getGameOverPopUp().setLayoutY(scroll.getCamera().getLayoutY());
         viewGame.getGameOverPopUp().setTranslateZ(scroll.getCamera().getTranslateZ());
+        viewGame.updateVBox(title,Math.round(player.getSize()) + "cm");
         viewGame.getRoot().getChildren().add(viewGame.getGameOverPopUp());
         this.stop();
-
-    }
+        }
 
     public void eraseListOfFish(){
         for (int i = 0; i < listFishPNJ.size(); i++) {
             ((FishPNJ) listFishPNJ.get(i)).animationStop();
         }
-
-        listFishPNJ = null;
     }
 
 
     @Override
     public void handle(long now) {
 
-        /** DEPLACEMENT DU PLAYER ET DU SCROLL */
+        /* DEPLACEMENT DU PLAYER ET DU SCROLL */
 
         if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.RIGHT)){
             player.move(Fish.moveRight);
@@ -94,17 +93,18 @@ public class JeuTL extends AnimationTimer {
             scroll.move(Scroll.moveDown);
         }
 
-            /**  REGLE DU JEU  : LES POISSONS SONT RETIRER DE LA LISTE SI IL SONT MORT */
+            /*  REGLE DU JEU  : LES POISSONS SONT RETIRER DE LA LISTE SI IL SONT MORT */
 
         for(int i = 0; i < listFishPNJ.size(); i++){
             if (!listFishPNJ.get(i).getIsAlive()){
                 viewGame.getRoot().getChildren().remove(listFishPNJ.get(i).getMainImg());
+                ((FishPNJ)listFishPNJ.get(i)).animationStop();
                 listFishPNJ.remove(listFishPNJ.get(i));
                 generateFish(viewGame.getRoot(),1);
             }
         }
 
-        /**  REGLE DU JEU  : LE PLAYER MANGE D'AUTRE POISSON OU SE FAIT MANGER */
+        /*  REGLE DU JEU  : LE PLAYER MANGE D'AUTRE POISSON OU SE FAIT MANGER */
 
         for(int i = 0; i < listFishPNJ.size(); i++){
             if(player.getMainImg().intersects(listFishPNJ.get(i).getMainImg().getBoundsInLocal()) && !listFishPNJ.get(i).getIsDying()){
@@ -117,7 +117,7 @@ public class JeuTL extends AnimationTimer {
             }
         }
 
-        /**  REGLE DU JEU  : LES POISSON SE MANGENT ENTRE EUX */
+        /*  REGLE DU JEU  : LES POISSON SE MANGENT ENTRE EUX */
 
         for (int i = 0; i < listFishPNJ.size(); i++){
             for (int j = 0; j < listFishPNJ.size(); j++) {
@@ -129,26 +129,27 @@ public class JeuTL extends AnimationTimer {
             }
         }
 
-        /**  REGLE DU JEU  : SI PLAYER MORT -> GAME OVER */
+        /*  REGLE DU JEU  : SI PLAYER MORT -> GAME OVER */
 
         if(!player.getIsAlive()){
-            gameOver();
+            stickPopUp("GAME OVER");
         }
 
-        /**  ON MET A JOUR LE HUD */
+        /*  REGLE DU JEU  : SI PLAYER EST SUPER GROS -> JEU GAGNE */
+        if(player.getSize()>Scroll.maxX){
+            stickPopUp("BRAVO !");
+        }
+
+        /*  ON MET A JOUR LE HUD */
 
         hud.stickAndRefreshHud();
 
-        /**  TOUCHE EXIT PRESSED POUR QUITTER */
+        /*  TOUCHE EXIT PRESSED POUR QUITTER */
 
         if(controllerInGameKeyboard.getListKeyPressed().get(KeyCode.ESCAPE) != null && controllerInGameKeyboard.getListKeyPressed().get(KeyCode.ESCAPE)){
-            controllerInGameKeyboard.getLauncher().getPrimaryStage().setFullScreen(true);
-            controllerInGameKeyboard.getLauncher().getPrimaryStage().setResizable(false);
             this.stop();
             controllerInGameKeyboard.getLauncher().afficherMenuPrincipal();
         }
-
-
 
     }
 

@@ -43,7 +43,6 @@ public class ViewMenuPrincipal{
 
     public void clearAndInitRoot(){
         root.getChildren().clear();
-
         root.getChildren().add(parallax.getRoot());
         root.getChildren().add(vBox);
     }

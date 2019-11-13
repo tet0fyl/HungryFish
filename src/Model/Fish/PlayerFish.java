@@ -1,14 +1,13 @@
 package Model.Fish;
 
+import Model.Menu;
 import Model.Scroll;
-import Tool.Cst;
 import Tool.Path;
 
 public class PlayerFish extends Fish {
-    private String status;
 
-    public PlayerFish(){
-        super(Path.skinMainFish+"1",15,7);
+    public PlayerFish(String url){
+        super(url, Menu.VITESSE_PLAYER_FISH,7);
         x= Scroll.maxX/2;
         y= Scroll.maxY/2;
         refreshImg(x,y);
@@ -37,7 +36,4 @@ public class PlayerFish extends Fish {
         refreshImg(x,y);
     }
 
-    public String getStatus() {
-        return status;
-    }
 }

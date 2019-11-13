@@ -47,7 +47,6 @@ public class Parallax {
     }
 
     public void move(double x, double y){
-
             panel1.setX((width - panel1.getFitWidth())/2-(x-width/2)*coef1);
             panel2.setX((width - panel2.getFitWidth())/2-(x-width/2)*coef2);
             panel3.setX((width - panel3.getFitWidth())/2-(x-width/2)*coef3);

@@ -5,7 +5,6 @@ import Model.Menu;
 import Timeline.JeuTL;
 import View.ViewHandler;
 import javafx.event.EventHandler;
-import javafx.scene.Cursor;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -27,7 +26,6 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
 
     /** Fonction qui permet de demarer la timeline du jeu */
     public void startJeuTL(){
-        launcher.getScene().setCursor(Cursor.NONE);
         jeuTL = new JeuTL(this);
         this.launcher.setEventHandlerInGameKeyboard(this);
         jeuTL.start();
@@ -40,6 +38,7 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
     public void stopJeuTL(){
         if(jeuTL!=null){
             /** On remet la camera a sa position initiale */
+            jeuTL.stop();
             jeuTL.getScroll().getCamera().setLayoutX(0);
             jeuTL.getScroll().getCamera().setLayoutY(0);
             jeuTL.getScroll().getCamera().setTranslateZ(0);
@@ -83,5 +82,9 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
 
     public Hashtable<KeyCode, Boolean> getListKeyPressed() {
         return listKeyPressed;
+    }
+
+    public Menu getModel() {
+        return model;
     }
 }

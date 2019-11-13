@@ -69,7 +69,6 @@ public abstract class FishPNJ extends Fish {
             public void handle(long l) {
                     x=x+(speed * sensX);
                     y=a*x+b;
-
                     colisionBoxY();
                     refreshImg(x,y);
 

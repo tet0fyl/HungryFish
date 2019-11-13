@@ -13,6 +13,7 @@ public class Path {
     public static final String urlBubblePopDirectory = "Asset/img/bubblePop/bubble_pop_frame_";
     public static final String imgTypePng = ".png";
     public static final String skinMainFish = "Asset/img/skin/skin";
+    public static final String urlIconValidation = "Asset/img/icon/validation.png";
     public static final String urlStyleshet = "Asset/css/styles.css";
 
                                         // SOUNDS //

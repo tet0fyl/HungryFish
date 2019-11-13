@@ -35,8 +35,8 @@ public abstract class Fish {
         backImg = new Image(url+"backward.png");
         mainImg.setImage(forImg);
         mainImg.setPreserveRatio(true);
-        this.size = (size* Cst.screenWidth/100);
-        this.speed=speed;
+        this.size=(size* Cst.screenWidth/100);
+        this.speed=(speed* Cst.screenWidth/100);
         memorySensX = sensX;
         isAlive=true;
         isDying=false;

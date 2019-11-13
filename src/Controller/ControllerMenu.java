@@ -2,11 +2,10 @@ package Controller;
 
 import Model.BubblePop;
 import Model.Menu;
+import Tool.Path;
 import View.ViewHandler;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-
-import javax.swing.text.html.ImageView;
 
 public class ControllerMenu implements EventHandler<MouseEvent> {
 
@@ -18,12 +17,12 @@ public class ControllerMenu implements EventHandler<MouseEvent> {
     public ControllerMenu(ViewHandler launcher, Menu model){
         this.model = model;
         this.launcher = launcher;
+        this.launcher.setEventHandlerMenu(this);
+        this.launcher.setEventHandlerOption(this);
 
     }
 
     public void initObject(){
-        this.launcher.setEventHandlerMenu(this);
-        this.launcher.setEventHandlerOption(this);
         bubblePop = new BubblePop();
         bubblePop.generateBubbleList(20,launcher.getViewMenuPrincipal().getRoot());
     }
@@ -34,10 +33,13 @@ public class ControllerMenu implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent mouseEvent) {
+
         if(bubblePop!=null){
             bubblePop.launchBubble(mouseEvent.getScreenX(),mouseEvent.getScreenY());
         }
+
         launcher.getViewMenuPrincipal().getParallax().move(mouseEvent.getScreenX(),mouseEvent.getScreenY());
+
         if(mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
             if(mouseEvent.getSource().equals(launcher.getViewMenuPrincipal().getBtnStart())){
                 launcher.afficherJeu();
@@ -56,6 +58,7 @@ public class ControllerMenu implements EventHandler<MouseEvent> {
             }
             if(mouseEvent.getSource().equals(launcher.getViewMenuOption().getBtnImpossible())){
                 launcher.getViewMenuOption().getBtnImpossible().getStyleClass().add("btnOptionPressed");
+                model.updateDifficulte(Menu.IMPOSSIBLE);
 
                 launcher.getViewMenuOption().getBtnEasy().getStyleClass().clear();
                 launcher.getViewMenuOption().getBtnEasy().getStyleClass().add("btn-secondary");
@@ -65,6 +68,7 @@ public class ControllerMenu implements EventHandler<MouseEvent> {
 
             if(mouseEvent.getSource().equals(launcher.getViewMenuOption().getBtnEasy())){
                 launcher.getViewMenuOption().getBtnEasy().getStyleClass().add("btnOptionPressed");
+                model.updateDifficulte(Menu.FACILE);
 
                 launcher.getViewMenuOption().getBtnImpossible().getStyleClass().clear();
                 launcher.getViewMenuOption().getBtnImpossible().getStyleClass().add("btn-secondary");
@@ -74,6 +78,7 @@ public class ControllerMenu implements EventHandler<MouseEvent> {
 
             if(mouseEvent.getSource().equals(launcher.getViewMenuOption().getBtnMedium())){
                 launcher.getViewMenuOption().getBtnMedium().getStyleClass().add("btnOptionPressed");
+                model.updateDifficulte(Menu.MOYEN);
 
                 launcher.getViewMenuOption().getBtnEasy().getStyleClass().clear();
                 launcher.getViewMenuOption().getBtnEasy().getStyleClass().add("btn-secondary");
@@ -81,14 +86,14 @@ public class ControllerMenu implements EventHandler<MouseEvent> {
                 launcher.getViewMenuOption().getBtnImpossible().getStyleClass().add("btn-secondary");
             }
 
-            try{
-                if(mouseEvent.getPickResult().getIntersectedNode().getId().equals("skin")){
-                    System.out.println("yes");
-                }
-            }catch (NullPointerException e){
+            if(mouseEvent.getPickResult().getIntersectedNode().getId() != null){
+                    String nbDuSkin = mouseEvent.getPickResult().getIntersectedNode().getId();
+                    model.setSkin(Path.skinMainFish + nbDuSkin);
+            }
+
+
 
             }
 
-        }
     }
 }

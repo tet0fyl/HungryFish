@@ -1,6 +1,8 @@
 package View;
 
 import Controller.ControllerMenu;
+import Model.Menu;
+import Tool.Cst;
 import Tool.NodeIniter;
 import Tool.Path;
 import javafx.geometry.Insets;
@@ -8,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 public class ViewMenuOption {
 
     private Group root;
+    private Menu model;
     private Label txtTitle,txtSelectSkin, txtSelectDifficulty, textHowToPlay;
     private Button btnReturn, btnValider, btnEasy, btnMedium, btnImpossible, btnHowToPlay;
     private ImageView imgBackground, skin1,skin2,skin3,skin4,skin5;
@@ -25,14 +29,9 @@ public class ViewMenuOption {
     private VBox vBox;
     private HBox hboxDifficulty, hBoxSkin, hboxHowTo, hBoxBtnRetourValider;
 
-    ViewMenuOption(Group root){
+    ViewMenuOption(Group root, Menu model){
         this.root = root;
-
-        listSkin.add(skin1);
-        listSkin.add(skin2);
-        listSkin.add(skin3);
-        listSkin.add(skin4);
-        listSkin.add(skin5);
+        this.model=model;
 
         txtTitle = NodeIniter.initTitle(90, "OPTION");
         txtSelectSkin = NodeIniter.initText(40,"ChoisiTonSkin:");
@@ -89,27 +88,39 @@ public class ViewMenuOption {
 
     public void initBackground(){
         imgBackground = new ImageView(Path.urlBackgroundOption);
-        imgBackground.setFitHeight(Screen.getPrimary().getBounds().getHeight());
-        imgBackground.setFitWidth(Screen.getPrimary().getBounds().getWidth());
+        imgBackground.setFitHeight(Cst.screenHeight);
+        imgBackground.setFitWidth(Cst.screenWidth);
         root.getChildren().add(imgBackground);
     }
 
     public void initHBoxSkin(){
+
+        skin1=new ImageView();
+        skin2=new ImageView();
+        skin3=new ImageView();
+        skin4=new ImageView();
+        skin5=new ImageView();
+
+        listSkin.add(skin1);
+        listSkin.add(skin2);
+        listSkin.add(skin3);
+        listSkin.add(skin4);
+        listSkin.add(skin5);
+
         hBoxSkin = initHBox();
         for(int i = 0; i < listSkin.size(); i++) {
-            ImageView v = new ImageView(Path.skinMainFish +(i+1)+".png");
-            v.setId("skin");
-            v.setFitWidth(100);
-            v.setPreserveRatio(true);
-            v.getStyleClass().add("selectedSkin");
-            hBoxSkin.getChildren().add(v);
-            listSkin.set(i,v);
+            listSkin.get(i).setImage(new Image(Path.skinMainFish +(i+1)+".png"));;
+            listSkin.get(i).setId(String.valueOf(i+1));
+            listSkin.get(i).setFitWidth(100);
+            listSkin.get(i).setPreserveRatio(true);
+            listSkin.get(i).getStyleClass().add("selectedSkin");
+            hBoxSkin.getChildren().add(listSkin.get(i));
         }
     }
 
     public HBox initHBox(){
         HBox hbox = new HBox();
-        hbox.setMinWidth(Screen.getPrimary().getBounds().getWidth());
+        hbox.setMinWidth(Cst.screenWidth);
         hbox.setAlignment(Pos.CENTER);
         hbox.setSpacing(25);
         return hbox;

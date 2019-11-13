@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -36,7 +37,7 @@ public class ViewHandler extends Application {
 
         model = new Menu();
         viewMenuPrincipal = new ViewMenuPrincipal(root, model);
-        viewMenuOption = new ViewMenuOption(root);
+        viewMenuOption = new ViewMenuOption(root,model);
         viewInGame = new ViewInGame(root,model);
         controllerInGameKeyboard = new ControllerInGameKeyboard(this,model);
         controllerInGameMouse = new ControllerInGameMouse(this, model);
@@ -47,13 +48,14 @@ public class ViewHandler extends Application {
         afficherMenuPrincipal();
 
         /** ON EDITE LA SCENE */
-        primaryStage.setTitle("HungryFish");
         root.getStylesheets().add(Path.urlStyleshet);
+        primaryStage.setTitle("HungryFish");
         primaryStage.setFullScreenExitHint("");
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(scene);
-        //primaryStage.setResizable(false);
-        //primaryStage.setFullScreen(true);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }
@@ -93,12 +95,13 @@ public class ViewHandler extends Application {
     /** LES METHODES SUIVANTES INITIALISE LE ROOT DE CHAQUE VUE EN DETRUISANT DES VALEURS */
     public void afficherMenuPrincipal(){
         scene.setCursor(Cursor.DEFAULT);
-        controllerInGameKeyboard.stopJeuTL();
         viewMenuPrincipal.clearAndInitRoot();
+        controllerInGameKeyboard.stopJeuTL();
         controllerMenu.initObject();
     }
 
     public void afficherJeu(){
+        scene.setCursor(Cursor.NONE);
         viewInGame.clearAndInitRoot();
         controllerMenu.destroyObject();
         controllerInGameKeyboard.startJeuTL();

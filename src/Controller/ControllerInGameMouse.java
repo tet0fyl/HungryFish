@@ -17,8 +17,9 @@ public class ControllerInGameMouse implements EventHandler<MouseEvent> {
     }
 
     @Override
-    public void handle(MouseEvent event) {
-        if(event.getSource().equals(launcher.getViewInGame().getBtnReturnMenu())){
+    public void handle(MouseEvent mouseEvent) {
+        System.out.println(mouseEvent.getSource());
+        if(mouseEvent.getSource().equals(launcher.getViewInGame().getBtnReturnMenu())){
             launcher.afficherMenuPrincipal();
         }
     }
