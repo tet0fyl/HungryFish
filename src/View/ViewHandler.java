@@ -28,11 +28,12 @@ public class ViewHandler extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         root = new Group();
-        scene = new Scene(root, 800, 1000, Color.CORNFLOWERBLUE);
+        scene = new Scene(root,800,800, Color.CORNFLOWERBLUE);
 
         this.primaryStage = primaryStage;
 
         /** ON INITIALISE LE MODEL MVC */
+
         model = new Menu();
         viewMenuPrincipal = new ViewMenuPrincipal(root, model);
         viewMenuOption = new ViewMenuOption(root);
@@ -51,8 +52,8 @@ public class ViewHandler extends Application {
         primaryStage.setFullScreenExitHint("");
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.setFullScreen(true);
+        //primaryStage.setResizable(false);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
 
     }

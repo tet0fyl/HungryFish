@@ -44,6 +44,7 @@ public class ControllerInGameKeyboard implements EventHandler<KeyEvent> {
             jeuTL.getScroll().getCamera().setLayoutY(0);
             jeuTL.getScroll().getCamera().setTranslateZ(0);
             /** On ecrase la liste des poisson et la varaible jeuTL (pour faire propre) */
+            bubblePop = null;
             jeuTL.eraseListOfFish();
             jeuTL = null;
         }

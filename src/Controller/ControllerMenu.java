@@ -6,6 +6,8 @@ import View.ViewHandler;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
+import javax.swing.text.html.ImageView;
+
 public class ControllerMenu implements EventHandler<MouseEvent> {
 
     private ViewHandler launcher;
@@ -78,6 +80,15 @@ public class ControllerMenu implements EventHandler<MouseEvent> {
                 launcher.getViewMenuOption().getBtnImpossible().getStyleClass().clear();
                 launcher.getViewMenuOption().getBtnImpossible().getStyleClass().add("btn-secondary");
             }
+
+            try{
+                if(mouseEvent.getPickResult().getIntersectedNode().getId().equals("skin")){
+                    System.out.println("yes");
+                }
+            }catch (NullPointerException e){
+
+            }
+
         }
     }
 }
