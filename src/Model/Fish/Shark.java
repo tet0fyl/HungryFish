@@ -11,10 +11,10 @@ public class Shark extends FishPNJ {
     @Override
     public void grow(Fish fish) {
         if(Menu.getDifficulte().equals(Menu.FACILE)){
-            size=size+fish.getSize()/2.5;
+            size=size+fish.getSize()/2.8;
             refreshImg();
         }else if(Menu.getDifficulte().equals(Menu.MOYEN) || Menu.getDifficulte().equals(Menu.IMPOSSIBLE)){
-            size=size+fish.getSize()/1.5;
+            size=size+fish.getSize()/2.4;
             refreshImg();
         }
     }

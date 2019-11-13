@@ -18,7 +18,7 @@ public class Scroll {
     private boolean waitTheSubjectYUp = false;
     private boolean waitTheSubjectYDown = false;
     private Fish subject;
-    private int deZoom=-200;
+    private int deZoom=-11000;
 
 
     public static final String moveRight = "droite";

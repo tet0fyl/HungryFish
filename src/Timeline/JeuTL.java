@@ -122,7 +122,10 @@ public class JeuTL extends AnimationTimer {
         for (int i = 0; i < listFishPNJ.size(); i++){
             for (int j = 0; j < listFishPNJ.size(); j++) {
                 if (listFishPNJ.get(i).getMainImg().intersects(listFishPNJ.get(j).getMainImg().getBoundsInLocal()) && !listFishPNJ.get(j).getIsDying()) {
+
                     if (listFishPNJ.get(i).getSize() > listFishPNJ.get(j).getSize() && !listFishPNJ.get(j).getClass().equals(Shark.class)) {
+                        listFishPNJ.get(i).eat(listFishPNJ.get(j));
+                    } else if(listFishPNJ.get(i).getSize() < listFishPNJ.get(j).getSize() && listFishPNJ.get(i).getClass().equals(Shark.class) && !listFishPNJ.get(j).getClass().equals(Shark.class)) {
                         listFishPNJ.get(i).eat(listFishPNJ.get(j));
                     }
                 }
@@ -137,7 +140,7 @@ public class JeuTL extends AnimationTimer {
 
         /*  REGLE DU JEU  : SI PLAYER EST SUPER GROS -> JEU GAGNE */
         if(player.getSize()>Scroll.maxX){
-            stickPopUp("BRAVO !");
+            stickPopUp("GAGNÉ !");
         }
 
         /*  ON MET A JOUR LE HUD */

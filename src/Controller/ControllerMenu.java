@@ -5,7 +5,9 @@ import Model.Menu;
 import Tool.Path;
 import View.ViewHandler;
 import javafx.event.EventHandler;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+
 
 public class ControllerMenu implements EventHandler<MouseEvent> {
 
@@ -87,12 +89,19 @@ public class ControllerMenu implements EventHandler<MouseEvent> {
             }
 
             if(mouseEvent.getPickResult().getIntersectedNode().getId() != null){
-                    String nbDuSkin = mouseEvent.getPickResult().getIntersectedNode().getId();
+                String nbDuSkin = mouseEvent.getPickResult().getIntersectedNode().getId();
+
+                for (int i = 0; i < launcher.getViewMenuOption().getListSkin().size() ; i++) {
+                    ImageView img = launcher.getViewMenuOption().getListSkin().get(i);
+                    if(img.getId().equals(nbDuSkin)){
+                        img.setOpacity(0.5);
+                    }else{
+                        img.setOpacity(1);
+                    }
+
+                }
                     model.setSkin(Path.skinMainFish + nbDuSkin);
             }
-
-
-
             }
 
     }

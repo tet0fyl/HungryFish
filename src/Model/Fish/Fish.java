@@ -1,6 +1,7 @@
 package Model.Fish;
 
 
+import Model.Menu;
 import Model.Scroll;
 import Tool.Cst;
 import javafx.animation.KeyFrame;
@@ -94,10 +95,9 @@ public abstract class Fish {
     }
 
     public void grow(Fish fish){
-
-        size=size+fish.getSize()/3;
-        refreshImg();
-    }
+            size=size+fish.getSize()/3.9;
+            refreshImg();
+        }
 
     public ImageView getMainImg() {
         return mainImg;

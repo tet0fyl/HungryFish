@@ -108,9 +108,13 @@ public class ViewMenuOption {
         listSkin.add(skin5);
 
         hBoxSkin = initHBox();
+
         for(int i = 0; i < listSkin.size(); i++) {
             listSkin.get(i).setImage(new Image(Path.skinMainFish +(i+1)+".png"));;
             listSkin.get(i).setId(String.valueOf(i+1));
+            if(i==0){
+                listSkin.get(i).setOpacity(0.5);
+            }
             listSkin.get(i).setFitWidth(100);
             listSkin.get(i).setPreserveRatio(true);
             listSkin.get(i).getStyleClass().add("selectedSkin");
@@ -155,5 +159,9 @@ public class ViewMenuOption {
 
     public Button getBtnImpossible() {
         return btnImpossible;
+    }
+
+    public ArrayList<ImageView> getListSkin() {
+        return listSkin;
     }
 }

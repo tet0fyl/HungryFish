@@ -1,5 +1,6 @@
 package Model.Fish;
 
+import Model.Menu;
 import Model.Scroll;
 import javafx.animation.AnimationTimer;
 
@@ -85,6 +86,17 @@ public abstract class FishPNJ extends Fish {
             }
         };
         animation.start();
+    }
+
+    @Override
+    public void grow(Fish fish){
+        if(Menu.getDifficulte().equals(Menu.FACILE)){
+            size=size+fish.getSize()/3.5;
+            refreshImg();
+        }else{
+            size=size+fish.getSize()/2.8;
+            refreshImg();
+        }
     }
 
     public void animationStop(){

@@ -136,4 +136,5 @@ public class ViewInGame {
     public HBox gethBox() {
         return hBox;
     }
+
 }
