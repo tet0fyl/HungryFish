@@ -20,4 +20,5 @@ This Menu is base on a parallax effect with different layer moving according to 
 
 ## Game
 A quick in game view sample :
+
 ![game_sample](documentation/game.gif)
